@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://ble25jlxswky7"]
+
+[ext_resource type="Script" path="res://ui/components/open_new_ui_button.gd" id="1_nd206"]
+[ext_resource type="Script" path="res://ui/components/base_menu.gd" id="1_txnvf"]
+[ext_resource type="Texture2D" uid="uid://cjec7m7mqg5rm" path="res://assets/tmp_title.png" id="2_eeitk"]
+[ext_resource type="Script" path="res://ui/components/quit_game_button.gd" id="2_vsj0k"]
+[ext_resource type="Texture2D" uid="uid://dij1fcvbhojrt" path="res://assets/title_background.png" id="5_3xta2"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("initial_focus")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_txnvf")
+initial_focus = NodePath("HBoxContainer/SinglePlayerButton")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = 176.0
+offset_right = 152.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SinglePlayerButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../QuitGameButton")
+focus_neighbor_right = NodePath("../MultiPlayerButton")
+text = "Single Player"
+script = ExtResource("1_nd206")
+next_scene_path = "res://ui/single_player_menu.tscn"
+
+[node name="MultiPlayerButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../SinglePlayerButton")
+focus_neighbor_right = NodePath("../QuitGameButton")
+text = "Multiplayer"
+script = ExtResource("1_nd206")
+next_scene_path = "res://ui/multiplayer_menu.tscn"
+
+[node name="QuitGameButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../MultiPlayerButton")
+focus_neighbor_right = NodePath("../SinglePlayerButton")
+text = "Quit Game"
+script = ExtResource("2_vsj0k")
+
+[node name="TmpTitle" type="TextureRect" parent="."]
+z_index = 1
+layout_mode = 1
+offset_left = 54.0
+offset_top = 66.0
+offset_right = 458.0
+offset_bottom = 125.0
+texture = ExtResource("2_eeitk")
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1112.0
+offset_bottom = -608.0
+scale = Vector2(0.7198, 0.719962)
+mouse_filter = 2
+texture = ExtResource("5_3xta2")
+stretch_mode = 4
