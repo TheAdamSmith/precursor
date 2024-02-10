@@ -1,4 +1,4 @@
-class_name StartGameButton
+class_name ChangePauseStateButton
 extends Button
 
 
@@ -7,4 +7,4 @@ func _ready():
 
 
 func _on_button_pressed():
-    EventService.start_game.emit()
+    EventService.change_pause_state.emit()

@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl4njstiybxps"]
+
+[ext_resource type="Texture2D" uid="uid://hbwlk1yuecpb" path="res://assets/barHorizontal_green.png" id="1_icr4c"]
+
+[node name="Hud" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -86.0
+offset_bottom = 42.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 30
+text = "Exp: 0"
+horizontal_alignment = 1
+
+[node name="BarHorizontalGreen" type="Sprite2D" parent="Control"]
+position = Vector2(134, 31)
+texture = ExtResource("1_icr4c")
