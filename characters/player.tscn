@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnhck0w802e3n"]
+[gd_scene load_steps=8 format=3 uid="uid://by1snekpu5tu8"]
 
 [ext_resource type="Script" path="res://characters/player.gd" id="1_tsvdu"]
 [ext_resource type="Texture2D" uid="uid://dqv76k0p8kj1y" path="res://models/player_large/player_large1.png" id="2_x1pa2"]
@@ -30,12 +30,11 @@ animations = [{
 radius = 65.0
 height = 304.0
 
-[node name="player" type="Area2D"]
+[node name="player" type="CharacterBody2D"]
 script = ExtResource("1_tsvdu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tdeaw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_7ymmp")
