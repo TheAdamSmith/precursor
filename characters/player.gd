@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 signal hit
 
 @export var speed = 400 # Player speed
@@ -14,15 +14,19 @@ func _process(delta):
 	#movement and animation
 	if Input.is_action_pressed("move_right"):
 		$AnimatedSprite2D.rotation = PI/2
+		$CollisionShape2D.rotation = PI/2
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
 		$AnimatedSprite2D.rotation = 3*PI/2
+		$CollisionShape2D.rotation = 3*PI/2
 		velocity.x -= 1
 	if Input.is_action_pressed("move_down"):
 		$AnimatedSprite2D.rotation = PI
+		$CollisionShape2D.rotation = PI
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		$AnimatedSprite2D.rotation = 0
+		$CollisionShape2D.rotation = PI
 		velocity.y -= 1
 	
 	if velocity.length() > 0:
@@ -30,10 +34,8 @@ func _process(delta):
 		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
-	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
-	
-	
+	move_and_collide(velocity * delta)
+
 func _on_body_entered(body):
 	hide()
 	hit.emit()
