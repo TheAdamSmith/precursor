@@ -5,8 +5,8 @@ extends Button
 
 
 func _ready():
-    button_down.connect(_on_button_pressed)
+	button_down.connect(_on_button_pressed)
 
 
 func _on_button_pressed():
-    EventService.change_scene.emit(next_scene_path)
+	EventService.change_scene.emit(next_scene_path)

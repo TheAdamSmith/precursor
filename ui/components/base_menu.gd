@@ -5,4 +5,4 @@ extends Control
 
 
 func _ready():
-    initial_focus.grab_focus()
+	initial_focus.grab_focus()
