@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjl7b8buxljch"
-path="res://.godot/imported/cowboy_riding_barney-sprite-final-export.png-fe44c2b4a50d7a225ce4370db04b2d9a.ctex"
+uid="uid://buiutidg0dey0"
+path="res://.godot/imported/cowboy_final-export.png-0d47d94adcc74da85bf04d7d767c847a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/Cowboy_8bit/cowboy_riding_barney-sprite-final-export.png"
-dest_files=["res://.godot/imported/cowboy_riding_barney-sprite-final-export.png-fe44c2b4a50d7a225ce4370db04b2d9a.ctex"]
+source_file="res://models/Cowboy_8bit/cowboy_final-export.png"
+dest_files=["res://.godot/imported/cowboy_final-export.png-0d47d94adcc74da85bf04d7d767c847a.ctex"]
 
 [params]
 
