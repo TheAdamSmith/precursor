@@ -16,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_elhuq")
 initial_focus = NodePath("VBoxContainer/ResumeButton")
 
@@ -35,16 +36,19 @@ grow_vertical = 2
 
 [node name="ResumeButton" type="Button" parent="PauseMenu/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 text = "Resume"
 script = ExtResource("2_rtyes")
 
 [node name="MainMenuButton" type="Button" parent="PauseMenu/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 text = "Main Menu"
 script = ExtResource("2_pyns1")
 next_scene_path = "res://ui/main_menu.tscn"
 
 [node name="QuitGameButton" type="Button" parent="PauseMenu/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 text = "Quit Game"
 script = ExtResource("3_dg1bm")
