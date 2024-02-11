@@ -13,18 +13,27 @@ func _ready():
 
 
 func handleInput():
-	var moveDirection = Input.get_vector("move_left","move_right","move_up","move_down")
+	var moveDirection = Input.get_vector(
+		"move_left",
+		"move_right",
+		"move_up",
+		"move_down",
+	)
 	velocity = moveDirection * speed
 
 
 func updateAnimation():
-	if velocity.length() ==0:
+	var x_mov = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	var y_mov = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	var mov = Vector2(x_mov, y_mov)
+	
+	if mov.length() ==0:
 		animations.stop()
 	else:
 		var direction = "Down"
-		if velocity.x < 0: direction = "Left"
-		elif velocity.x > 0: direction = "Right"
-		elif velocity.y < 0: direction = "Up"
+		if mov.x < 0: direction = "Left"
+		elif mov.x > 0: direction = "Right"
+		elif mov.y < 0: direction = "Up"
 		
 		animations.play("walk" + direction)
 
