@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://ubasmpkjla7k"]
+
+[ext_resource type="Script" path="res://ui/components/base_menu.gd" id="1_gok1u"]
+[ext_resource type="Texture2D" uid="uid://cjec7m7mqg5rm" path="res://assets/tmp_title.png" id="2_oncje"]
+[ext_resource type="Script" path="res://ui/components/start_game_button.gd" id="3_u0g2h"]
+[ext_resource type="Script" path="res://ui/components/open_new_scene_button.gd" id="4_aj2yp"]
+[ext_resource type="Script" path="res://ui/components/quit_game_button.gd" id="4_eaj6x"]
+[ext_resource type="Texture2D" uid="uid://dij1fcvbhojrt" path="res://assets/title_background.png" id="5_wevf7"]
+[ext_resource type="Script" path="res://ui/components/background.gd" id="6_qns2s"]
+
+[node name="SinglePlayerMenu" type="Control" node_paths=PackedStringArray("initial_focus")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gok1u")
+initial_focus = NodePath("VBoxContainer/StartGameButton")
+
+[node name="TmpTitle" type="TextureRect" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.411
+anchor_bottom = 0.218
+offset_left = 54.0
+offset_top = 66.0
+offset_right = -15.472
+offset_bottom = -16.264
+texture = ExtResource("2_oncje")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 54.0
+offset_top = -103.0
+offset_right = 150.0
+offset_bottom = -2.0
+grow_vertical = 2
+
+[node name="StartGameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Start Game"
+script = ExtResource("3_u0g2h")
+
+[node name="MainMenu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Main Menu"
+script = ExtResource("4_aj2yp")
+next_scene_path = "res://ui/main_menu.tscn"
+
+[node name="QuitGameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit Game"
+script = ExtResource("4_eaj6x")
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1112.0
+offset_bottom = -608.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(28.801, 16.1975)
+mouse_filter = 2
+texture = ExtResource("5_wevf7")
+expand_mode = 1
+script = ExtResource("6_qns2s")

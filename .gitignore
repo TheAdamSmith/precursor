@@ -1,5 +1,9 @@
 # Godot 4+ specific ignores
 .godot/
-!models*
-!levels*
+!assets*
+!autoloads*
 !characters*
+!levels*
+!models*
+!ui*
+
