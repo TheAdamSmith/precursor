@@ -43,17 +43,20 @@ grow_vertical = 2
 
 [node name="StartGameButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Start Game"
 script = ExtResource("3_u0g2h")
 
 [node name="MainMenu" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Main Menu"
 script = ExtResource("4_aj2yp")
 next_scene_path = "res://ui/main_menu.tscn"
 
 [node name="QuitGameButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Quit Game"
 script = ExtResource("4_eaj6x")
 
