@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://jgn80e46ku2v"]
+
+[ext_resource type="Script" path="res://weapons/basic_weapon/revolver.gd" id="1_a26cl"]
+[ext_resource type="Texture2D" uid="uid://bxsrij7jnvog3" path="res://models/basic_weapon/revolver.png" id="1_y8xop"]
+
+[node name="Revolver" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_a26cl")
+
+[node name="Revolver" type="Sprite2D" parent="."]
+scale = Vector2(0.327731, 0.37037)
+texture = ExtResource("1_y8xop")
+
+[node name="BulletPoint" type="Node2D" parent="."]
+position = Vector2(40, -21)
