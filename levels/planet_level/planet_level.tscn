@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt7xh03ye22rr"]
+[gd_scene load_steps=8 format=3 uid="uid://dt7xh03ye22rr"]
 
 [ext_resource type="Texture2D" uid="uid://ccvnwue44mquo" path="res://levels/planet_level/planet-level-sheet.png" id="1_sucad"]
 [ext_resource type="PackedScene" uid="uid://dk0xdy43c6bcn" path="res://characters/player.tscn" id="2_didse"]
 [ext_resource type="PackedScene" uid="uid://cl4njstiybxps" path="res://ui/hud.tscn" id="3_u1381"]
+[ext_resource type="Script" path="res://characters/player_camera.gd" id="3_xh18g"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pqjfb"]
 
@@ -66,5 +67,7 @@ position = Vector2(273, 263)
 scale = Vector2(0.2, 0.2)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
+position_smoothing_enabled = true
+script = ExtResource("3_xh18g")
 
 [node name="Hud" parent="player" instance=ExtResource("3_u1381")]
