@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt7xh03ye22rr"]
+[gd_scene load_steps=9 format=3 uid="uid://dt7xh03ye22rr"]
 
 [ext_resource type="Texture2D" uid="uid://ccvnwue44mquo" path="res://levels/planet_level/planet-level-sheet.png" id="1_sucad"]
 [ext_resource type="PackedScene" uid="uid://dk0xdy43c6bcn" path="res://characters/player.tscn" id="2_didse"]
 [ext_resource type="PackedScene" uid="uid://cl4njstiybxps" path="res://ui/hud.tscn" id="3_u1381"]
-[ext_resource type="PackedScene" uid="uid://bbwy464nx86b0" path="res://enemies/enemy.tscn" id="4_84bjs"]
+[ext_resource type="Script" path="res://levels/planet_level/enemy.gd" id="4_xela4"]
+[ext_resource type="Texture2D" uid="uid://ctiglbim4idgv" path="res://models/enemy_alien_v1/alien-v1.png" id="5_drr3i"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pqjfb"]
 
@@ -70,5 +71,10 @@ scale = Vector2(0.2, 0.2)
 
 [node name="Hud" parent="player" instance=ExtResource("3_u1381")]
 
-[node name="Enemy" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(466, 72)
+[node name="enemy" type="CharacterBody2D" parent="."]
+script = ExtResource("4_xela4")
+
+[node name="Sprite2D" type="Sprite2D" parent="enemy"]
+position = Vector2(470, 68)
+scale = Vector2(0.440298, 0.431507)
+texture = ExtResource("5_drr3i")
