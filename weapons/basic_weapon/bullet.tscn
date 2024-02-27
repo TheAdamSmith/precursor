@@ -1,13 +1,49 @@
-[gd_scene load_steps=3 format=3 uid="uid://gcut5ipd0n4f"]
+[gd_scene load_steps=11 format=3 uid="uid://gcut5ipd0n4f"]
 
+[ext_resource type="Script" path="res://weapons/basic_weapon/bullet.gd" id="1_axqsb"]
 [ext_resource type="Texture2D" uid="uid://b15n8b22f4iea" path="res://models/basic_weapon/small_bullet.png" id="1_i2lqa"]
+[ext_resource type="Texture2D" uid="uid://cnbktw2xue711" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d1.png" id="3_lmbac"]
+[ext_resource type="Texture2D" uid="uid://dcu1y6wd07o73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d2.png" id="4_tl6m7"]
+[ext_resource type="Texture2D" uid="uid://cxwd2pqgsmkq3" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d3.png" id="5_lasdn"]
+[ext_resource type="Texture2D" uid="uid://frtmsj2kr18o" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d4.png" id="6_1v8ur"]
+[ext_resource type="Texture2D" uid="uid://d21b5m3h5unwl" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d5.png" id="7_ubkyc"]
+[ext_resource type="Texture2D" uid="uid://ckpf3hjj1ynkr" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d6.png" id="8_ppw4f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yduv4"]
-radius = 6.0
-height = 36.0
+radius = 3.0
+height = 16.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_foeqg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lmbac")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tl6m7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lasdn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1v8ur")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ubkyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ppw4f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
 
 [node name="Bullet" type="RigidBody2D"]
 gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_axqsb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -15,5 +51,12 @@ shape = SubResource("CapsuleShape2D_yduv4")
 
 [node name="SmallBullet" type="Sprite2D" parent="."]
 rotation = 1.5708
-scale = Vector2(0.370233, 0.438734)
+scale = Vector2(0.135802, 0.180307)
 texture = ExtResource("1_i2lqa")
+
+[node name="Vfx" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_foeqg")
+frame_progress = 0.972011
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_looped" from="Vfx" to="." method="_on_vfx_animation_looped"]
