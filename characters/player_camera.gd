@@ -28,7 +28,7 @@ var panning: bool
 var pan_velocity: Vector2
 var pos_holder: Array = []
 var camera_pan_vec: Vector2 
-var camera_pan_vec_div_factor: float = 3 
+var camera_pan_vec_div_factor: float = 700
 
 
 func _unhandled_input(event: InputEvent):
@@ -118,4 +118,5 @@ func _process(delta):
 		pan_velocity = pan_velocity.slerp(Vector2.ZERO, pan_velocity_dampening_factor * delta)
 
 	if camera_pan_vec != Vector2.ZERO:
-		offset += camera_pan_vec.normalized() * (camera_pan_vec.length() / camera_pan_vec_div_factor)
+		print(camera_pan_vec * delta)
+		offset += camera_pan_vec.normalized() * (camera_pan_vec.length() * camera_pan_vec_div_factor * delta)
