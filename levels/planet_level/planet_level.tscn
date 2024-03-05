@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ccvnwue44mquo" path="res://levels/planet_level/planet-level-sheet.png" id="1_sucad"]
 [ext_resource type="PackedScene" uid="uid://dshjlrawv1gyb" path="res://characters/playerv_2.tscn" id="2_kqhvk"]
 [ext_resource type="PackedScene" uid="uid://cl4njstiybxps" path="res://ui/hud.tscn" id="3_u1381"]
+[ext_resource type="PackedScene" uid="uid://bbwy464nx86b0" path="res://enemies/enemy.tscn" id="4_84bjs"]
 [ext_resource type="Script" path="res://characters/player_camera.gd" id="3_xh18g"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pqjfb"]
@@ -73,3 +74,8 @@ position = Vector2(0.5, 1.5)
 scale = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 script = ExtResource("3_xh18g")
+
+[node name="Hud" parent="player" instance=ExtResource("3_u1381")]
+
+[node name="Enemy" parent="." instance=ExtResource("4_84bjs")]
+position = Vector2(466, 72)
