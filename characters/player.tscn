@@ -35,6 +35,7 @@ script = ExtResource("1_tsvdu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tdeaw")
+frame_progress = 0.661481
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_7ymmp")
