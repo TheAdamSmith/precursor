@@ -1,15 +1,17 @@
-extends RigidBody2D
+extends Sprite2D
 
 @export var fire_rate = 3
 @export var bullet_speed = 1000
 
 var bullet = preload("res://weapons/basic_weapon/bullet.tscn")
 var can_fire = true
-var screen_size
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print("revolver is ready")
 	set_z_index(1)
-	screen_size = get_viewport_rect().size
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -26,11 +28,6 @@ func _process(delta):
 		can_fire = false
 		await get_tree().create_timer(fire_rate).timeout
 		can_fire = true
-
-
-
-
-
 
 func _on_vfx_animation_looped():
 	$Vfx.hide()

@@ -7,12 +7,14 @@ var screen_size # size of game window
 
 
 func _ready():
+	print("Player is ready")
 	screen_size = get_viewport_rect().size
 	#to do: uncomment
 	#hide()
 
 
 func handleInput():
+	print("Player is moving")
 	var moveDirection = Input.get_vector(
 		"move_left",
 		"move_right",
