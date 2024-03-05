@@ -5,7 +5,7 @@ var speed = 100.0
 
 # TODO modify once mobs are generated via script, 
 # should not be hard coding to find the file
-@onready var player = get_node("/root/Level/player")
+@onready var player = get_node("/root/Level/playerv2")
 @onready var _animated_sprite = $AnimatedSprite2D
 
 func _physics_process(delta):
