@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://jgn80e46ku2v"]
+
+[ext_resource type="Script" path="res://weapons/basic_weapon/revolver.gd" id="1_a26cl"]
+[ext_resource type="Texture2D" uid="uid://bxsrij7jnvog3" path="res://models/basic_weapon/revolver.png" id="1_y8xop"]
+[ext_resource type="Texture2D" uid="uid://dm6ssfcfjpoqm" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h1.png" id="3_yedst"]
+[ext_resource type="Texture2D" uid="uid://cd3hm8vhxkro" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h2.png" id="4_c377x"]
+[ext_resource type="Texture2D" uid="uid://cowubpylvk1ev" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h3.png" id="5_2v0v8"]
+[ext_resource type="Texture2D" uid="uid://ciqhntxpxknc3" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h4.png" id="6_j3m5r"]
+[ext_resource type="Texture2D" uid="uid://ca73ela1e0s6f" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h5.png" id="7_8wgyo"]
+[ext_resource type="Texture2D" uid="uid://criicn1j4dc73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h6.png" id="8_a0wrh"]
+[ext_resource type="Texture2D" uid="uid://cf2umap2pka2w" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h7.png" id="9_jxsvf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xtuwr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_yedst")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_c377x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2v0v8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_j3m5r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8wgyo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_a0wrh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_jxsvf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 50.0
+}]
+
+[node name="Revolver" type="Sprite2D"]
+script = ExtResource("1_a26cl")
+
+[node name="Revolver" type="Sprite2D" parent="."]
+position = Vector2(0, 2.38419e-07)
+scale = Vector2(0.0624999, 0.072531)
+texture = ExtResource("1_y8xop")
+
+[node name="BulletPoint" type="Node2D" parent="."]
+position = Vector2(7, -4)
+
+[node name="Vfx" type="AnimatedSprite2D" parent="."]
+position = Vector2(14, -4)
+rotation = 1.5708
+scale = Vector2(0.317911, 0.435731)
+sprite_frames = SubResource("SpriteFrames_xtuwr")
+frame_progress = 0.0182909
+
+[connection signal="animation_looped" from="Vfx" to="." method="_on_vfx_animation_looped"]
