@@ -3,30 +3,25 @@ extends Node2D
 
 signal health_update(current_health, base_health)
 
-@export var stats : StatResource
-var base_health
-var current_health
+@export var base_health : float
+var current_health : float
 
 
 func _ready():
-	await stats
-	base_health = stats._get_base_stat(StatResource.names.HEALTH)
 	current_health = base_health
-	health_update.emit()
+	health_update.emit(current_health, base_health)
 
 
-func apply_damage(damage):
+func apply_damage(damage, damaging_entity = null):
 	current_health -= damage
 	if current_health <= 0:
 		current_health = 0
-	health_update.emit()
+		EventService.entity_death.emit(damaging_entity, self)
+	health_update.emit(current_health, base_health)
 
 
-func apply_healing(health):
+func apply_healing(health, healing_entity = null):
 	current_health += health
 	if current_health >= base_health:
 		current_health = base_health
 	health_update.emit()
-
-
-func increase_

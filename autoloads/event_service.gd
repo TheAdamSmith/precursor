@@ -1,9 +1,14 @@
 extends Node
 
+# Game State Signals
 signal change_scene(scene_path)
 signal start_game
 signal quit_game
 signal change_pause_state
+
+#  In-game Signals
+signal entity_damaged(damaging_entity, damaged_entity, base_damage)
+signal entity_death(damaging_entity, dying_entity)
 
 enum GAME_STATE {MENU, IN_PROGRESS}
 var game_state
@@ -12,10 +17,16 @@ var game_state
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	game_state = GAME_STATE.MENU
+
+	# Connect game state signals
 	change_scene.connect(_change_scene)
 	start_game.connect(_start_game)
 	quit_game.connect(_quit_game)
 	change_pause_state.connect(_change_pause_state)
+
+	# Connect in-game signals
+	entity_damaged.connect(_on_entity_damaged)
+	entity_death.connect(_on_entity_death)
 
 
 func _input(event):
@@ -46,3 +57,33 @@ func _quit_game():
 func _change_pause_state():
 	get_tree().paused = not get_tree().paused
 	PauseScreen.pause_state_changed(get_tree().paused)
+
+
+func _on_entity_damaged(damaging_entity, damaged_entity, base_damage):
+	var damaged_character = _get_character_body_2d_parent(damaged_entity)
+	if damaged_character:
+		var health_comps = damaged_character.find_children("", "HealthComponent")
+		if health_comps:
+			for health_comp in health_comps:
+				health_comp.apply_damage(base_damage, damaging_entity)
+
+
+func _on_entity_death(damaging_entity, dying_entity):
+	var dying_character = _get_character_body_2d_parent(dying_entity)
+	if dying_character.has_method("give_experience"):
+		var damaging_character = _get_character_body_2d_parent(damaging_entity)
+		if damaging_character:
+			var exp_comps = damaging_character.find_children("", "ExperienceComponent")
+			if exp_comps:
+				for exp_comp in exp_comps:
+					exp_comp.add_exp(dying_character.give_experience())
+	dying_character.queue_free()
+
+
+func _get_character_body_2d_parent(child):
+	var curr_node = child
+	while curr_node:
+		if curr_node is CharacterBody2D:
+			return curr_node
+		curr_node = curr_node.get_parent()
+	return curr_node
