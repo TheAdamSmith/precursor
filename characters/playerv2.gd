@@ -3,18 +3,20 @@ signal hit
 
 @export var speed: int = 200 # Player speed
 @onready var animations = $AnimationPlayer
+@onready var audio_listener_2d: AudioListener2D = $AudioListener2D
 var screen_size # size of game window
 
 
 func _ready():
 	print("Player is ready")
 	screen_size = get_viewport_rect().size
+	audio_listener_2d.make_current()
+	SoundManager.play_bgm(load("res://assets/audio/bgm/smash mouth - all star.wav"))
 	#to do: uncomment
 	#hide()
 
 
 func handleInput():
-	print("Player is moving")
 	var moveDirection = Input.get_vector(
 		"move_left",
 		"move_right",

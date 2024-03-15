@@ -57,3 +57,5 @@ libraries = {
 
 [node name="Revolver" parent="." instance=ExtResource("7_rm75b")]
 position = Vector2(26, 0)
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]

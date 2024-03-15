@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var health = 3
 var speed = 100.0
+var timer = 0
 
 # TODO modify once mobs are generated via script, 
 # should not be hard coding to find the file
@@ -9,7 +10,10 @@ var speed = 100.0
 @onready var _animated_sprite = $AnimatedSprite2D
 
 func _physics_process(delta):
-	
+	timer += delta
+	if timer > 1:
+		SoundManager.play_sfx(self, load("res://assets/audio/sfx/land.wav"))
+		timer = 0
 	var direction = global_position.direction_to(player.global_position)
 	
 	# flip the animated sprite body in the direction of travel
