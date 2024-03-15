@@ -7,14 +7,12 @@ var screen_size # size of game window
 
 
 func _ready():
-	print("Player is ready")
 	screen_size = get_viewport_rect().size
 	#to do: uncomment
 	#hide()
 
 
-func handleInput():
-	print("Player is moving")
+func handle_input():
 	var moveDirection = Input.get_vector(
 		"move_left",
 		"move_right",
@@ -24,12 +22,12 @@ func handleInput():
 	velocity = moveDirection * speed
 
 
-func updateAnimation():
+func update_animation():
 	var x_mov = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var y_mov = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	var mov = Vector2(x_mov, y_mov)
-	
-	if mov.length() ==0:
+
+	if mov.length() == 0:
 		animations.stop()
 	else:
 		var direction = "Down"
@@ -40,10 +38,10 @@ func updateAnimation():
 		animations.play("walk" + direction)
 
 
-func _process(delta):
-	handleInput()
-	move_and_slide()
-	updateAnimation()
+func _physics_process(delta):
+	handle_input()
+	move_and_collide(velocity * delta)
+	update_animation()
 
 
 func _on_body_entered(body):
