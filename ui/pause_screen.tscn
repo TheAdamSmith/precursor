@@ -36,6 +36,7 @@ grow_vertical = 2
 
 [node name="ResumeButton" type="Button" parent="PauseMenu/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../QuitGameButton")
 mouse_filter = 1
 text = "Resume"
 script = ExtResource("2_rtyes")
@@ -49,6 +50,7 @@ next_scene_path = "res://ui/main_menu.tscn"
 
 [node name="QuitGameButton" type="Button" parent="PauseMenu/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../ResumeButton")
 mouse_filter = 1
 text = "Quit Game"
 script = ExtResource("3_dg1bm")

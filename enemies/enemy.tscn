@@ -1,19 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbwy464nx86b0"]
+[gd_scene load_steps=10 format=3 uid="uid://bbwy464nx86b0"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_ic6gj"]
 [ext_resource type="Texture2D" uid="uid://fc32k8b80a7s" path="res://models/enemy_alien_v1/alien-v1-move1.png" id="2_atdgb"]
 [ext_resource type="Texture2D" uid="uid://bnssffkwqib3h" path="res://models/enemy_alien_v1/alien-v1-attack1.png" id="2_h5wci"]
 [ext_resource type="Texture2D" uid="uid://c78q7q2kmdlt7" path="res://models/enemy_alien_v1/alien-v1-move2.png" id="3_8b4l3"]
 [ext_resource type="Texture2D" uid="uid://ct18fnph6ptrn" path="res://models/enemy_alien_v1/alien-v1-attack2.png" id="3_u8t4k"]
+[ext_resource type="Script" path="res://characters/components/health_component.gd" id="6_d0o6s"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vntik"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_h5wci")
+"texture": ExtResource("3_u8t4k")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_u8t4k")
+"texture": ExtResource("2_h5wci")
 }],
 "loop": true,
 "name": &"attack",
@@ -38,12 +39,14 @@ radius = 25.0
 radius = 29.8329
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 15
 script = ExtResource("1_ic6gj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.018, 1)
 sprite_frames = SubResource("SpriteFrames_vntik")
-animation = &"move"
+animation = &"attack"
 speed_scale = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -52,8 +55,14 @@ shape = SubResource("CircleShape2D_5bpiu")
 
 [node name="AttackBox" type="Area2D" parent="."]
 unique_name_in_owner = true
+collision_layer = 8
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 position = Vector2(-1, 3)
 shape = SubResource("CircleShape2D_8wa81")
 debug_color = Color(0.894118, 0.290196, 0.356863, 0.419608)
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("6_d0o6s")
+base_health = 30.0
