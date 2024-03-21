@@ -13,6 +13,10 @@ signal entity_death(damaging_entity, dying_entity)
 enum GAME_STATE {MENU, IN_PROGRESS}
 var game_state
 
+var level_bgm_mappings: Dictionary = {
+	
+}
+
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -36,6 +40,8 @@ func _input(event):
 
 func _change_scene(scene_path):
 	if scene_path.begins_with("res://ui"):
+		if scene_path == "res://ui/main_menu.tscn":
+			SoundManager.stop_bgm()
 		if game_state == GAME_STATE.IN_PROGRESS:
 			game_state = GAME_STATE.MENU
 		if get_tree().paused:
@@ -46,6 +52,7 @@ func _change_scene(scene_path):
 
 func _start_game():
 	game_state = GAME_STATE.IN_PROGRESS
+	SoundManager.play_bgm(load("res://assets/audio/bgm/planet_level_1.wav"))
 	var next_scene = load("res://levels/planet_level/planet_level.tscn")
 	get_tree().change_scene_to_packed(next_scene)
 

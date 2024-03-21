@@ -10,10 +10,8 @@ var screen_size # size of game window
 func _ready():
 	screen_size = get_viewport_rect().size
 	audio_listener_2d.make_current()
-	SoundManager.play_bgm(load("res://assets/audio/bgm/smash mouth - all star.wav"))
 	#to do: uncomment
 	#hide()
-
 
 
 func handle_input():
