@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dt7xh03ye22rr"]
 
+[ext_resource type="Script" path="res://levels/planet_level/planet_level.gd" id="1_on5qm"]
 [ext_resource type="Texture2D" uid="uid://ccvnwue44mquo" path="res://levels/planet_level/planet-level-sheet.png" id="1_sucad"]
 [ext_resource type="PackedScene" uid="uid://dshjlrawv1gyb" path="res://characters/playerv_2.tscn" id="2_kqhvk"]
 [ext_resource type="Script" path="res://characters/player_camera.gd" id="3_xh18g"]
-[ext_resource type="PackedScene" uid="uid://bbwy464nx86b0" path="res://enemies/enemy.tscn" id="4_84bjs"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pqjfb"]
 
@@ -54,6 +54,7 @@ physics_layer_0/physics_material = SubResource("PhysicsMaterial_pqjfb")
 sources/0 = SubResource("TileSetAtlasSource_0k8y3")
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_on5qm")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 5
@@ -71,48 +72,3 @@ position = Vector2(0.5, 1.5)
 scale = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 script = ExtResource("3_xh18g")
-
-[node name="Enemy" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(466, 72)
-
-[node name="Enemy2" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(1079, 1568)
-
-[node name="Enemy3" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(1443, 1140)
-
-[node name="Enemy4" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(419, 1812)
-
-[node name="Enemy5" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(1439, 660)
-
-[node name="Enemy6" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(1831, 1896)
-
-[node name="Enemy7" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(1051, 1936)
-
-[node name="Enemy8" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(1839, 968)
-
-[node name="Enemy9" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(1799, 248)
-
-[node name="Enemy10" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(739, 1352)
-
-[node name="Enemy11" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(207, 1328)
-
-[node name="Enemy12" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(1743, 1536)
-
-[node name="Enemy13" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(1439, 1732)
-
-[node name="Enemy14" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(1039, 1016)
-
-[node name="Enemy15" parent="." instance=ExtResource("4_84bjs")]
-position = Vector2(435, 1028)

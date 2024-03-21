@@ -1,20 +1,20 @@
 [gd_scene load_steps=10 format=3 uid="uid://bbwy464nx86b0"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_ic6gj"]
-[ext_resource type="Texture2D" uid="uid://fc32k8b80a7s" path="res://models/enemy_alien_v1/alien-v1-move1.png" id="2_atdgb"]
-[ext_resource type="Texture2D" uid="uid://bnssffkwqib3h" path="res://models/enemy_alien_v1/alien-v1-attack1.png" id="2_h5wci"]
-[ext_resource type="Texture2D" uid="uid://c78q7q2kmdlt7" path="res://models/enemy_alien_v1/alien-v1-move2.png" id="3_8b4l3"]
-[ext_resource type="Texture2D" uid="uid://ct18fnph6ptrn" path="res://models/enemy_alien_v1/alien-v1-attack2.png" id="3_u8t4k"]
+[ext_resource type="Texture2D" uid="uid://ct18fnph6ptrn" path="res://models/enemy_models/enemy_alien_v1/alien-v1-attack2.png" id="2_ppptw"]
+[ext_resource type="Texture2D" uid="uid://bnssffkwqib3h" path="res://models/enemy_models/enemy_alien_v1/alien-v1-attack1.png" id="3_cgogl"]
+[ext_resource type="Texture2D" uid="uid://fc32k8b80a7s" path="res://models/enemy_models/enemy_alien_v1/alien-v1-move1.png" id="4_nrpdh"]
+[ext_resource type="Texture2D" uid="uid://c78q7q2kmdlt7" path="res://models/enemy_models/enemy_alien_v1/alien-v1-move2.png" id="5_anu6f"]
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="6_d0o6s"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vntik"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_u8t4k")
+"texture": ExtResource("2_ppptw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_h5wci")
+"texture": ExtResource("3_cgogl")
 }],
 "loop": true,
 "name": &"attack",
@@ -22,10 +22,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_atdgb")
+"texture": ExtResource("4_nrpdh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_8b4l3")
+"texture": ExtResource("5_anu6f")
 }],
 "loop": true,
 "name": &"move",
