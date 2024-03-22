@@ -2,7 +2,7 @@ extends Node
 
 # Game State Signals
 signal change_scene(scene_path)
-signal start_game
+signal start_game(type : EventService.GAME_TYPE, game_info : Dictionary)
 signal quit_game
 signal change_pause_state
 
@@ -11,12 +11,15 @@ signal entity_damaged(damaging_entity, damaged_entity, base_damage)
 signal entity_death(damaging_entity, dying_entity)
 
 enum GAME_STATE {MENU, IN_PROGRESS}
+enum GAME_TYPE {SINGLE_PLAYER, MULTIPLAYER}
 var game_state
+var game_type
 
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	game_state = GAME_STATE.MENU
+	game_type = null
 
 	# Connect game state signals
 	change_scene.connect(_change_scene)
@@ -38,16 +41,51 @@ func _change_scene(scene_path):
 	if scene_path.begins_with("res://ui"):
 		if game_state == GAME_STATE.IN_PROGRESS:
 			game_state = GAME_STATE.MENU
+			game_type = null
 		if get_tree().paused:
 			_change_pause_state()
 	var next_scene = load(scene_path)
 	get_tree().change_scene_to_packed(next_scene)
 
 
-func _start_game():
+func _start_game(type, game_info):
 	game_state = GAME_STATE.IN_PROGRESS
-	var next_scene = load("res://levels/planet_level/planet_level.tscn")
-	get_tree().change_scene_to_packed(next_scene)
+	game_type = type
+	if game_type == GAME_TYPE.SINGLE_PLAYER:
+		print("starting single")
+		var parent_node = Node2D.new()
+		var player_arena_scene = load("res://levels/planet_level/planet_level.tscn")
+		var player_arena = player_arena_scene.instantiate()
+		player_arena.position.x = 0
+		player_arena.position.y = 0
+		parent_node.add_child(player_arena)
+		player_arena.owner = parent_node
+		for i in game_info["num_players"]:
+			var cpu_arena_scene = load("res://levels/arenas/planet_arena.tscn")
+			var cpu_arena = cpu_arena_scene.instantiate()
+			var arena_pos_vec
+			# The logic below only works cleanly for up to 8 cpu arenas
+			# TODO: Make an elegant solution elegant for any number of arenas
+			if (i / 4) % 2 == 0:
+				arena_pos_vec = Vector2((i / 4 + 1) * 64 * 32, 0)
+			else:
+				arena_pos_vec = Vector2((i / 8 + 1) * 64 * 32, (i / 8 + 1) * 64 * 32)
+			cpu_arena.position = Vector2i(arena_pos_vec.rotated((i * PI) / 2))
+			cpu_arena.z_index = -1
+			parent_node.add_child(cpu_arena)
+			cpu_arena.owner = parent_node
+			var computer_player = load("res://characters/computer_player.tscn").instantiate()
+			parent_node.add_child(computer_player)
+			computer_player.owner = parent_node
+			computer_player.position = cpu_arena.position + Vector2(64 * 32 / 2, 64 * 32 / 2)
+		var scene = PackedScene.new()
+		scene.pack(parent_node)
+		get_tree().change_scene_to_packed(scene)
+	elif game_type == GAME_TYPE.MULTIPLAYER:
+		var next_scene = load("res://levels/planet_level/planet_level.tscn")
+		get_tree().change_scene_to_packed(next_scene)
+	else:
+		assert(false, "Unknown game typed passed into _start_game")
 
 
 func _quit_game():

@@ -46,6 +46,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Start Game"
 script = ExtResource("3_xa41j")
+game_type = 1
 
 [node name="MainMenu" type="Button" parent="VBoxContainer"]
 layout_mode = 2

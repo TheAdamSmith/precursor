@@ -25,6 +25,7 @@ func _physics_process(delta):
 		await get_tree().create_timer(fire_rate).timeout
 		can_fire = true
 
+
 func _on_vfx_animation_looped():
 	$Vfx.hide()
 	$Vfx.stop()
