@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 EventService="*res://autoloads/event_service.gd"
 PauseScreen="*res://ui/pause_screen.tscn"
+SoundManager="*res://autoloads/sound_manager.gd"
 
 [input]
 
