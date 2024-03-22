@@ -14,7 +14,6 @@ var timer = 0
 # Attacks per second
 @export var attack_speed = 1.0
 var can_attack_timer : SceneTreeTimer
-var rng = RandomNumberGenerator.new()
 
 
 func _set_attack_animation_speed():
@@ -49,7 +48,7 @@ func _physics_process(delta):
 		EventService.entity_damaged.emit(self, player, contact_damage)
 		_set_attack_animation_speed()
 		_animated_sprite.play("attack")
-		SoundManager.play_sfx(self, load("res://assets/audio/sfx/land.wav"))
+		SoundManager.play_sfx(self, load("res://assets/audio/sfx/hit.wav"))
 		can_attack_timer = get_tree().create_timer(1 / attack_speed)
 	elif not overlaps_player:
 		_animated_sprite.play("move")
