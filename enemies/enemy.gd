@@ -3,19 +3,24 @@ extends CharacterBody2D
 
 var speed = 100.0
 
+
+
 # should not be hard coding to find the file
 @onready var player = get_node("/root/Level/playerv2")
-
 @onready var _animated_sprite = $AnimatedSprite2D
+
+
+
 @export var contact_damage = 5.0
 @export var experience_given = 10
+
 # Attacks per second
 @export var attack_speed = 1.0
 var can_attack_timer : SceneTreeTimer
 
-
 func _set_attack_animation_speed():
-	var sprite_frames : SpriteFrames = _animated_sprite.get_sprite_frames()
+
+	var sprite_frames = _animated_sprite.get_sprite_frames()
 	var num_frames = sprite_frames.get_frame_count("attack")
 	sprite_frames.set_animation_speed("attack", num_frames * attack_speed)
 
@@ -31,14 +36,12 @@ func _physics_process(delta):
 		
 	var direction = global_position.direction_to(player.global_position)
 
-		
 	# flip the animated sprite body in the direction of travel
 	if direction.x > 0:
 		_animated_sprite.set_flip_h(true)
 	else :
 		_animated_sprite.set_flip_h(false)
 		
-
 	velocity = direction * speed
 
 	# check to see how many objects colliding with the mob
