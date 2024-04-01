@@ -72,47 +72,47 @@ scale = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 script = ExtResource("3_xh18g")
 
-[node name="Enemy" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(466, 72)
 
-[node name="Enemy2" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy2" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(1079, 1568)
 
-[node name="Enemy3" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy3" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(1443, 1140)
 
-[node name="Enemy4" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy4" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(419, 1812)
 
-[node name="Enemy5" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy5" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(1439, 660)
 
-[node name="Enemy6" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy6" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(1831, 1896)
 
-[node name="Enemy7" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy7" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(1051, 1936)
 
-[node name="Enemy8" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy8" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(1839, 968)
 
-[node name="Enemy9" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy9" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(1799, 248)
 
-[node name="Enemy10" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy10" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(739, 1352)
 
-[node name="Enemy11" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy11" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(207, 1328)
 
-[node name="Enemy12" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy12" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(1743, 1536)
 
-[node name="Enemy13" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy13" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(1439, 1732)
 
-[node name="Enemy14" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy14" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(1039, 1016)
 
-[node name="Enemy15" parent="." instance=ExtResource("4_84bjs")]
+[node name="Enemy15" parent="." groups=["enemy"] instance=ExtResource("4_84bjs")]
 position = Vector2(435, 1028)
