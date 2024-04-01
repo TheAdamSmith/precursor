@@ -20,15 +20,10 @@ func _physics_process(delta):
 	if enemy:
 		var direction = (enemy.global_position - $Revolver.global_position)
 		self.rotation = clamp(direction.angle(), initial_rotation -PI/2, initial_rotation + PI/2)
-		#if direction.angle() < initial_rotation + PI/2 :
-			#self.roation = 
-		#elif direction.angle() > initial_rotation - PI/2:
-			#self.rotation = direction.angle()
 	else:
 		self.rotation = initial_rotation
 	
 	if can_fire:
-
 		$Vfx.show()
 		$Vfx.play()
 		var bullet_instance = bullet.instantiate()
@@ -46,6 +41,7 @@ func _on_vfx_animation_looped():
 	$Vfx.stop()
 
 func find_closest_enemy(cur_pos):
+	# big number idk if there is maxint in godot
 	var closest_distance = 100000000
 	var closest_enemy = null
 	for enemy in get_tree().get_nodes_in_group("enemy"):
