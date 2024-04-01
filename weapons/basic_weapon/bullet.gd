@@ -16,6 +16,7 @@ func _on_body_entered(body):
 	linear_velocity.y = 0
 	$Vfx.show()
 	$Vfx.play()
+	
 	EventService.entity_damaged.emit(self, body, damage)
 	await get_tree().create_timer(0.05).timeout 
 	$SmallBullet.hide()
