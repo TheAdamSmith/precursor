@@ -9,7 +9,7 @@ func _ready():
 
 
 func _on_body_entered(body):
-	if disabled:
+	if disabled or body.is_in_group("player"):
 		return
 	disabled = true
 	linear_velocity.x = 0
