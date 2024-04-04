@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt7xh03ye22rr"]
+[gd_scene load_steps=10 format=3 uid="uid://dt7xh03ye22rr"]
 
 [ext_resource type="Texture2D" uid="uid://ccvnwue44mquo" path="res://levels/planet_level/planet-level-sheet.png" id="1_sucad"]
 [ext_resource type="PackedScene" uid="uid://dshjlrawv1gyb" path="res://characters/playerv_2.tscn" id="2_kqhvk"]
 [ext_resource type="Script" path="res://characters/player_camera.gd" id="3_xh18g"]
 [ext_resource type="PackedScene" uid="uid://bbwy464nx86b0" path="res://enemies/enemy.tscn" id="4_84bjs"]
+[ext_resource type="PackedScene" uid="uid://dx8ompps1m82a" path="res://ui/components/bgm_selector.tscn" id="5_x6t60"]
+[ext_resource type="AudioStream" uid="uid://deona08bxt7lw" path="res://assets/audio/bgm/level_1.wav" id="6_f1thb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pqjfb"]
 
@@ -116,3 +118,6 @@ position = Vector2(1039, 1016)
 
 [node name="Enemy15" parent="." instance=ExtResource("4_84bjs")]
 position = Vector2(435, 1028)
+
+[node name="BgmSelector" parent="." instance=ExtResource("5_x6t60")]
+bgm = ExtResource("6_f1thb")

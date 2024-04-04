@@ -36,10 +36,6 @@ func _input(event):
 
 func _change_scene(scene_path):
 	if scene_path.begins_with("res://ui"):
-		# when returning to main menu, stop BGM for now
-		# in future, this would be replaced to play the main menu music
-		if scene_path == "res://ui/main_menu.tscn":
-			SoundManager.stop_bgm()
 		if game_state == GAME_STATE.IN_PROGRESS:
 			game_state = GAME_STATE.MENU
 		if get_tree().paused:
@@ -52,7 +48,6 @@ func _start_game():
 	game_state = GAME_STATE.IN_PROGRESS
 	# will need to be adjusted when there are more than one scene associated
 	# with "starting the game"
-	SoundManager.play_bgm(load("res://assets/audio/bgm/planet_level_1.wav"))
 	var next_scene = load("res://levels/planet_level/planet_level.tscn")
 	get_tree().change_scene_to_packed(next_scene)
 

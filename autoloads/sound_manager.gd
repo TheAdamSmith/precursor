@@ -3,13 +3,15 @@ extends Node2D
 var bgm_player: AudioStreamPlayer
 
 
-func play_bgm(stream: AudioStream, volume_db: float = -10):
+func play_bgm(stream: AudioStream, volume_db: float = -10, force_restart: bool = false):
 	if not bgm_player:
 		bgm_player = AudioStreamPlayer.new()
 		add_child(bgm_player)
+	bgm_player.volume_db = volume_db	
+	if stream == bgm_player.stream and not force_restart:
+		return
 	bgm_player.autoplay = true
 	bgm_player.stream = stream
-	bgm_player.volume_db = volume_db
 	bgm_player.play()
 
 
