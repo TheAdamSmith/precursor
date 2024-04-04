@@ -2,7 +2,6 @@ class_name Enemy
 extends CharacterBody2D
 
 var speed = 100.0
-var timer = 0
 
 # TODO modify once mobs are generated via script,
 # should not be hard coding to find the file
