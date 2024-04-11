@@ -9,7 +9,7 @@ func _ready():
 
 
 func _on_body_entered(body):
-	if disabled or body.is_in_group("player"):
+	if disabled:
 		return
 	disabled = true
 	linear_velocity.x = 0
@@ -20,6 +20,7 @@ func _on_body_entered(body):
 	EventService.entity_damaged.emit(self, body, damage)
 	await get_tree().create_timer(0.05).timeout 
 	$SmallBullet.hide()
+	queue_free()
 
 
 func _on_vfx_animation_looped():

@@ -10,8 +10,6 @@ var initial_rotation
 
 func _ready():
 	initial_rotation = $Revolver.global_rotation
-	#if floor(initial_rotation) == floor(-PI):
-		#initial_rotation = PI
 	set_z_index(1)
 
 
@@ -21,13 +19,6 @@ func _physics_process(delta):
 	
 	if enemy:
 		var direction = (enemy.global_position - $Revolver.global_position)
-		if floor(initial_rotation) == floor(-PI):
-			self.rotation = clamp(direction.angle(), PI/2,  3*PI/2)
-		else:
-			var angle = rad_to_deg(direction.angle())
-			var temp_rot = clamp(direction.angle(), initial_rotation -PI/2, initial_rotation + PI/2)
-			var temp_angle = rad_to_deg(temp_rot)
-			#self.rotation = temp_rot
 		self.rotation = direction.angle()
 	else:
 		self.rotation = initial_rotation
