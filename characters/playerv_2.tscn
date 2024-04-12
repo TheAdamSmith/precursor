@@ -63,6 +63,8 @@ libraries = {
 "": SubResource("AnimationLibrary_26w5p")
 }
 
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+
 [node name="UpgradeComponent" parent="." node_paths=PackedStringArray("experience_component") instance=ExtResource("8_g5ohr")]
 position = Vector2(0, -43)
 experience_component = NodePath("../ExperienceComponent")

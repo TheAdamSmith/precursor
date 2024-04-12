@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ble25jlxswky7"]
+[gd_scene load_steps=9 format=3 uid="uid://ble25jlxswky7"]
 
 [ext_resource type="Script" path="res://ui/components/base_menu.gd" id="1_txnvf"]
 [ext_resource type="Script" path="res://ui/components/open_new_scene_button.gd" id="2_31nul"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://ui/components/quit_game_button.gd" id="2_vsj0k"]
 [ext_resource type="Texture2D" uid="uid://dij1fcvbhojrt" path="res://assets/title_background.png" id="5_3xta2"]
 [ext_resource type="Script" path="res://ui/components/background.gd" id="6_lee4k"]
+[ext_resource type="PackedScene" uid="uid://dx8ompps1m82a" path="res://ui/components/bgm_selector.tscn" id="7_kt5m1"]
+[ext_resource type="AudioStream" uid="uid://d3cpvhbvgmtox" path="res://assets/audio/bgm/menu_music.wav" id="8_njqiu"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("initial_focus")]
 layout_mode = 3
@@ -87,3 +89,6 @@ texture = ExtResource("5_3xta2")
 expand_mode = 1
 script = ExtResource("6_lee4k")
 metadata/_edit_use_anchors_ = true
+
+[node name="BgmSelector" parent="." instance=ExtResource("7_kt5m1")]
+bgm = ExtResource("8_njqiu")

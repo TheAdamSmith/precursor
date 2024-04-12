@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 var speed = 100.0
 
-# TODO modify once mobs are generated via script, 
+# TODO modify once mobs are generated via script,
 # should not be hard coding to find the file
 @onready var player = get_node("/root/Level/playerv2")
 @onready var _animated_sprite = $AnimatedSprite2D
@@ -28,6 +28,7 @@ func give_experience():
 func _physics_process(delta):
 	if not player:
 		return
+
 	var direction = global_position.direction_to(player.global_position)
 
 	# flip the animated sprite body in the direction of travel
@@ -46,6 +47,7 @@ func _physics_process(delta):
 		EventService.entity_damaged.emit(self, player, contact_damage)
 		_set_attack_animation_speed()
 		_animated_sprite.play("attack")
+		SoundManager.play_sfx(self, load("res://assets/audio/sfx/hit.wav"))
 		can_attack_timer = get_tree().create_timer(1 / attack_speed)
 	elif not overlaps_player:
 		_animated_sprite.play("move")
