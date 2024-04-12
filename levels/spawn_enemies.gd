@@ -3,7 +3,10 @@ extends Node2D
 #TODO programatically find the boundary of the level
 var xBoundary = 2000
 var yBoundary = 2000
-var enemyModels = ["alien-v1", "alien-v2"]
+
+#TODO load this from a file, could do same thing with bounding boxes and such, 
+# might be worthfile to store in some form of json object
+var enemyModels = ["alien_v1", "alien_v2"]
 
 func _ready():
 	while true :
@@ -11,15 +14,13 @@ func _ready():
 		spawn_enemy()
 
 func spawn_enemy():
+	var position = Vector2(randi_range(50,xBoundary),randi_range(50,yBoundary))
 	var enemyModel = enemyModels.pick_random()
-	var moveFrame1 = load("res://models/enemy_models/" + enemyModel + "/" + enemyModel + "-move1.png")
-	var moveFrame2 = load("res://models/enemy_models/" + enemyModel + "/" + enemyModel + "-move2.png")
+	
+	var enemySprite = load("res://enemies/enemyAnimatedSprite2D/" + enemyModel + ".tscn").instantiate()
+	enemySprite.set_name("enemySprite")
 	
 	var enemy = load("res://enemies/enemy.tscn").instantiate()
-	var spriteFrames = enemy.get_node("AnimatedSprite2D").get_sprite_frames()
-
-	spriteFrames.set_frame("move", 0, moveFrame1, 1)
-	spriteFrames.set_frame("move", 1, moveFrame2, 1)
-	
-	enemy.global_position = Vector2(randi_range(50,xBoundary),randi_range(50,yBoundary))
+	enemy.add_child(enemySprite)
+	enemy.global_position = position
 	add_child(enemy)
