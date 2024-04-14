@@ -4,13 +4,14 @@ extends CharacterBody2D
 var speed = 100.0
 
 # should not be hard coding to find the file
-@onready var player = get_node("/root/Level/playerv2")
-
 @onready var _animated_sprite = $AnimatedSprite2D
+
+@export var arena_group : String
 @export var contact_damage = 5.0
 @export var experience_given = 10
 # Attacks per second
 @export var attack_speed = 1.0
+var player
 var can_attack_timer : SceneTreeTimer
 
 
@@ -24,11 +25,25 @@ func give_experience():
 	return experience_given
 
 
-func _physics_process(delta):
-
+func _find_player():
+	if not arena_group:
+		for group in get_groups():
+			if group.contains("Arena"):
+				arena_group = group
+				break
+	#print(arena_group)
 	if not player:
+		for node in get_tree().get_nodes_in_group(arena_group):
+			if node.is_in_group("Player"):
+				player = node
+				break
+		if not player:
+			return
+
+
+func _physics_process(delta):
+	if not player and not _find_player():
 		return
-		
 	var direction = global_position.direction_to(player.global_position)
 
 		

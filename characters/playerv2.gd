@@ -1,6 +1,13 @@
+class_name Player
 extends CharacterBody2D
 
 @onready var animations = $AnimationPlayer
+
+
+func _ready():
+	add_to_group("Player")
+	print(self)
+	print(get_groups())
 
 
 func update_animation():
