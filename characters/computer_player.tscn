@@ -41,12 +41,18 @@ _data = {
 "walkUp": ExtResource("6_6q8cu")
 }
 
+<<<<<<< HEAD:characters/computer_player.tscn
 [node name="computer_player" type="CharacterBody2D"]
+=======
+[node name="playerv2" type="CharacterBody2D"]
+visibility_layer = 2
+>>>>>>> origin/main:characters/playerv_2.tscn
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_6fimu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 2
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_mrqpl")
 
@@ -66,6 +72,8 @@ libraries = {
 script = ExtResource("12_csdww")
 character = NodePath("..")
 speed = 200.0
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [node name="UpgradeComponent" parent="." node_paths=PackedStringArray("experience_component") instance=ExtResource("8_g5ohr")]
 position = Vector2(0, -43)

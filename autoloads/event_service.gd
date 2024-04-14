@@ -54,6 +54,8 @@ func _start_game(type, game_info):
 	if game_type == GAME_TYPE.SINGLE_PLAYER:
 		print("starting single")
 		var parent_node = Node2D.new()
+		# will need to be adjusted when there are more than one scene associated
+		# with "starting the game"
 		var player_arena = load("res://levels/arenas/planet_arena.tscn").instantiate() as PlanetArena
 		player_arena.add_to_group("Arena0")
 		player_arena.position.x = 0
