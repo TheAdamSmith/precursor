@@ -3,11 +3,10 @@ extends CharacterBody2D
 
 var speed = 100.0
 
-# TODO modify once mobs are generated via script, 
 # should not be hard coding to find the file
 @onready var player = get_node("/root/Level/playerv2")
-@onready var _animated_sprite = $AnimatedSprite2D
 
+@onready var _animated_sprite = $AnimatedSprite2D
 @export var contact_damage = 5.0
 @export var experience_given = 10
 # Attacks per second
@@ -26,15 +25,19 @@ func give_experience():
 
 
 func _physics_process(delta):
+
 	if not player:
 		return
+		
 	var direction = global_position.direction_to(player.global_position)
 
+		
 	# flip the animated sprite body in the direction of travel
 	if direction.x > 0:
-		_animated_sprite.set_scale(Vector2(-1, 1))
+		_animated_sprite.set_flip_h(true)
 	else :
-		_animated_sprite.set_scale(Vector2(1, 1))
+		_animated_sprite.set_flip_h(false)
+		
 
 	velocity = direction * speed
 

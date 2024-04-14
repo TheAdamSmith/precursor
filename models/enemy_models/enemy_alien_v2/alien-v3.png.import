@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnssffkwqib3h"
-path="res://.godot/imported/alien-v1-attack1.png-81f6b413e32d280d9c237081876c1a8e.ctex"
+uid="uid://d1134k8fuhmt5"
+path="res://.godot/imported/alien-v3.png-2948abfc8de8b60443a0677f97796e95.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/enemy_alien_v1/alien-v1-attack1.png"
-dest_files=["res://.godot/imported/alien-v1-attack1.png-81f6b413e32d280d9c237081876c1a8e.ctex"]
+source_file="res://models/enemy_models/enemy_alien_v2/alien-v3.png"
+dest_files=["res://.godot/imported/alien-v3.png-2948abfc8de8b60443a0677f97796e95.ctex"]
 
 [params]
 
