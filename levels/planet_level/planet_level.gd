@@ -6,6 +6,7 @@ var xBoundary = 2000
 var yBoundary = 2000
 var arena_group : String
 
+
 func _ready():
 	print(self)
 	while true :

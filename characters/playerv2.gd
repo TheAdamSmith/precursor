@@ -6,7 +6,6 @@ extends CharacterBody2D
 
 
 func _ready():
-	screen_size = get_viewport_rect().size
 	audio_listener_2d.make_current()
 	add_to_group("Player")
 	print(self)
