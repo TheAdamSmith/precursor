@@ -1,7 +1,8 @@
 extends Node2D
+class_name EnemySpawner
 
-var xBoundary = 2000
-var yBoundary = 2000
+@export var xBoundary = 2000
+@export var yBoundary = 2000
 
 var enemyModels = ["alien_v1", "alien_v2"]
 
@@ -13,7 +14,6 @@ func _ready():
 func spawn_enemy():
 	var position = Vector2(randi_range(50,xBoundary),randi_range(50,yBoundary))
 	var enemyModel = enemyModels.pick_random()
-	
 	var enemySprite = load("res://enemies/enemyAnimatedSprite2D/" + enemyModel + ".tscn").instantiate()
 	
 	#set a generic name for the sprite frame object so that it can be referenced generically
