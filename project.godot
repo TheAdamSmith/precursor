@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 EventService="*res://autoloads/event_service.gd"
 PauseScreen="*res://ui/pause_screen.tscn"
+SoundManager="*res://autoloads/sound_manager.gd"
 
 [input]
 
@@ -143,6 +144,9 @@ left_upgrade={
 
 [layer_names]
 
+2d_render/layer_1="player"
+2d_render/layer_2="enemies"
+2d_render/layer_3="bullets"
 2d_physics/layer_1="Level"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemy"

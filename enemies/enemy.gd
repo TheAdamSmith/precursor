@@ -3,7 +3,6 @@ class_name Enemy
 
 var speed = 100.0
 
-# load nodes
 @onready var player = get_node("/root/Level/playerv2")
 @onready var animated_sprite = get_node("enemySprite")
 
@@ -28,7 +27,7 @@ func _physics_process(delta):
 
 	if not player:
 		return
-	
+    
 	var direction = global_position.direction_to(player.global_position)
 	# flip the animated sprite body in the direction of travel
 	if direction.x > 0:
@@ -46,6 +45,7 @@ func _physics_process(delta):
 		EventService.entity_damaged.emit(self, player, contact_damage)
 		_set_attack_animation_speed()
 		animated_sprite.play("attack")
+		SoundManager.play_sfx(self, load("res://assets/audio/sfx/hit.wav"))
 		can_attack_timer = get_tree().create_timer(1 / attack_speed)
 	elif not overlaps_player:
 		animated_sprite.play("move")

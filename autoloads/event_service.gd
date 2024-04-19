@@ -46,6 +46,8 @@ func _change_scene(scene_path):
 
 func _start_game():
 	game_state = GAME_STATE.IN_PROGRESS
+	# will need to be adjusted when there are more than one scene associated
+	# with "starting the game"
 	var next_scene = load("res://levels/planet_level/planet_level.tscn")
 	get_tree().change_scene_to_packed(next_scene)
 

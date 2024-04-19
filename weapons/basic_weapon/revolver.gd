@@ -5,13 +5,24 @@ extends Sprite2D
 
 var bullet = preload("res://weapons/basic_weapon/bullet.tscn")
 var can_fire = true
+var initial_rotation
 
 
 func _ready():
+	initial_rotation = $Revolver.global_rotation
 	set_z_index(1)
 
 
 func _physics_process(delta):
+	
+	var enemy = find_closest_enemy($Revolver.global_position)
+	
+	if enemy:
+		var direction = (enemy.global_position - $Revolver.global_position)
+		self.rotation = direction.angle()
+	else:
+		self.rotation = initial_rotation
+	
 	if can_fire:
 		$Vfx.show()
 		$Vfx.play()
@@ -28,3 +39,15 @@ func _physics_process(delta):
 func _on_vfx_animation_looped():
 	$Vfx.hide()
 	$Vfx.stop()
+
+func find_closest_enemy(cur_pos):
+	# big number idk if there is maxint in godot
+	var closest_distance = 100000000
+	var closest_enemy = null
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		var distance = enemy.global_transform.origin.distance_to(cur_pos)
+		if distance < closest_distance:
+			closest_distance = distance
+			closest_enemy = enemy
+
+	return closest_enemy
