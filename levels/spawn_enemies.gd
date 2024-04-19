@@ -23,10 +23,5 @@ func spawn_enemy():
 	var enemy = load("res://enemies/enemy.tscn").instantiate()
 	enemy.add_child(enemySprite)
 	enemy.global_position = position
-	if not arena_group:
-		for group in get_groups():
-			if group.contains("Arena"):
-				arena_group = group
-				break
-	enemy.add_to_group(arena_group)
+	enemy.add_to_group("enemy")
 	add_child(enemy)
