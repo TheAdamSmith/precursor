@@ -27,7 +27,7 @@ func _physics_process(delta):
 
 	if not player:
 		return
-    
+	
 	var direction = global_position.direction_to(player.global_position)
 	# flip the animated sprite body in the direction of travel
 	if direction.x > 0:

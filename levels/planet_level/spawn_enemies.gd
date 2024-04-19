@@ -3,6 +3,7 @@ class_name EnemySpawner
 
 @export var xBoundary = 2000
 @export var yBoundary = 2000
+var arena_group : String
 
 var enemyModels = ["alien_v1", "alien_v2"]
 
@@ -22,4 +23,10 @@ func spawn_enemy():
 	var enemy = load("res://enemies/enemy.tscn").instantiate()
 	enemy.add_child(enemySprite)
 	enemy.global_position = position
+	if not arena_group:
+		for group in get_groups():
+			if group.contains("Arena"):
+				arena_group = group
+				break
+	enemy.add_to_group(arena_group)
 	add_child(enemy)
