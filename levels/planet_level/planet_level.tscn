@@ -56,7 +56,6 @@ physics_layer_0/physics_material = SubResource("PhysicsMaterial_pqjfb")
 sources/0 = SubResource("TileSetAtlasSource_0k8y3")
 
 [node name="Level" type="Node2D"]
-script = ExtResource("1_on5qm")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 5
