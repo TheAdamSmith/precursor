@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsly2k2xpl86e"]
+
+[ext_resource type="Texture2D" uid="uid://bm45nhj47fv3e" path="res://models/enemy_models/alien-v2/alien-v2-attack1.png" id="1_t07ef"]
+[ext_resource type="Texture2D" uid="uid://cbjlwdmkadu0n" path="res://models/enemy_models/alien-v2/alien-v2-move1.png" id="1_xxv0n"]
+[ext_resource type="Texture2D" uid="uid://d1134k8fuhmt5" path="res://models/enemy_models/alien-v2/alien-v2-move2.png" id="2_gloyl"]
+[ext_resource type="Texture2D" uid="uid://5oj2ree8vyj6" path="res://models/enemy_models/alien-v2/alien-v2-attack2.png" id="2_i51mh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ulp8j"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("1_t07ef")
+}, {
+"duration": 0.5,
+"texture": ExtResource("2_i51mh")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("1_xxv0n")
+}, {
+"duration": 4.0,
+"texture": ExtResource("2_gloyl")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="alien_v2" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ulp8j")
+animation = &"attack"

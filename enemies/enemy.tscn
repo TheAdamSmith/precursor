@@ -1,36 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbwy464nx86b0"]
+[gd_scene load_steps=5 format=3 uid="uid://8krgtsb65k0h"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_ic6gj"]
-[ext_resource type="Texture2D" uid="uid://fc32k8b80a7s" path="res://models/enemy_alien_v1/alien-v1-move1.png" id="2_atdgb"]
-[ext_resource type="Texture2D" uid="uid://bnssffkwqib3h" path="res://models/enemy_alien_v1/alien-v1-attack1.png" id="2_h5wci"]
-[ext_resource type="Texture2D" uid="uid://c78q7q2kmdlt7" path="res://models/enemy_alien_v1/alien-v1-move2.png" id="3_8b4l3"]
-[ext_resource type="Texture2D" uid="uid://ct18fnph6ptrn" path="res://models/enemy_alien_v1/alien-v1-attack2.png" id="3_u8t4k"]
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="6_d0o6s"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_vntik"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_u8t4k")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_h5wci")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_atdgb")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_8b4l3")
-}],
-"loop": true,
-"name": &"move",
-"speed": 5.0
-}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5bpiu"]
 radius = 25.0
@@ -43,18 +14,11 @@ collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_ic6gj")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1.018, 1)
-sprite_frames = SubResource("SpriteFrames_vntik")
-animation = &"attack"
-speed_scale = 0.5
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 3)
 shape = SubResource("CircleShape2D_5bpiu")
 
 [node name="AttackBox" type="Area2D" parent="."]
-unique_name_in_owner = true
 collision_layer = 8
 collision_mask = 15
 
