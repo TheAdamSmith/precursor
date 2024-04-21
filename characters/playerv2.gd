@@ -6,13 +6,16 @@ extends CharacterBody2D
 
 
 func _ready():
-	audio_listener_2d.make_current()
+	if audio_listener_2d:
+		# Audio listener not set for computer players
+		audio_listener_2d.make_current()
 	add_to_group("Player")
 	print(self)
 	print(get_groups())
 
 
 func update_animation():
+	# Velocity should be set in an input component
 	if velocity.length() == 0:
 		animations.stop()
 	else:

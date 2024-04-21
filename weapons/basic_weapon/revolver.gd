@@ -41,6 +41,7 @@ func _on_vfx_animation_looped():
 	$Vfx.hide()
 	$Vfx.stop()
 
+
 func find_closest_enemy(cur_pos):
 	# big number idk if there is maxint in godot
 	var closest_distance = 100000000

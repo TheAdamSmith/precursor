@@ -16,6 +16,10 @@ var player
 var can_attack_timer : SceneTreeTimer
 
 
+func _ready():
+	add_to_group("enemy")
+
+
 func _set_attack_animation_speed():
 	var sprite_frames : SpriteFrames = _animated_sprite.get_sprite_frames()
 	var num_frames = sprite_frames.get_frame_count("attack")

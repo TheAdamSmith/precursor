@@ -2,12 +2,10 @@ extends CharacterBody2D
 signal hit
 
 @export var speed = 400 # Player speed
-var screen_size # size of game window
 
 func _ready():
-	screen_size = get_viewport_rect().size
-	#to do: uncomment
-	#hide()
+	add_to_group("player")
+
 
 func _process(delta):
 	var velocity = Vector2.ZERO # The player's movement vector.

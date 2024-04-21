@@ -103,3 +103,5 @@ experience_component = NodePath("../../ExperienceComponent")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 script = ExtResource("13_5ayu6")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
