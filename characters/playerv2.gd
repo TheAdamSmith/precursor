@@ -4,6 +4,7 @@ signal hit
 @export var speed: int = 200 # Player speed
 @onready var animations = $AnimationPlayer
 @onready var audio_listener_2d: AudioListener2D = $AudioListener2D
+@onready var marker2D=$Marker2D
 var screen_size # size of game window
 
 
@@ -29,15 +30,15 @@ func update_animation():
 	var y_mov = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	var mov = Vector2(x_mov, y_mov)
 
+	if x_mov > 0:
+		marker2D.scale.x = 1
+	elif x_mov < 0:
+		marker2D.scale.x = -1
+
 	if mov.length() == 0:
-		animations.stop()
+		animations.play("idle")
 	else:
-		var direction = "Down"
-		if mov.x < 0: direction = "Left"
-		elif mov.x > 0: direction = "Right"
-		elif mov.y < 0: direction = "Up"
-		
-		animations.play("walk" + direction)
+		animations.play("walk")
 
 
 func _physics_process(delta):
