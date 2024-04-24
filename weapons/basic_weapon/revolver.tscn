@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://jgn80e46ku2v"]
+[gd_scene load_steps=14 format=3 uid="uid://jgn80e46ku2v"]
 
 [ext_resource type="Script" path="res://weapons/basic_weapon/revolver.gd" id="1_a26cl"]
 [ext_resource type="Texture2D" uid="uid://bxsrij7jnvog3" path="res://models/basic_weapon/revolver.png" id="1_y8xop"]
@@ -39,6 +39,67 @@ animations = [{
 "speed": 50.0
 }]
 
+[sub_resource type="Animation" id="Animation_e0og7"]
+resource_name = "recoil"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Revolver:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 2.38419e-07), Vector2(-5, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Revolver:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_7bt45"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Revolver:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 2.38419e-07)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Revolver:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w8rn5"]
+_data = {
+"RESET": SubResource("Animation_7bt45"),
+"recoil": SubResource("Animation_e0og7")
+}
+
 [node name="Revolver" type="Sprite2D"]
 script = ExtResource("1_a26cl")
 
@@ -55,6 +116,12 @@ position = Vector2(14, -4)
 rotation = 1.5708
 scale = Vector2(0.317911, 0.435731)
 sprite_frames = SubResource("SpriteFrames_xtuwr")
-frame_progress = 0.0182909
+frame = 1
+frame_progress = 0.718845
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w8rn5")
+}
 
 [connection signal="animation_looped" from="Vfx" to="." method="_on_vfx_animation_looped"]
