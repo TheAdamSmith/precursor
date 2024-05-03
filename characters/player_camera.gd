@@ -55,7 +55,7 @@ func _unhandled_input(event: InputEvent):
 
 	# pan controls:
 	# camera_pan_grab -> mouse wheel click
-	if Input.is_action_just_pressed("camera_pan_grab"):
+	if event.is_action_pressed("camera_pan_grab"):
 		panning = true
 		pan_grab_pos = event.position
 		pan_velocity = Vector2.ZERO

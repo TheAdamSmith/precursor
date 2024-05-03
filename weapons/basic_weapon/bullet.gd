@@ -12,7 +12,6 @@ func _on_body_entered(body):
 	if disabled:
 		return
 	disabled = true
-	get_tree().call_group()
 	linear_velocity.x = 0
 	linear_velocity.y = 0
 	$Vfx.show()

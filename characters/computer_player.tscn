@@ -64,9 +64,10 @@ libraries = {
 "": SubResource("AnimationLibrary_26w5p")
 }
 
-[node name="ComputerPlayerInputComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
+[node name="ComputerPlayerInputComponent" type="Node2D" parent="." node_paths=PackedStringArray("player", "upgrade_component")]
 script = ExtResource("12_csdww")
-character = NodePath("..")
+player = NodePath("..")
+upgrade_component = NodePath("../UpgradeComponent")
 speed = 200.0
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
@@ -85,21 +86,22 @@ threshold_multiplier = 2
 script = ExtResource("10_buq5f")
 base_health = 100.0
 
-[node name="Hud" type="CanvasLayer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = -63.0
+offset_top = 23.0
+offset_right = 193.0
+offset_bottom = 92.0
+scale = Vector2(0.5, 0.5)
 
-[node name="HealthBar" parent="Hud" node_paths=PackedStringArray("health_component") instance=ExtResource("10_lie7l")]
-offset_right = 256.0
-offset_bottom = 16.0
-scale = Vector2(0.734612, 1.3485)
-size_flags_horizontal = 0
-size_flags_vertical = 0
-health_component = NodePath("../../HealthComponent")
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
 
-[node name="ExpLabel" parent="Hud" node_paths=PackedStringArray("experience_component") instance=ExtResource("11_x4h1m")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -38.0
-offset_right = 0.0
-grow_horizontal = 0
-experience_component = NodePath("../../ExperienceComponent")
+[node name="HealthBar" parent="MarginContainer/HBoxContainer" node_paths=PackedStringArray("health_component") instance=ExtResource("10_lie7l")]
+layout_direction = 1
+layout_mode = 2
+health_component = NodePath("../../../HealthComponent")
+
+[node name="ExpLabel" parent="MarginContainer/HBoxContainer" node_paths=PackedStringArray("experience_component") instance=ExtResource("11_x4h1m")]
+layout_mode = 2
+size_flags_horizontal = 4
+experience_component = NodePath("../../../ExperienceComponent")

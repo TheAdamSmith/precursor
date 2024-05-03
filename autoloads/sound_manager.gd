@@ -12,7 +12,7 @@ func play_bgm(stream: AudioStream, volume_db: float = -10, force_restart: bool =
 		return
 	bgm_player.autoplay = true
 	bgm_player.stream = stream
-	bgm_player.play()
+	#bgm_player.play()
 
 
 func stop_bgm():

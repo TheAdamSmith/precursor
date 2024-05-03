@@ -39,7 +39,7 @@ animations = [{
 "speed": 50.0
 }]
 
-[node name="Revolver" type="Sprite2D"]
+[node name="Revolver" type="Node2D"]
 script = ExtResource("1_a26cl")
 
 [node name="Revolver" type="Sprite2D" parent="."]

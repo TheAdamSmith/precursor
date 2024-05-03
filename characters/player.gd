@@ -2,6 +2,7 @@ extends CharacterBody2D
 signal hit
 
 @export var speed = 400 # Player speed
+var arena_group
 
 func _ready():
 	add_to_group("player")

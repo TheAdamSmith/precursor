@@ -53,41 +53,7 @@ func _start_game(type, game_info):
 	game_type = type
 	if game_type == GAME_TYPE.SINGLE_PLAYER:
 		print("starting single")
-		var parent_node = Node2D.new()
-		# will need to be adjusted when there are more than one scene associated
-		# with "starting the game"
-		var player_arena = load("res://levels/arenas/planet_arena.tscn").instantiate() as PlanetArena
-		player_arena.add_to_group("Arena0")
-		player_arena.position.x = 0
-		player_arena.position.y = 0
-		parent_node.add_child(player_arena)
-		player_arena.owner = parent_node
-		var main_player = load("res://characters/playerv2.tscn").instantiate() as Player
-		main_player.add_to_group("Arena0")
-		parent_node.add_child(main_player)
-		main_player.owner = parent_node
-		main_player.position = player_arena.position + Vector2(64 * 32 / 2, 64 * 32 / 2)
-		for i in game_info["num_players"]:
-			var cpu_arena_scene = load("res://levels/arenas/planet_arena.tscn")
-			var cpu_arena = cpu_arena_scene.instantiate()
-			var arena_pos_vec
-			# The logic below only works cleanly for up to 8 cpu arenas
-			# TODO: Make an elegant solution elegant for any number of arenas
-			if (i / 4) % 2 == 0:
-				arena_pos_vec = Vector2((i / 4 + 1) * 64 * 32, 0)
-			else:
-				arena_pos_vec = Vector2((i / 8 + 1) * 64 * 32, (i / 8 + 1) * 64 * 32)
-			cpu_arena.position = Vector2i(arena_pos_vec.rotated((i * PI) / 2))
-			cpu_arena.z_index = -1
-			cpu_arena.add_to_group("Arena%d" % [i + 1])
-			parent_node.add_child(cpu_arena)
-			cpu_arena.owner = parent_node
-			var computer_player = load("res://characters/computer_player.tscn").instantiate()
-			parent_node.add_child(computer_player)
-			computer_player.owner = parent_node
-			computer_player.position = cpu_arena.position + Vector2(64 * 32 / 2, 64 * 32 / 2)
-		var scene = PackedScene.new()
-		scene.pack(parent_node)
+		var scene = ArenaUtilities.create_arenas_packed_scene(2, game_info["num_players"], true)
 		get_tree().change_scene_to_packed(scene)
 	elif game_type == GAME_TYPE.MULTIPLAYER:
 		var next_scene = load("res://levels/planet_level/planet_level.tscn")

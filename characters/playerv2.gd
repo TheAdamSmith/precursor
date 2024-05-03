@@ -3,15 +3,17 @@ extends CharacterBody2D
 
 @onready var animations = $AnimationPlayer
 @onready var audio_listener_2d: AudioListener2D = $AudioListener2D
+var arena_group : String
 
 
 func _ready():
 	if audio_listener_2d:
 		# Audio listener not set for computer players
 		audio_listener_2d.make_current()
-	add_to_group("Player")
-	print(self)
-	print(get_groups())
+	add_to_group("player")
+	arena_group = ArenaUtilities.get_arena_name_by_position(global_position)
+	add_to_group(arena_group)
+	floor_snap_length = 0.0
 
 
 func update_animation():
@@ -28,7 +30,7 @@ func update_animation():
 
 
 func _physics_process(delta):
-	move_and_collide(velocity * delta)
+	move_and_slide()
 	update_animation()
 
 
