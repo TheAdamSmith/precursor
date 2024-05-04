@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtd2prg7d05ci"]
+
+[ext_resource type="Script" path="res://audio/bgm_selector.gd" id="1_7g6i2"]
+[ext_resource type="AudioStream" uid="uid://o03ehjegtst0" path="res://assets/audio/bgm/level_2.wav" id="2_xmob6"]
+
+[node name="Level2Bgm" type="Node"]
+script = ExtResource("1_7g6i2")
+bgm = ExtResource("2_xmob6")
+restart_bgm = true

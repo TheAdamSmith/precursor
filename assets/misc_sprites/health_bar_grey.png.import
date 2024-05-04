@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4k2jct7pr62a"
-path="res://.godot/imported/down_arrow_button.png-9bf5cc7d217a2fae5c89583106734aa9.ctex"
+uid="uid://b8h13m5pwfaal"
+path="res://.godot/imported/health_bar_grey.png-4340b3ef958e3959e3ab87fba07357d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/down_arrow_button.png"
-dest_files=["res://.godot/imported/down_arrow_button.png-9bf5cc7d217a2fae5c89583106734aa9.ctex"]
+source_file="res://assets/misc_sprites/health_bar_grey.png"
+dest_files=["res://.godot/imported/health_bar_grey.png-4340b3ef958e3959e3ab87fba07357d7.ctex"]
 
 [params]
 

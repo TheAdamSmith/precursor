@@ -18,8 +18,6 @@ func _ready():
 
 func _on_button_pressed():
 	selected = not selected
-	print("button pressed")
-	print(selected)
 	grab_focus()
 	set_focus_mode(Control.FOCUS_ALL)
 

@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://ubasmpkjla7k"]
 
 [ext_resource type="Script" path="res://ui/components/base_menu.gd" id="1_gok1u"]
-[ext_resource type="Texture2D" uid="uid://cjec7m7mqg5rm" path="res://assets/tmp_title.png" id="2_oncje"]
+[ext_resource type="Texture2D" uid="uid://cjec7m7mqg5rm" path="res://assets/misc_sprites/tmp_title.png" id="2_oncje"]
 [ext_resource type="Script" path="res://ui/components/start_game_button.gd" id="3_u0g2h"]
 [ext_resource type="Script" path="res://ui/components/open_new_scene_button.gd" id="4_aj2yp"]
 [ext_resource type="Script" path="res://ui/components/quit_game_button.gd" id="4_eaj6x"]
 [ext_resource type="PackedScene" uid="uid://ctyvatjgstnm6" path="res://ui/components/number_selector.tscn" id="4_i7ije"]
-[ext_resource type="Texture2D" uid="uid://dij1fcvbhojrt" path="res://assets/title_background.png" id="5_wevf7"]
+[ext_resource type="Texture2D" uid="uid://dij1fcvbhojrt" path="res://assets/misc_sprites/title_background.png" id="5_wevf7"]
 [ext_resource type="Script" path="res://ui/components/background.gd" id="6_qns2s"]
 
 [node name="SinglePlayerMenu" type="Control" node_paths=PackedStringArray("initial_focus")]

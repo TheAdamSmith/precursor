@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bry1y52kbn44d" path="res://characters/playerv2.tscn" id="2_kqhvk"]
 [ext_resource type="Script" path="res://characters/player_camera.gd" id="3_xh18g"]
 [ext_resource type="PackedScene" uid="uid://c7icek0pyocbw" path="res://levels/arenas/planet_arena.tscn" id="4_2lvn6"]
-[ext_resource type="PackedScene" path="res://ui/components/bgm_selector.tscn" id="5_x6t60"]
+[ext_resource type="PackedScene" uid="uid://l3fqkrc78nis" path="res://audio/bgm_selector.tscn" id="5_x6t60"]
 [ext_resource type="AudioStream" uid="uid://deona08bxt7lw" path="res://assets/audio/bgm/level_1.wav" id="6_f1thb"]
 
 [node name="Level" type="Node2D"]

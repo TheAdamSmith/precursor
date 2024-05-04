@@ -9,7 +9,7 @@ static func get_arena_name_by_position(global_position : Vector2):
 	return "arena%d" % floori(global_position.x / ARENA_WIDTH)
 
 
-static func create_arenas_packed_scene(num_arenas, num_players_per_side, enemy_spawner = true):
+static func create_arenas_root_node(num_arenas, num_players_per_side, main_arena = 0, enemy_spawner = true, enemies_per_second_per_player = .5):
 	var parent_node = Node2D.new()
 	var player_spawned = false
 	for i in num_arenas:
@@ -28,11 +28,11 @@ static func create_arenas_packed_scene(num_arenas, num_players_per_side, enemy_s
 			spawner.max_x = (i + 1) * ARENA_WIDTH - TILE_SIZE
 			spawner.min_y = TILE_SIZE
 			spawner.max_y = ARENA_HEIGHT - TILE_SIZE
-			spawner.spawn_time = 2.0 / num_players_per_side
+			spawner.spawn_time = 1 / (enemies_per_second_per_player * num_players_per_side)
 			parent_node.add_child(spawner)
 			spawner.owner = parent_node
 		for j in num_players_per_side:
-			if not player_spawned:
+			if not player_spawned and i == main_arena:
 				var main_player = load("res://characters/playerv2.tscn").instantiate()
 				parent_node.add_child(main_player)
 				main_player.owner = parent_node
@@ -43,9 +43,7 @@ static func create_arenas_packed_scene(num_arenas, num_players_per_side, enemy_s
 				parent_node.add_child(computer_player)
 				computer_player.owner = parent_node
 				computer_player.position = arena.position + Vector2(ARENA_WIDTH / 2 + j * TILE_SIZE, ARENA_HEIGHT / 2) 
-	var scene = PackedScene.new()
-	scene.pack(parent_node)
-	return scene
+	return parent_node
 
 
 static func find_closest_in_arena_by_group(reference_node, group, arena_group):
@@ -61,6 +59,14 @@ static func find_closest_in_arena_by_group(reference_node, group, arena_group):
 			closest_distance = distance
 			closest_in_group = enemy
 	return closest_in_group
+
+
+static func get_count_in_arena_by_group(tree, group, arena_group):
+	var node_count = 0
+	for node in tree.get_nodes_in_group(arena_group):
+		if node.is_in_group(group):
+			node_count += 1
+	return node_count
 
 
 static func get_arena_center(arena_name : String):
