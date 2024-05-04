@@ -20,6 +20,11 @@ z_index = -1
 
 [node name="BgmSelector" parent="." instance=ExtResource("5_x6t60")]
 bgm = ExtResource("6_f1thb")
+restart_bgm = true
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource("1_on5qm")
+min_x = 32
+max_x = 2016
+min_y = 32
+max_y = 2016
