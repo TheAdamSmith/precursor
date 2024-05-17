@@ -1,55 +1,37 @@
+class_name Player
 extends CharacterBody2D
-signal hit
 
-@export var speed: int = 200 # Player speed
 @onready var animations = $AnimationPlayer
 @onready var audio_listener_2d: AudioListener2D = $AudioListener2D
-var screen_size # size of game window
+var arena_group : String
 
 
 func _ready():
-	screen_size = get_viewport_rect().size
-	audio_listener_2d.make_current()
-	#to do: uncomment
-	#hide()
-
-
-func handle_input():
-	var moveDirection = Input.get_vector(
-		"move_left",
-		"move_right",
-		"move_up",
-		"move_down",
-	)
-	velocity = moveDirection * speed
+	if audio_listener_2d:
+		# Audio listener not set for computer players
+		audio_listener_2d.make_current()
+	add_to_group("player")
+	arena_group = ArenaUtilities.get_arena_name_by_position(global_position)
+	add_to_group(arena_group)
+	floor_snap_length = 0.0
 
 
 func update_animation():
-	var x_mov = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	var y_mov = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	var mov = Vector2(x_mov, y_mov)
-
-	if mov.length() == 0:
+	# Velocity should be set in an input component
+	if velocity.length() == 0:
 		animations.stop()
 	else:
-		var direction = "Down"
-		if mov.x < 0: direction = "Left"
-		elif mov.x > 0: direction = "Right"
-		elif mov.y < 0: direction = "Up"
-		
+		var direction
+		if abs(velocity.x) > abs(velocity.y):
+			direction = "Right" if velocity.x > 0 else "Left"
+		else:
+			direction = "Up" if velocity.y < 0 else "Down"
 		animations.play("walk" + direction)
 
 
 func _physics_process(delta):
-	handle_input()
-	move_and_collide(velocity * delta)
+	move_and_slide()
 	update_animation()
-
-
-func _on_body_entered(body):
-	hide()
-	hit.emit()
-	$CollisionShape2D.set_deferred("disabled", true)
 
 
 func start(pos):

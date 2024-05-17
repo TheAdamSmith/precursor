@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dx8ompps1m82a"]
-
-[ext_resource type="Script" path="res://ui/components/bgm_selector.gd" id="1_sxu1q"]
-
-[node name="BgmSelector" type="Node"]
-script = ExtResource("1_sxu1q")

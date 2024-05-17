@@ -1,3 +1,4 @@
+class_name BgmSelector
 extends Node
 
 # add bgm_selector.tscn scene to scenes to play Background Music

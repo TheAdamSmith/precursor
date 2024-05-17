@@ -2,7 +2,7 @@ extends Node
 
 # Game State Signals
 signal change_scene(scene_path)
-signal start_game
+signal start_game(type : EventService.GAME_TYPE, game_info : Dictionary)
 signal quit_game
 signal change_pause_state
 
@@ -11,12 +11,16 @@ signal entity_damaged(damaging_entity, damaged_entity, base_damage)
 signal entity_death(damaging_entity, dying_entity)
 
 enum GAME_STATE {MENU, IN_PROGRESS}
+enum GAME_TYPE {SINGLE_PLAYER, MULTIPLAYER}
 var game_state
+var game_type
+var main_arena_num
 
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	game_state = GAME_STATE.MENU
+	game_type = null
 
 	# Connect game state signals
 	change_scene.connect(_change_scene)
@@ -38,18 +42,32 @@ func _change_scene(scene_path):
 	if scene_path.begins_with("res://ui"):
 		if game_state == GAME_STATE.IN_PROGRESS:
 			game_state = GAME_STATE.MENU
+			game_type = null
 		if get_tree().paused:
 			_change_pause_state()
 	var next_scene = load(scene_path)
 	get_tree().change_scene_to_packed(next_scene)
 
 
-func _start_game():
+func _start_game(type, game_info):
 	game_state = GAME_STATE.IN_PROGRESS
-	# will need to be adjusted when there are more than one scene associated
-	# with "starting the game"
-	var next_scene = load("res://levels/planet_level/planet_level.tscn")
-	get_tree().change_scene_to_packed(next_scene)
+	game_type = type
+	if game_type == GAME_TYPE.SINGLE_PLAYER:
+		print("starting single")
+		main_arena_num = 0
+		var parent_node = ArenaUtilities.create_arenas_root_node(2, game_info["num_players"], main_arena_num, true, .5)
+		var bgm_selector = load("res://audio/level_2_bgm.tscn").instantiate()
+		parent_node.add_child(bgm_selector)
+		bgm_selector.owner = parent_node
+		var scene = PackedScene.new()
+		scene.pack(parent_node)
+		get_tree().change_scene_to_packed(scene)
+		
+	elif game_type == GAME_TYPE.MULTIPLAYER:
+		var next_scene = load("res://levels/planet_level/planet_level.tscn")
+		get_tree().change_scene_to_packed(next_scene)
+	else:
+		assert(false, "Unknown game typed passed into _start_game")
 
 
 func _quit_game():
@@ -58,7 +76,7 @@ func _quit_game():
 
 func _change_pause_state():
 	get_tree().paused = not get_tree().paused
-	PauseScreen.pause_state_changed(get_tree().paused)
+	PauseScreen.pause_state_changed(get_tree().paused, "Paused")
 
 
 func _on_entity_damaged(damaging_entity, damaged_entity, base_damage):
@@ -79,6 +97,17 @@ func _on_entity_death(damaging_entity, dying_entity):
 			if exp_comps:
 				for exp_comp in exp_comps:
 					exp_comp.add_exp(dying_character.give_experience())
+	if dying_character.is_in_group("player"):
+		var player_camera = dying_character.find_child("PlayerCamera")
+		if player_camera:
+			player_camera.reparent(dying_character.get_parent())
+			player_camera.global_position = dying_character.global_position
+		if ArenaUtilities.get_count_in_arena_by_group(get_tree(), "player", dying_character.arena_group) <= 1:
+			get_tree().paused = not get_tree().paused
+			var game_over_label = "You Win!"
+			if dying_character.arena_group == "arena%d" % main_arena_num:
+				game_over_label = "You Lose!"
+			PauseScreen.pause_state_changed(get_tree().paused, game_over_label)
 	dying_character.queue_free()
 
 

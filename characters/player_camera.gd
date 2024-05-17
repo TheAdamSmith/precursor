@@ -55,7 +55,7 @@ func _unhandled_input(event: InputEvent):
 
 	# pan controls:
 	# camera_pan_grab -> mouse wheel click
-	if Input.is_action_just_pressed("camera_pan_grab"):
+	if event.is_action_pressed("camera_pan_grab"):
 		panning = true
 		pan_grab_pos = event.position
 		pan_velocity = Vector2.ZERO
@@ -118,5 +118,4 @@ func _process(delta):
 		pan_velocity = pan_velocity.slerp(Vector2.ZERO, pan_velocity_dampening_factor * delta)
 
 	if camera_pan_vec != Vector2.ZERO:
-		print(camera_pan_vec * delta)
 		offset += camera_pan_vec.normalized() * (camera_pan_vec.length() * camera_pan_vec_div_factor * delta)
