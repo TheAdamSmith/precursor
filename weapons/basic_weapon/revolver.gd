@@ -29,6 +29,7 @@ func _physics_process(delta):
 	if can_fire:
 		$Vfx.show()
 		$Vfx.play()
+		SoundManager.play_sfx(self, load("res://assets/audio/sfx/single_pistol_gunshot.mp3"), -20)
 		var bullet_instance = bullet.instantiate()
 		bullet_instance.set_z_index(0)
 		bullet_instance.position = $BulletPoint.position
@@ -36,6 +37,7 @@ func _physics_process(delta):
 		bullet_instance.apply_impulse(Vector2(bullet_speed, 0).rotated($Revolver.global_rotation))
 		add_child(bullet_instance)
 		can_fire = false
+		$AnimationPlayer.play("recoil")
 		await get_tree().create_timer(fire_rate).timeout
 		can_fire = true
 

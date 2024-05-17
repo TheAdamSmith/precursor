@@ -55,7 +55,7 @@ func _start_game(type, game_info):
 	if game_type == GAME_TYPE.SINGLE_PLAYER:
 		print("starting single")
 		main_arena_num = 0
-		var parent_node = ArenaUtilities.create_arenas_root_node(2, game_info["num_players"], main_arena_num, true, .5)
+		var parent_node = ArenaUtilities.create_arenas_root_node(2, game_info["num_players"], main_arena_num, true, .7)
 		var bgm_selector = load("res://audio/level_2_bgm.tscn").instantiate()
 		parent_node.add_child(bgm_selector)
 		bgm_selector.owner = parent_node
