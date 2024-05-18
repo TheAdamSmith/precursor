@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbeah8dwia8o3"
-path="res://.godot/imported/up_arrow_button.png-348b14a67c6246254268bbb6d5310533.ctex"
+uid="uid://cn73cqdu23b8h"
+path="res://.godot/imported/health_bar_red.png-4ab84d78a3a2107f38373cd30430d02b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/up_arrow_button.png"
-dest_files=["res://.godot/imported/up_arrow_button.png-348b14a67c6246254268bbb6d5310533.ctex"]
+source_file="res://assets/misc_sprites/health_bar_red.png"
+dest_files=["res://.godot/imported/health_bar_red.png-4ab84d78a3a2107f38373cd30430d02b.ctex"]
 
 [params]
 

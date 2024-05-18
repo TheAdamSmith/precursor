@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciardivejjxpj"
-path="res://.godot/imported/right_arrow_button.png-1065800ce9cf2648823d9d96df602974.ctex"
+uid="uid://dpd55sdityao"
+path="res://.godot/imported/health_bar_green.png-730206d22404687055a3218ea0e6a0db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/right_arrow_button.png"
-dest_files=["res://.godot/imported/right_arrow_button.png-1065800ce9cf2648823d9d96df602974.ctex"]
+source_file="res://assets/misc_sprites/health_bar_green.png"
+dest_files=["res://.godot/imported/health_bar_green.png-730206d22404687055a3218ea0e6a0db.ctex"]
 
 [params]
 

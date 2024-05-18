@@ -1,4 +1,5 @@
-extends Sprite2D
+class_name Revolver
+extends Node2D
 
 @export var fire_rate = 1
 @export var bullet_speed = 1000
@@ -6,17 +7,19 @@ extends Sprite2D
 var bullet = preload("res://weapons/basic_weapon/bullet.tscn")
 var can_fire = true
 var initial_rotation
+var arena_group
 
 
 func _ready():
 	initial_rotation = $Revolver.global_rotation
 	set_z_index(1)
+	arena_group = ArenaUtilities.get_arena_name_by_position(global_position)
+	if arena_group and arena_group not in get_groups():
+		add_to_group(arena_group)
 
 
 func _physics_process(delta):
-	
-	var enemy = find_closest_enemy($Revolver.global_position)
-	
+	var enemy = ArenaUtilities.find_closest_in_arena_by_group(self, "enemy", arena_group)
 	if enemy:
 		var direction = (enemy.global_position - $Revolver.global_position)
 		self.rotation = direction.angle()
@@ -26,6 +29,7 @@ func _physics_process(delta):
 	if can_fire:
 		$Vfx.show()
 		$Vfx.play()
+		SoundManager.play_sfx(self, load("res://assets/audio/sfx/single_pistol_gunshot.mp3"), -20)
 		var bullet_instance = bullet.instantiate()
 		bullet_instance.set_z_index(0)
 		bullet_instance.position = $BulletPoint.position
@@ -33,21 +37,11 @@ func _physics_process(delta):
 		bullet_instance.apply_impulse(Vector2(bullet_speed, 0).rotated($Revolver.global_rotation))
 		add_child(bullet_instance)
 		can_fire = false
+		$AnimationPlayer.play("recoil")
 		await get_tree().create_timer(fire_rate).timeout
 		can_fire = true
+
 
 func _on_vfx_animation_looped():
 	$Vfx.hide()
 	$Vfx.stop()
-
-func find_closest_enemy(cur_pos):
-	# big number idk if there is maxint in godot
-	var closest_distance = 100000000
-	var closest_enemy = null
-	for enemy in get_tree().get_nodes_in_group("enemy"):
-		var distance = enemy.global_transform.origin.distance_to(cur_pos)
-		if distance < closest_distance:
-			closest_distance = distance
-			closest_enemy = enemy
-
-	return closest_enemy

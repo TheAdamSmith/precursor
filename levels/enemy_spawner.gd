@@ -1,19 +1,17 @@
 extends Node2D
 class_name EnemySpawner
 
-@export var xBoundary = 2000
-@export var yBoundary = 2000
-var arena_group : String
+@export var min_x : int
+@export var max_x : int
+@export var min_y : int
+@export var max_y : int
+@export var spawn_time = 1.0
+var spawn_timer : SceneTreeTimer
 
 var enemyModels = ["alien_v1", "alien_v2"]
 
-func _ready():
-	while true :
-		await get_tree().create_timer(1.0).timeout 
-		spawn_enemy()
-
 func spawn_enemy():
-	var position = Vector2(randi_range(50,xBoundary),randi_range(50,yBoundary))
+	var position = Vector2(randi_range(min_x,max_x),randi_range(min_y,max_y))
 	var enemyModel = enemyModels.pick_random()
 	var enemySprite = load("res://enemies/enemyAnimatedSprite2D/" + enemyModel + ".tscn").instantiate()
 	
@@ -24,4 +22,11 @@ func spawn_enemy():
 	enemy.add_child(enemySprite)
 	enemy.global_position = position
 	enemy.add_to_group("enemy")
+	enemy.add_to_group(ArenaUtilities.get_arena_name_by_position(enemy.global_position))
 	add_child(enemy)
+
+
+func _physics_process(delta):
+	if not spawn_timer or spawn_timer.time_left == 0.0:
+		spawn_enemy()
+		spawn_timer = get_tree().create_timer(spawn_time)

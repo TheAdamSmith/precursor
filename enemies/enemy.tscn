@@ -12,6 +12,8 @@ radius = 29.8329
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 15
+motion_mode = 1
+floor_snap_length = 0.0
 script = ExtResource("1_ic6gj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -29,4 +31,4 @@ debug_color = Color(0.894118, 0.290196, 0.356863, 0.419608)
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("6_d0o6s")
-base_health = 30.0
+base_health = 80.0

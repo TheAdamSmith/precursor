@@ -3,7 +3,6 @@ class_name Enemy
 
 var speed = 100.0
 
-@onready var player = get_node("/root/Level/playerv2")
 @onready var animated_sprite = get_node("enemySprite")
 
 # enemy properties
@@ -12,22 +11,37 @@ var speed = 100.0
 
 # Attacks per second
 @export var attack_speed = 1.0
+var player : Player
+var arena_group : String
 var can_attack_timer : SceneTreeTimer
 
+
+func _ready():
+	add_to_group("enemy")
+	arena_group = ArenaUtilities.get_arena_name_by_position(global_position)
+	if arena_group and arena_group not in get_groups():
+		add_to_group(arena_group)
+	floor_snap_length = 0.0
+
 func _set_attack_animation_speed():
-	
 	var sprite_frames = animated_sprite.get_sprite_frames()
 	var num_frames = sprite_frames.get_frame_count("attack")
 	sprite_frames.set_animation_speed("attack", num_frames * attack_speed)
 
+
 func give_experience():
 	return experience_given
 
-func _physics_process(delta):
 
-	if not player:
+func _find_player():
+	player = ArenaUtilities.find_closest_in_arena_by_group(self, "player", arena_group)
+
+
+func _physics_process(delta):
+	if not player and not _find_player():
 		return
-	
+	if not is_instance_valid(player):
+		return
 	var direction = global_position.direction_to(player.global_position)
 	# flip the animated sprite body in the direction of travel
 	if direction.x > 0:
@@ -49,5 +63,4 @@ func _physics_process(delta):
 		can_attack_timer = get_tree().create_timer(1 / attack_speed)
 	elif not overlaps_player:
 		animated_sprite.play("move")
-
-	move_and_collide(velocity * delta)
+	move_and_slide()
