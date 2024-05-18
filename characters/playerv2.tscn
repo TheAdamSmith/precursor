@@ -1,10 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://bry1y52kbn44d"]
+[gd_scene load_steps=16 format=3 uid="uid://bry1y52kbn44d"]
 
 [ext_resource type="Script" path="res://characters/playerv2.gd" id="1_6fimu"]
-[ext_resource type="Texture2D" uid="uid://buiutidg0dey0" path="res://models/Cowboy_8bit/cowboy_final-export.png" id="2_bqjx6"]
-[ext_resource type="Animation" uid="uid://dgobe7bn1d8hn" path="res://models/Cowboy_8bit/walkDown.res" id="3_ayf8i"]
-[ext_resource type="Animation" uid="uid://7xvbbrknocwu" path="res://models/Cowboy_8bit/walkLeft.res" id="4_liea4"]
-[ext_resource type="Animation" uid="uid://cg7ljp3m0bwo1" path="res://models/Cowboy_8bit/walkRight.res" id="5_0clik"]
+[ext_resource type="Texture2D" uid="uid://3yv5hx2p3sch" path="res://models/Cowboy_final/Beetle_move.png" id="2_88k6x"]
 [ext_resource type="Animation" uid="uid://chkrcb7h1yobc" path="res://models/Cowboy_8bit/walkUp.res" id="6_6q8cu"]
 [ext_resource type="PackedScene" uid="uid://b1vwu2a4upfbu" path="res://characters/components/upgrade_component.tscn" id="8_g5ohr"]
 [ext_resource type="Script" path="res://characters/components/experience_component.gd" id="9_io3wp"]
@@ -16,15 +13,15 @@
 [ext_resource type="Script" path="res://characters/components/upgrade_input_component.gd" id="14_n1qb2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrqpl"]
-radius = 14.0
-height = 32.0
+radius = 9.0
+height = 26.0
 
-[sub_resource type="Animation" id="Animation_yqfu6"]
+[sub_resource type="Animation" id="Animation_bhqmy"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("Marker2D/Cowboy:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -34,13 +31,27 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_wu6ow"]
+resource_name = "walk"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker2D/Cowboy:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6, 2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(3, 0), Vector2i(2, 0), Vector2i(4, 0), Vector2i(4, 0), Vector2i(1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_26w5p"]
 _data = {
-"RESET": SubResource("Animation_yqfu6"),
-"walkDown": ExtResource("3_ayf8i"),
-"walkLeft": ExtResource("4_liea4"),
-"walkRight": ExtResource("5_0clik"),
-"walkUp": ExtResource("6_6q8cu")
+"RESET": SubResource("Animation_bhqmy"),
+"idle": ExtResource("6_6q8cu"),
+"walk": SubResource("Animation_wu6ow")
 }
 
 [node name="playerv2" type="CharacterBody2D"]
@@ -50,20 +61,25 @@ motion_mode = 1
 script = ExtResource("1_6fimu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
+visibility_layer = 2
+position = Vector2(1.13687e-12, 5)
+rotation = 1.5708
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CapsuleShape2D_mrqpl")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Cowboy" type="Sprite2D" parent="Marker2D"]
 position = Vector2(0, -1)
-scale = Vector2(0.325, 0.304167)
-texture = ExtResource("2_bqjx6")
-hframes = 3
-vframes = 4
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_88k6x")
+hframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_26w5p")
 }
+speed_scale = 10.0
 
 [node name="MovementInputComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("12_t7dvb")
@@ -71,7 +87,7 @@ character = NodePath("..")
 speed = 200.0
 
 [node name="UpgradeComponent" parent="." node_paths=PackedStringArray("experience_component") instance=ExtResource("8_g5ohr")]
-position = Vector2(0, -43)
+position = Vector2(0, -55)
 experience_component = NodePath("../ExperienceComponent")
 
 [node name="ExperienceComponent" type="Node2D" parent="."]

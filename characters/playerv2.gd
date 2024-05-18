@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @onready var animations = $AnimationPlayer
 @onready var audio_listener_2d: AudioListener2D = $AudioListener2D
+@onready var marker2D=$Marker2D
 var arena_group : String
 
 
@@ -17,16 +18,11 @@ func _ready():
 
 
 func update_animation():
-	# Velocity should be set in an input component
 	if velocity.length() == 0:
-		animations.stop()
+		animations.play("idle")
 	else:
-		var direction
-		if abs(velocity.x) > abs(velocity.y):
-			direction = "Right" if velocity.x > 0 else "Left"
-		else:
-			direction = "Up" if velocity.y < 0 else "Down"
-		animations.play("walk" + direction)
+		marker2D.scale.x = sign(velocity.x) if velocity.x != 0 else marker2D.scale.x
+		animations.play("walk")
 
 
 func _physics_process(delta):

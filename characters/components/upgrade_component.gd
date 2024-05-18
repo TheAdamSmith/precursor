@@ -41,7 +41,7 @@ func _handle_upgrade_input(upgrade_vec):
 		return
 	var upgrade_scene = load("res://weapons/basic_weapon/revolver.tscn")
 	var upgrade_node = upgrade_scene.instantiate()
-	upgrade_node.position = upgrade_vec * 25
+	upgrade_node.position = upgrade_vec * 35
 	upgrade_node.rotation = upgrade_rotation
 	upgrade_node.scale.y = y_scale
 	get_parent().add_child(upgrade_node)
