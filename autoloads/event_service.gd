@@ -62,7 +62,6 @@ func _start_game(type, game_info):
 		var scene = PackedScene.new()
 		scene.pack(parent_node)
 		get_tree().change_scene_to_packed(scene)
-		
 	elif game_type == GAME_TYPE.MULTIPLAYER:
 		var next_scene = load("res://levels/planet_level/planet_level.tscn")
 		get_tree().change_scene_to_packed(next_scene)

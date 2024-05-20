@@ -37,9 +37,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 54.0
-offset_top = -103.0
-offset_right = 150.0
-offset_bottom = -2.0
+offset_top = -112.0
+offset_right = 238.0
+offset_bottom = 112.0
 grow_vertical = 2
 
 [node name="StartGameButton" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("num_players_selector")]
@@ -52,8 +52,8 @@ num_players_selector = NodePath("../NumberSelector")
 [node name="NumberSelector" parent="VBoxContainer" instance=ExtResource("4_i7ije")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Num CPUs"
-label = "Players per side"
+text = "Players per Side"
+label = "Players per Side"
 min = 1
 max = 8
 default = 1

@@ -3,10 +3,11 @@ extends Node
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
+signal client_disconnected
 
-const PORT = 7000
+const PORT = 12782 # Multiply by 10 and look up Unicode by decimal value :)
 const DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost
-const MAX_CONNECTIONS = 20
+const MAX_CONNECTIONS = 16
 
 # This will contain player info for every player,
 # with the keys being each player's unique IDs.
@@ -17,9 +18,7 @@ var players = {}
 # For example, the value of "name" can be set to something the player
 # entered in a UI scene.
 var player_info = {"name": "Name"}
-
 var players_loaded = 0
-
 
 
 func _ready():
@@ -33,26 +32,29 @@ func _ready():
 func join_game(address = ""):
 	if address.is_empty():
 		address = DEFAULT_SERVER_IP
+	print("trying to connect to %s" % address)
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(address, PORT)
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
+	print("connected to %s" % address)
 
 
-func create_game():
+func host_game():
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(PORT, MAX_CONNECTIONS)
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
-
 	players[1] = player_info
 	player_connected.emit(1, player_info)
+	print("now hosting")
 
 
 func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = null
+	client_disconnected.emit()
 
 
 # When the server decides to start the game from a UI scene,
@@ -68,18 +70,20 @@ func player_loaded():
 	if multiplayer.is_server():
 		players_loaded += 1
 		if players_loaded == players.size():
-			$/root/Game.start_game()
+			#$/root/Game.start_game()
 			players_loaded = 0
 
 
 # When a peer connects, send them my player info.
 # This allows transfer of all desired data for each player, not only the unique ID.
 func _on_player_connected(id):
+	print("Player %s Connected!" % player_info["name"])
 	_register_player.rpc_id(id, player_info)
 
 
 @rpc("any_peer", "reliable")
 func _register_player(new_player_info):
+	print("registering")
 	var new_player_id = multiplayer.get_remote_sender_id()
 	players[new_player_id] = new_player_info
 	player_connected.emit(new_player_id, new_player_info)

@@ -1,14 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://bac48710arx5v"]
+[gd_scene load_steps=12 format=3 uid="uid://bac48710arx5v"]
 
 [ext_resource type="Script" path="res://ui/components/base_menu.gd" id="1_iglra"]
 [ext_resource type="Texture2D" uid="uid://cjec7m7mqg5rm" path="res://assets/misc_sprites/tmp_title.png" id="2_sava7"]
-[ext_resource type="Script" path="res://ui/components/start_game_button.gd" id="3_1u0o0"]
+[ext_resource type="Script" path="res://ui/components/public_ip_label.gd" id="3_o7urj"]
+[ext_resource type="Script" path="res://ui/components/host_game_button.gd" id="4_7wu37"]
 [ext_resource type="Script" path="res://ui/components/open_new_scene_button.gd" id="4_ya1ug"]
 [ext_resource type="Script" path="res://ui/components/quit_game_button.gd" id="5_u6jip"]
 [ext_resource type="Texture2D" uid="uid://dij1fcvbhojrt" path="res://assets/misc_sprites/title_background.png" id="6_pfl56"]
 [ext_resource type="Script" path="res://ui/components/background.gd" id="7_kfhds"]
+[ext_resource type="Script" path="res://ui/components/start_game_button.gd" id="7_pr58h"]
+[ext_resource type="Script" path="res://ui/components/number_selector.gd" id="8_qd1in"]
+[ext_resource type="PackedScene" uid="uid://bwaqfat7e86im" path="res://ui/components/multiplayer_lobby.tscn" id="9_w70bj"]
 
-[node name="MultiplayerMenu" type="Control" node_paths=PackedStringArray("initial_focus")]
+[node name="HostGameMenu" type="Control" node_paths=PackedStringArray("initial_focus")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iglra")
-initial_focus = NodePath("VBoxContainer/StartGameButton")
+initial_focus = NodePath("HBoxContainer/VBoxContainer/HostGameButton")
 
 [node name="TmpTitle" type="TextureRect" parent="."]
 z_index = 1
@@ -29,37 +33,6 @@ offset_top = 66.0
 offset_right = -15.472
 offset_bottom = -16.264
 texture = ExtResource("2_sava7")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 54.0
-offset_top = -106.0
-offset_right = 150.0
-offset_bottom = -5.0
-grow_vertical = 2
-
-[node name="StartGameButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Start Game"
-script = ExtResource("3_1u0o0")
-game_type = 1
-
-[node name="MainMenu" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Main Menu"
-script = ExtResource("4_ya1ug")
-next_scene_path = "res://ui/main_menu.tscn"
-
-[node name="QuitGameButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Quit Game"
-script = ExtResource("5_u6jip")
 
 [node name="Background" type="TextureRect" parent="."]
 z_index = -1
@@ -74,3 +47,75 @@ mouse_filter = 2
 texture = ExtResource("6_pfl56")
 expand_mode = 1
 script = ExtResource("7_kfhds")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 54.0
+offset_top = -135.0
+offset_right = 267.0
+offset_bottom = 135.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="PublicIpLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Hosting On: ?"
+script = ExtResource("3_o7urj")
+
+[node name="NameFieldTextEdit" type="TextEdit" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Name"
+
+[node name="HostGameButton" type="Button" parent="HBoxContainer/VBoxContainer" node_paths=PackedStringArray("name_field", "lobby", "start_game_button")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Start Hosting"
+script = ExtResource("4_7wu37")
+name_field = NodePath("../NameFieldTextEdit")
+lobby = NodePath("../../MultiplayerLobby")
+start_game_button = NodePath("../StartGameButton")
+
+[node name="StartGameButton" type="Button" parent="HBoxContainer/VBoxContainer" node_paths=PackedStringArray("num_players_selector")]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Start Game"
+script = ExtResource("7_pr58h")
+game_type = 1
+num_players_selector = NodePath("../NumberSelector")
+
+[node name="NumberSelector" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Players per Side"
+script = ExtResource("8_qd1in")
+label = "Players per Side"
+min = 1
+max = 8
+default = 1
+
+[node name="MainMenu" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Main Menu"
+script = ExtResource("4_ya1ug")
+next_scene_path = "res://ui/main_menu.tscn"
+disconnect_multiplayer = true
+
+[node name="QuitGameButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit Game"
+script = ExtResource("5_u6jip")
+
+[node name="MultiplayerLobby" parent="HBoxContainer" node_paths=PackedStringArray("num_players_per_side_selector") instance=ExtResource("9_w70bj")]
+layout_mode = 2
+num_players_per_side_selector = NodePath("../VBoxContainer/NumberSelector")

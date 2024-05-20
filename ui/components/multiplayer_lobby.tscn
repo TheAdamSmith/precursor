@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwaqfat7e86im"]
+
+[ext_resource type="Script" path="res://ui/components/multiplayer_lobby.gd" id="1_jaopw"]
+
+[node name="MultiplayerLobby" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jaopw")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Lobby"
+
+[node name="PLayerListContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PLayerListContainer"]
+layout_mode = 2
+text = "player1"
