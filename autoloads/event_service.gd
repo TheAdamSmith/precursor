@@ -63,8 +63,10 @@ func _start_game(type, game_info):
 		scene.pack(parent_node)
 		get_tree().change_scene_to_packed(scene)
 	elif game_type == GAME_TYPE.MULTIPLAYER:
-		var next_scene = load("res://levels/planet_level/planet_level.tscn")
-		get_tree().change_scene_to_packed(next_scene)
+		var parent_node = ArenaUtilities.create_muliplayer_root_node(MultiplayerManager.players.size(), 1)
+		var scene = PackedScene.new()
+		scene.pack(parent_node)
+		get_tree().change_scene_to_packed(scene)
 	else:
 		assert(false, "Unknown game typed passed into _start_game")
 

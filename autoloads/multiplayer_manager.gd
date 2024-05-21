@@ -59,9 +59,9 @@ func remove_multiplayer_peer():
 
 # When the server decides to start the game from a UI scene,
 # do Lobby.load_game.rpc(filepath)
-@rpc("call_local", "reliable")
-func load_game(game_scene_path):
-	get_tree().change_scene_to_file(game_scene_path)
+@rpc("any_peer", "call_remote", "reliable")
+func start_game_for_peers(game_type, game_info):
+	EventService.start_game.emit(game_type, game_info)
 
 
 # Every peer will call this when they have loaded the game scene.
