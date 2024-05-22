@@ -46,23 +46,22 @@ static func create_arenas_root_node(num_arenas, num_players_per_side, main_arena
 	return parent_node
 
 
-static func create_muliplayer_root_node(num_players, num_arenas):
-	var parent_node = Node2D.new()
+static func create_muliplayer_root_node(num_players, num_arenas, parent_node):
 	for i in num_arenas:
 		var arena = load("res://levels/arenas/planet_arena.tscn").instantiate()
-		# Spawns arenas in a line going right
-		# Will want to reconsider if we ever use more than 2 arenas
 		arena.position.x = i * ARENA_WIDTH
 		arena.position.y = 0
 		arena.z_index = -1
 		parent_node.add_child(arena)
 		arena.owner = parent_node
+		var peer_ids = MultiplayerManager.players.keys()
 		for j in num_players:
 			var main_player = load("res://characters/playerv2.tscn").instantiate()
-			parent_node.add_child(main_player)
+			parent_node.add_child(main_player, true)
 			main_player.owner = parent_node
+			print(peer_ids[j])
+			main_player.set_multiplayer_authority(peer_ids[j])
 			main_player.position = arena.position + Vector2(ARENA_WIDTH / 2 + j * TILE_SIZE, ARENA_HEIGHT / 2)
-	return parent_node
 
 
 static func find_closest_in_arena_by_group(reference_node, group, arena_group):

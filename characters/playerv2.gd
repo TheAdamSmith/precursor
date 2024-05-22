@@ -15,6 +15,7 @@ func _ready():
 	arena_group = ArenaUtilities.get_arena_name_by_position(global_position)
 	add_to_group(arena_group)
 	floor_snap_length = 0.0
+	z_index = 2
 
 
 func update_animation():
@@ -34,4 +35,3 @@ func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
-

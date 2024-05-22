@@ -53,10 +53,16 @@ _data = {
 "walk": SubResource("Animation_wu6ow")
 }
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_161bu"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pgs22"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath(".:scale")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:z_index")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [node name="playerv2" type="CharacterBody2D"]
 collision_layer = 2
@@ -85,7 +91,7 @@ libraries = {
 }
 speed_scale = 10.0
 
-[node name="PlayerInputComponent" type="MultiplayerSynchronizer" parent="." node_paths=PackedStringArray("character", "upgrade_component")]
+[node name="PlayerInputComponent" type="Node" parent="." node_paths=PackedStringArray("character", "upgrade_component")]
 script = ExtResource("12_t7dvb")
 character = NodePath("..")
 upgrade_component = NodePath("../UpgradeComponent")
@@ -132,4 +138,4 @@ zoom_max = Vector2(0.5, 0.5)
 current = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_161bu")
+replication_config = SubResource("SceneReplicationConfig_pgs22")

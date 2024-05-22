@@ -1,5 +1,5 @@
 class_name PlayerInputComponent
-extends MultiplayerSynchronizer
+extends Node
 
 @export var character : CharacterBody2D
 @export var upgrade_component : UpgradeComponent
@@ -11,6 +11,7 @@ func _ready():
 		character = get_parent()
 	assert(character is CharacterBody2D)
 	# Only process for the local player.
+	print("player ready %d %d" % [multiplayer.get_unique_id(), get_multiplayer_authority()])
 	set_process(get_multiplayer_authority() == multiplayer.get_unique_id())
 
 
