@@ -14,6 +14,8 @@ func _ready():
 
 func _unhandled_input(event):
 	if not is_multiplayer_authority():
+		set_process(false)
+		set_process_input(false)
 		return
 	var moveDirection = Input.get_vector(
 		"move_left",

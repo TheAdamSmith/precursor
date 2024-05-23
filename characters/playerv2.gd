@@ -21,16 +21,12 @@ func _ready():
 
 @rpc("call_local", "reliable")
 func set_initial_values(pos, multiplayer_authority):
-	print("SETTING INITIAL")
 	position = pos
 	set_multiplayer_authority(multiplayer_authority, true)
-	print("player ready %d %d" % [multiplayer.get_unique_id(), get_multiplayer_authority()])
-	print(is_multiplayer_authority())
 	set_process(is_multiplayer_authority())
 	set_process_input(is_multiplayer_authority())
-	#for child in get_children():
-		#child.set_process(is_multiplayer_authority())
-		#child.set_process_input(is_multiplayer_authority())
+	if is_multiplayer_authority():
+		audio_listener_2d.make_current()
 
 
 func update_animation():

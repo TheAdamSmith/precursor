@@ -56,6 +56,7 @@ static func create_muliplayer_root_node(num_players, num_arenas, parent_node):
 		arena.owner = parent_node
 		var peer_ids = MultiplayerManager.players.keys()
 		var players = []
+		var initial_positions = []
 		for j in num_players:
 			var main_player = load("res://characters/playerv2.tscn").instantiate()
 			main_player.multiplayer_authority = peer_ids[j]
@@ -63,9 +64,13 @@ static func create_muliplayer_root_node(num_players, num_arenas, parent_node):
 			main_player.position = initial_pos
 			parent_node.add_child(main_player, true)
 			main_player.set_initial_values.rpc(initial_pos, peer_ids[j])
-			#players.append(main_player)
-		for player in players:
-			pass#parent_node.call_deferred("add_child", player, true)
+			players.append(main_player)
+			initial_positions.append(initial_pos)
+		# Loop over again and set initial values afterplayers added as children
+		# This is due to some weirdness with how MultiplayerSpawner handles replicating
+		# initial values on peers
+		for j in num_players:
+			players[j].set_initial_values.rpc(initial_positions[j], peer_ids[j])
 
 
 static func find_closest_in_arena_by_group(reference_node, group, arena_group):

@@ -35,13 +35,11 @@ func _remove_player_from_list(peer_id):
 
 
 func _on_player_connected(peer_id, player_info):
-	print("adding player")
 	_add_player_to_list(peer_id, player_info["name"])
 	_update_num_selector()
 
 
 func _on_player_disconnected(peer_id):
-	print("removing player")
 	_remove_player_from_list(peer_id)
 
 

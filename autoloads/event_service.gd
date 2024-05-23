@@ -71,7 +71,6 @@ func _start_game(type, game_info):
 
 
 func _on_load_multiplayer_level():
-	print($/root/MultiplayerBaseScene/LevelRoot)
 	ArenaUtilities.create_muliplayer_root_node(MultiplayerManager.players.size(), 1, $/root/MultiplayerBaseScene/LevelRoot)
 
 
