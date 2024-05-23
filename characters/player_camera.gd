@@ -32,6 +32,8 @@ var camera_pan_vec_div_factor: float = 700
 
 
 func _unhandled_input(event: InputEvent):
+	var has_authority = get_multiplayer_authority() == multiplayer.get_unique_id()
+	enabled = has_authority
 	# zoom controls:
 	# zoom_out -> mouse wheel down
 	# zoom_trigger -> L2 + zoom_out_trigger -> right stick down

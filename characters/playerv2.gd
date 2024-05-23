@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var animations = $AnimationPlayer
 @onready var audio_listener_2d: AudioListener2D = $AudioListener2D
 @onready var marker2D=$Marker2D
+@export var multiplayer_authority : int
 var arena_group : String
 
 
@@ -16,6 +17,20 @@ func _ready():
 	add_to_group(arena_group)
 	floor_snap_length = 0.0
 	z_index = 2
+
+
+@rpc("call_local", "reliable")
+func set_initial_values(pos, multiplayer_authority):
+	print("SETTING INITIAL")
+	position = pos
+	set_multiplayer_authority(multiplayer_authority, true)
+	print("player ready %d %d" % [multiplayer.get_unique_id(), get_multiplayer_authority()])
+	print(is_multiplayer_authority())
+	set_process(is_multiplayer_authority())
+	set_process_input(is_multiplayer_authority())
+	#for child in get_children():
+		#child.set_process(is_multiplayer_authority())
+		#child.set_process_input(is_multiplayer_authority())
 
 
 func update_animation():

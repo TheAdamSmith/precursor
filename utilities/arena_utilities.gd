@@ -42,7 +42,7 @@ static func create_arenas_root_node(num_arenas, num_players_per_side, main_arena
 				var computer_player = load("res://characters/computer_player.tscn").instantiate()
 				parent_node.add_child(computer_player)
 				computer_player.owner = parent_node
-				computer_player.position = arena.position + Vector2(ARENA_WIDTH / 2 + j * TILE_SIZE, ARENA_HEIGHT / 2) 
+				computer_player.position = arena.position + Vector2(ARENA_WIDTH / 2 + j * 2 * TILE_SIZE, ARENA_HEIGHT / 2) 
 	return parent_node
 
 
@@ -55,13 +55,17 @@ static func create_muliplayer_root_node(num_players, num_arenas, parent_node):
 		parent_node.add_child(arena)
 		arena.owner = parent_node
 		var peer_ids = MultiplayerManager.players.keys()
+		var players = []
 		for j in num_players:
 			var main_player = load("res://characters/playerv2.tscn").instantiate()
+			main_player.multiplayer_authority = peer_ids[j]
+			var initial_pos = arena.position + Vector2(ARENA_WIDTH / 2 + j * TILE_SIZE, ARENA_HEIGHT / 2)
+			main_player.position = initial_pos
 			parent_node.add_child(main_player, true)
-			main_player.owner = parent_node
-			print(peer_ids[j])
-			main_player.set_multiplayer_authority(peer_ids[j])
-			main_player.position = arena.position + Vector2(ARENA_WIDTH / 2 + j * TILE_SIZE, ARENA_HEIGHT / 2)
+			main_player.set_initial_values.rpc(initial_pos, peer_ids[j])
+			#players.append(main_player)
+		for player in players:
+			pass#parent_node.call_deferred("add_child", player, true)
 
 
 static func find_closest_in_arena_by_group(reference_node, group, arena_group):

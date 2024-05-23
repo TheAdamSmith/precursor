@@ -10,12 +10,11 @@ func _ready():
 	if not character:
 		character = get_parent()
 	assert(character is CharacterBody2D)
-	# Only process for the local player.
-	print("player ready %d %d" % [multiplayer.get_unique_id(), get_multiplayer_authority()])
-	set_process(get_multiplayer_authority() == multiplayer.get_unique_id())
 
 
 func _unhandled_input(event):
+	if not is_multiplayer_authority():
+		return
 	var moveDirection = Input.get_vector(
 		"move_left",
 		"move_right",
