@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://6nrsywyx2nfx"]
+[gd_scene load_steps=15 format=3 uid="uid://6nrsywyx2nfx"]
 
 [ext_resource type="Script" path="res://weapons/basic_weapon/gun.gd" id="1_aiupw"]
 [ext_resource type="Texture2D" uid="uid://ckr0qsbqw50tr" path="res://assets/guns_gameassets/PNG/sniper.png" id="2_hwrre"]
+[ext_resource type="PackedScene" uid="uid://ct68ompnbee8c" path="res://weapons/basic_weapon/sniper_bullet.tscn" id="2_m628n"]
 [ext_resource type="Texture2D" uid="uid://dm6ssfcfjpoqm" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h1.png" id="3_bcqcx"]
 [ext_resource type="Texture2D" uid="uid://cd3hm8vhxkro" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h2.png" id="4_li7or"]
 [ext_resource type="Texture2D" uid="uid://cowubpylvk1ev" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h3.png" id="5_s53mv"]
@@ -105,6 +106,7 @@ script = ExtResource("1_aiupw")
 fire_rate = 3.0
 bullet_speed = 1500.0
 bullet_damage = 40.0
+bullet = ExtResource("2_m628n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 2.38419e-07)
