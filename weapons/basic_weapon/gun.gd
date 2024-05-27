@@ -34,11 +34,11 @@ func _physics_process(delta):
 
 
 func _fire():
-	# Basic fir method, can be overridden by subclass
+	# Basic fire method, can be overridden by subclass
 	$Vfx.show()
 	$Vfx.play()
 	SoundManager.play_sfx(self, load("res://assets/audio/sfx/single_pistol_gunshot.mp3"), -20)
-	var bullet_instance = bullet.instantiate()
+	var bullet_instance = _create_bullet()
 	bullet_instance.damage = bullet_damage
 	bullet_instance.set_z_index(1)
 	bullet_instance.global_position = $BulletPoint.global_position
@@ -47,6 +47,11 @@ func _fire():
 	add_child(bullet_instance)
 	can_fire = false
 	$AnimationPlayer.play("recoil")
+
+
+func _create_bullet():
+	# Basic method, can be overridden by subclass
+	return bullet.instantiate()
 
 
 func _on_vfx_animation_looped():
