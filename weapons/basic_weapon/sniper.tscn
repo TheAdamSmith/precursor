@@ -1,38 +1,38 @@
-[gd_scene load_steps=14 format=3 uid="uid://jgn80e46ku2v"]
+[gd_scene load_steps=14 format=3 uid="uid://6nrsywyx2nfx"]
 
-[ext_resource type="Script" path="res://weapons/basic_weapon/gun.gd" id="1_nyi4i"]
-[ext_resource type="Texture2D" uid="uid://bxsrij7jnvog3" path="res://models/basic_weapon/revolver.png" id="1_y8xop"]
-[ext_resource type="Texture2D" uid="uid://dm6ssfcfjpoqm" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h1.png" id="3_yedst"]
-[ext_resource type="Texture2D" uid="uid://cd3hm8vhxkro" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h2.png" id="4_c377x"]
-[ext_resource type="Texture2D" uid="uid://cowubpylvk1ev" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h3.png" id="5_2v0v8"]
-[ext_resource type="Texture2D" uid="uid://ciqhntxpxknc3" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h4.png" id="6_j3m5r"]
-[ext_resource type="Texture2D" uid="uid://ca73ela1e0s6f" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h5.png" id="7_8wgyo"]
-[ext_resource type="Texture2D" uid="uid://criicn1j4dc73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h6.png" id="8_a0wrh"]
-[ext_resource type="Texture2D" uid="uid://cf2umap2pka2w" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h7.png" id="9_jxsvf"]
+[ext_resource type="Script" path="res://weapons/basic_weapon/gun.gd" id="1_aiupw"]
+[ext_resource type="Texture2D" uid="uid://ckr0qsbqw50tr" path="res://assets/guns_gameassets/PNG/sniper.png" id="2_hwrre"]
+[ext_resource type="Texture2D" uid="uid://dm6ssfcfjpoqm" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h1.png" id="3_bcqcx"]
+[ext_resource type="Texture2D" uid="uid://cd3hm8vhxkro" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h2.png" id="4_li7or"]
+[ext_resource type="Texture2D" uid="uid://cowubpylvk1ev" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h3.png" id="5_s53mv"]
+[ext_resource type="Texture2D" uid="uid://ciqhntxpxknc3" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h4.png" id="6_bgdya"]
+[ext_resource type="Texture2D" uid="uid://ca73ela1e0s6f" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h5.png" id="7_v1kk2"]
+[ext_resource type="Texture2D" uid="uid://criicn1j4dc73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h6.png" id="8_yuhtr"]
+[ext_resource type="Texture2D" uid="uid://cf2umap2pka2w" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h7.png" id="9_ilgyg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xtuwr"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_yedst")
+"texture": ExtResource("3_bcqcx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_c377x")
+"texture": ExtResource("4_li7or")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_2v0v8")
+"texture": ExtResource("5_s53mv")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_j3m5r")
+"texture": ExtResource("6_bgdya")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_8wgyo")
+"texture": ExtResource("7_v1kk2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_a0wrh")
+"texture": ExtResource("8_yuhtr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_jxsvf")
+"texture": ExtResource("9_ilgyg")
 }],
 "loop": true,
 "name": &"default",
@@ -100,19 +100,22 @@ _data = {
 "recoil": SubResource("Animation_e0og7")
 }
 
-[node name="Revolver" type="Node2D"]
-script = ExtResource("1_nyi4i")
+[node name="Sniper" type="Node2D"]
+script = ExtResource("1_aiupw")
+fire_rate = 3.0
+bullet_speed = 1500.0
+bullet_damage = 40.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 2.38419e-07)
 scale = Vector2(0.0624999, 0.072531)
-texture = ExtResource("1_y8xop")
+texture = ExtResource("2_hwrre")
 
 [node name="BulletPoint" type="Node2D" parent="."]
-position = Vector2(7, -4)
+position = Vector2(12, -2)
 
 [node name="Vfx" type="AnimatedSprite2D" parent="."]
-position = Vector2(14, -4)
+position = Vector2(19, -2)
 rotation = 1.5708
 scale = Vector2(0.317911, 0.435731)
 sprite_frames = SubResource("SpriteFrames_xtuwr")

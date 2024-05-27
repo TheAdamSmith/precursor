@@ -23,23 +23,27 @@ func _handle_upgrade_input(upgrade_vec):
 	if upgrade_count == 0:
 		return
 
+	var upgrade_scene
 	var upgrade_rotation
 	var y_scale
 	if upgrade_vec == Vector2i.UP:
+		upgrade_scene = load("res://weapons/basic_weapon/assault_rifle.tscn")
 		upgrade_rotation = -PI / 2
 		y_scale = 1
 	elif upgrade_vec == Vector2i.DOWN:
+		upgrade_scene = load("res://weapons/basic_weapon/shotgun.tscn")
 		upgrade_rotation = PI / 2
 		y_scale = 1
 	elif upgrade_vec == Vector2i.RIGHT:
+		upgrade_scene = load("res://weapons/basic_weapon/sniper.tscn")
 		upgrade_rotation = 0
 		y_scale = 1
 	elif upgrade_vec == Vector2i.LEFT:
+		upgrade_scene = load("res://weapons/basic_weapon/grenade_launcher.tscn")
 		upgrade_rotation = PI
 		y_scale = -1
 	else:
 		return
-	var upgrade_scene = load("res://weapons/basic_weapon/shotgun.tscn")
 	var upgrade_node = upgrade_scene.instantiate()
 	upgrade_node.position = upgrade_vec * 35
 	upgrade_node.rotation = upgrade_rotation
