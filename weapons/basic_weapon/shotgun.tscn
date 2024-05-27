@@ -1,0 +1,141 @@
+[gd_scene load_steps=14 format=3 uid="uid://cvinwqhgbqbxv"]
+
+[ext_resource type="Script" path="res://weapons/basic_weapon/shotgun.gd" id="1_fhtx3"]
+[ext_resource type="Texture2D" uid="uid://bxsrij7jnvog3" path="res://models/basic_weapon/revolver.png" id="2_2054b"]
+[ext_resource type="Texture2D" uid="uid://dm6ssfcfjpoqm" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h1.png" id="3_skqa2"]
+[ext_resource type="Texture2D" uid="uid://cd3hm8vhxkro" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h2.png" id="4_p2xpq"]
+[ext_resource type="Texture2D" uid="uid://cowubpylvk1ev" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h3.png" id="5_cldpv"]
+[ext_resource type="Texture2D" uid="uid://ciqhntxpxknc3" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h4.png" id="6_tpd5l"]
+[ext_resource type="Texture2D" uid="uid://ca73ela1e0s6f" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h5.png" id="7_lpx5e"]
+[ext_resource type="Texture2D" uid="uid://criicn1j4dc73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h6.png" id="8_co8tp"]
+[ext_resource type="Texture2D" uid="uid://cf2umap2pka2w" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h7.png" id="9_8wlpi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xtuwr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_skqa2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_p2xpq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cldpv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_tpd5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lpx5e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_co8tp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_8wlpi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 50.0
+}]
+
+[sub_resource type="Animation" id="Animation_7bt45"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 2.38419e-07)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_e0og7"]
+resource_name = "recoil"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 2.38419e-07), Vector2(-5, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w8rn5"]
+_data = {
+"RESET": SubResource("Animation_7bt45"),
+"recoil": SubResource("Animation_e0og7")
+}
+
+[node name="Shotgun" type="Sprite2D"]
+script = ExtResource("1_fhtx3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 2.38419e-07)
+scale = Vector2(0.0624999, 0.072531)
+texture = ExtResource("2_2054b")
+
+[node name="BulletPoints" type="Node2D" parent="."]
+
+[node name="BulletPoint" type="Node2D" parent="BulletPoints"]
+position = Vector2(7, -8)
+
+[node name="BulletPoint2" type="Node2D" parent="BulletPoints"]
+position = Vector2(7, -6)
+
+[node name="BulletPoint3" type="Node2D" parent="BulletPoints"]
+position = Vector2(7, -4)
+
+[node name="BulletPoint4" type="Node2D" parent="BulletPoints"]
+position = Vector2(7, -2)
+
+[node name="BulletPoint5" type="Node2D" parent="BulletPoints"]
+position = Vector2(7, 0)
+
+[node name="Vfx" type="AnimatedSprite2D" parent="."]
+position = Vector2(14, -4)
+rotation = 1.5708
+scale = Vector2(0.317911, 0.435731)
+sprite_frames = SubResource("SpriteFrames_xtuwr")
+frame = 1
+frame_progress = 0.718845
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w8rn5")
+}
+
+[connection signal="animation_looped" from="Vfx" to="." method="_on_vfx_animation_looped"]
