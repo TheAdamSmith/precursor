@@ -13,6 +13,8 @@ func _ready():
 
 
 func apply_damage(damage, damaging_entity = null):
+	if current_health <= 0:
+		return
 	current_health -= damage
 	if current_health <= 0:
 		current_health = 0
