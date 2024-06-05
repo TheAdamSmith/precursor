@@ -42,8 +42,35 @@ static func create_arenas_root_node(num_arenas, num_players_per_side, main_arena
 				var computer_player = load("res://characters/computer_player.tscn").instantiate()
 				parent_node.add_child(computer_player)
 				computer_player.owner = parent_node
-				computer_player.position = arena.position + Vector2(ARENA_WIDTH / 2 + j * TILE_SIZE, ARENA_HEIGHT / 2) 
+				computer_player.position = arena.position + Vector2(ARENA_WIDTH / 2 + j * 2 * TILE_SIZE, ARENA_HEIGHT / 2) 
 	return parent_node
+
+
+static func create_muliplayer_root_node(num_players, num_arenas, parent_node):
+	for i in num_arenas:
+		var arena = load("res://levels/arenas/planet_arena.tscn").instantiate()
+		arena.position.x = i * ARENA_WIDTH
+		arena.position.y = 0
+		arena.z_index = -1
+		parent_node.add_child(arena)
+		arena.owner = parent_node
+		var peer_ids = MultiplayerManager.players.keys()
+		var players = []
+		var initial_positions = []
+		for j in num_players:
+			var main_player = load("res://characters/playerv2.tscn").instantiate()
+			main_player.multiplayer_authority = peer_ids[j]
+			var initial_pos = arena.position + Vector2(ARENA_WIDTH / 2 + j * TILE_SIZE, ARENA_HEIGHT / 2)
+			main_player.position = initial_pos
+			parent_node.add_child(main_player, true)
+			main_player.set_initial_values.rpc(initial_pos, peer_ids[j])
+			players.append(main_player)
+			initial_positions.append(initial_pos)
+		# Loop over again and set initial values afterplayers added as children
+		# This is due to some weirdness with how MultiplayerSpawner handles replicating
+		# initial values on peers
+		for j in num_players:
+			players[j].set_initial_values.rpc(initial_positions[j], peer_ids[j])
 
 
 static func find_closest_in_arena_by_group(reference_node, group, arena_group):

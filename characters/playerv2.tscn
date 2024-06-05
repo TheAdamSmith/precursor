@@ -8,9 +8,8 @@
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="10_buq5f"]
 [ext_resource type="PackedScene" uid="uid://ce7uohvil47by" path="res://ui/components/health_bar.tscn" id="10_lie7l"]
 [ext_resource type="PackedScene" uid="uid://c8kltbveyhbjo" path="res://ui/components/exp_label.tscn" id="11_x4h1m"]
-[ext_resource type="Script" path="res://characters/components/movement_input_component.gd" id="12_t7dvb"]
+[ext_resource type="Script" path="res://characters/components/player_input_component.gd" id="12_t7dvb"]
 [ext_resource type="Script" path="res://characters/player_camera.gd" id="13_5ayu6"]
-[ext_resource type="Script" path="res://characters/components/upgrade_input_component.gd" id="14_n1qb2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrqpl"]
 radius = 9.0
@@ -54,6 +53,23 @@ _data = {
 "walk": SubResource("Animation_wu6ow")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pgs22"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:scale")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:z_index")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Marker2D:scale")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:multiplayer_authority")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+
 [node name="playerv2" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 15
@@ -81,9 +97,10 @@ libraries = {
 }
 speed_scale = 10.0
 
-[node name="MovementInputComponent" type="Node2D" parent="." node_paths=PackedStringArray("character")]
+[node name="PlayerInputComponent" type="Node" parent="." node_paths=PackedStringArray("character", "upgrade_component")]
 script = ExtResource("12_t7dvb")
 character = NodePath("..")
+upgrade_component = NodePath("../UpgradeComponent")
 speed = 200.0
 
 [node name="UpgradeComponent" parent="." node_paths=PackedStringArray("experience_component") instance=ExtResource("8_g5ohr")]
@@ -126,6 +143,5 @@ zoom_max = Vector2(0.5, 0.5)
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 current = true
 
-[node name="UpgradeInputComponent" type="Node2D" parent="." node_paths=PackedStringArray("upgrade_component")]
-script = ExtResource("14_n1qb2")
-upgrade_component = NodePath("../UpgradeComponent")
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_pgs22")

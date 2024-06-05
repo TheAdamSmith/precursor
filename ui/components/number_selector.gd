@@ -1,6 +1,8 @@
 class_name NumberSelector
 extends Button
 
+signal values_updated
+
 @export var label : String
 @export var min : int
 @export var max : int
@@ -14,6 +16,7 @@ func _ready():
 	value = default
 	text = "%s: %d" % [label, value]
 	button_down.connect(_on_button_pressed)
+	values_updated.connect(_on_values_updated)
 
 
 func _on_button_pressed():
@@ -36,4 +39,7 @@ func _input(event):
 			value = max
 		accept_event()
 	text = "%s: %d" % [label, value]
-		
+
+
+func _on_values_updated():
+	text = "%s: %d" % [label, value]

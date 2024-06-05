@@ -1,7 +1,7 @@
 class_name BaseMenu
 extends Control
 
-@export var initial_focus : Button
+@export var initial_focus : Control
 
 
 func _ready():

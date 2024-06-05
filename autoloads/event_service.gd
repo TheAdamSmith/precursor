@@ -3,6 +3,7 @@ extends Node
 # Game State Signals
 signal change_scene(scene_path)
 signal start_game(type : EventService.GAME_TYPE, game_info : Dictionary)
+signal load_multiplayer_level
 signal quit_game
 signal change_pause_state
 
@@ -25,6 +26,7 @@ func _ready():
 	# Connect game state signals
 	change_scene.connect(_change_scene)
 	start_game.connect(_start_game)
+	load_multiplayer_level.connect(_on_load_multiplayer_level)
 	quit_game.connect(_quit_game)
 	change_pause_state.connect(_change_pause_state)
 
@@ -62,12 +64,14 @@ func _start_game(type, game_info):
 		var scene = PackedScene.new()
 		scene.pack(parent_node)
 		get_tree().change_scene_to_packed(scene)
-		
 	elif game_type == GAME_TYPE.MULTIPLAYER:
-		var next_scene = load("res://levels/planet_level/planet_level.tscn")
-		get_tree().change_scene_to_packed(next_scene)
+		get_tree().change_scene_to_packed(load("res://utilities/multiplayer/multiplayer_base_scene.tscn"))
 	else:
 		assert(false, "Unknown game typed passed into _start_game")
+
+
+func _on_load_multiplayer_level():
+	ArenaUtilities.create_muliplayer_root_node(MultiplayerManager.players.size(), 1, $/root/MultiplayerBaseScene/LevelRoot)
 
 
 func _quit_game():
