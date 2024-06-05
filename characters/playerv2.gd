@@ -19,7 +19,7 @@ func _ready():
 	z_index = 2
 
 
-@rpc("call_local", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func set_initial_values(pos, multiplayer_authority):
 	position = pos
 	set_multiplayer_authority(multiplayer_authority, true)
