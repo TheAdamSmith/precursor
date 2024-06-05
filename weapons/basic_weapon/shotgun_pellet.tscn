@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=3 uid="uid://c1vmwq2tc8n0a"]
+
+[ext_resource type="Script" path="res://weapons/basic_weapon/bullet.gd" id="1_4lbvs"]
+[ext_resource type="Texture2D" uid="uid://jnuf8ntsk8cn" path="res://assets/misc_sprites/shotgun_pellet.png" id="2_6fv2k"]
+[ext_resource type="Texture2D" uid="uid://cnbktw2xue711" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d1.png" id="3_3eya4"]
+[ext_resource type="Texture2D" uid="uid://dcu1y6wd07o73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d2.png" id="4_x2s48"]
+[ext_resource type="Texture2D" uid="uid://cxwd2pqgsmkq3" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d3.png" id="5_yfe6p"]
+[ext_resource type="Texture2D" uid="uid://frtmsj2kr18o" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d4.png" id="6_rqqdv"]
+[ext_resource type="Texture2D" uid="uid://d21b5m3h5unwl" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d5.png" id="7_o7kiy"]
+[ext_resource type="Texture2D" uid="uid://ckpf3hjj1ynkr" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d6.png" id="8_70y6k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3mbxo"]
+radius = 5.80577
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_foeqg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3eya4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_x2s48")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yfe6p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rqqdv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_o7kiy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_70y6k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="ShotgunPellet" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 5
+gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_4lbvs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.7, 0.7)
+shape = SubResource("CircleShape2D_3mbxo")
+
+[node name="SmallBullet" type="Sprite2D" parent="."]
+texture = ExtResource("2_6fv2k")
+
+[node name="Vfx" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_foeqg")
+frame_progress = 0.972011
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_looped" from="Vfx" to="." method="_on_vfx_animation_looped"]
