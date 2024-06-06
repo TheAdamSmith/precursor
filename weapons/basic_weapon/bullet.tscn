@@ -59,7 +59,7 @@ texture = ExtResource("1_i2lqa")
 
 [node name="Vfx" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_foeqg")
-frame_progress = 0.972011
+frame_progress = 0.0839354
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_looped" from="Vfx" to="." method="_on_vfx_animation_looped"]

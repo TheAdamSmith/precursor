@@ -12,7 +12,7 @@ extends Node
 
 func _ready() -> void:
 	if bgm and not stop_bgm:
-		SoundManager.play_bgm(bgm, -10, restart_bgm)
+		SoundManager.play_bgm(bgm, -100, restart_bgm)
 	elif stop_bgm:
 		SoundManager.stop_bgm()
 	else:

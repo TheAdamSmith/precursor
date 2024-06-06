@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://ch3845iakqlop"]
+
+[ext_resource type="Script" path="res://bosses/roosterBoss/roosterBoss.gd" id="1_eraas"]
+[ext_resource type="Texture2D" uid="uid://bca8c4f1yhk3e" path="res://models/bosses/rooster/rooster-boss-spawn0.png" id="2_pubkq"]
+[ext_resource type="Texture2D" uid="uid://cxyxpxp4q6s2m" path="res://models/bosses/rooster/rooster-boss-spawn1.png" id="3_pbwpf"]
+[ext_resource type="Texture2D" uid="uid://du0s7kt2m46cp" path="res://models/bosses/rooster/rooster-boss-spawn2.png" id="4_5be0c"]
+[ext_resource type="Texture2D" uid="uid://c85nq4xfswygy" path="res://models/bosses/rooster/rooster-boss-spawn3.png" id="5_yfv5q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xgnwi"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_yfv5q")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("2_pubkq")
+}, {
+"duration": 5.0,
+"texture": ExtResource("3_pbwpf")
+}, {
+"duration": 5.0,
+"texture": ExtResource("4_5be0c")
+}, {
+"duration": 5.0,
+"texture": ExtResource("5_yfv5q")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ysuqf"]
+radius = 26.0768
+
+[node name="roosterBoss" type="CharacterBody2D"]
+script = ExtResource("1_eraas")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xgnwi")
+animation = &"spawn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-35, 29)
+shape = SubResource("CircleShape2D_ysuqf")
