@@ -1,12 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://dshjlrawv1gyb"]
+[gd_scene load_steps=20 format=3 uid="uid://dshjlrawv1gyb"]
 
-[ext_resource type="Script" path="res://characters/playerv2.gd" id="1_6fimu"]
+[ext_resource type="Script" path="res://characters/player/playerv2.gd" id="1_6fimu"]
 [ext_resource type="Texture2D" uid="uid://3yv5hx2p3sch" path="res://models/Cowboy_final/Beetle_move.png" id="2_kn8q8"]
 [ext_resource type="Animation" uid="uid://chkrcb7h1yobc" path="res://models/Cowboy_8bit/walkUp.res" id="6_6q8cu"]
+[ext_resource type="Resource" uid="uid://dcn4pfn8pdvl" path="res://characters/player/player_stat_scaler.tres" id="6_jirwl"]
+[ext_resource type="PackedScene" uid="uid://bqi04w12vyyov" path="res://weapons/basic_weapon/assault_rifle.tscn" id="7_u6xnb"]
 [ext_resource type="PackedScene" uid="uid://b1vwu2a4upfbu" path="res://characters/components/upgrade_component.tscn" id="8_g5ohr"]
+[ext_resource type="PackedScene" uid="uid://cvinwqhgbqbxv" path="res://weapons/basic_weapon/shotgun.tscn" id="8_usxgj"]
 [ext_resource type="Script" path="res://characters/components/experience_component.gd" id="9_io3wp"]
+[ext_resource type="PackedScene" uid="uid://6nrsywyx2nfx" path="res://weapons/basic_weapon/sniper.tscn" id="9_p61p5"]
+[ext_resource type="Script" path="res://characters/components/stat_component.gd" id="10_6qw1a"]
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="10_buq5f"]
 [ext_resource type="PackedScene" uid="uid://ce7uohvil47by" path="res://ui/components/health_bar.tscn" id="10_lie7l"]
+[ext_resource type="PackedScene" uid="uid://b7oo4onbkakgp" path="res://weapons/basic_weapon/grenade_launcher.tscn" id="10_s4m4e"]
 [ext_resource type="PackedScene" uid="uid://c8kltbveyhbjo" path="res://ui/components/exp_label.tscn" id="11_x4h1m"]
 [ext_resource type="Script" path="res://characters/components/computer_player_input_component.gd" id="12_csdww"]
 
@@ -72,15 +78,21 @@ libraries = {
 }
 speed_scale = 10.0
 
-[node name="ComputerPlayerInputComponent" type="Node2D" parent="." node_paths=PackedStringArray("player", "upgrade_component")]
+[node name="ComputerPlayerInputComponent" type="Node2D" parent="." node_paths=PackedStringArray("player", "upgrade_component", "stat_component")]
 script = ExtResource("12_csdww")
 player = NodePath("..")
 upgrade_component = NodePath("../UpgradeComponent")
-speed = 200.0
+stat_component = NodePath("../StatComponent")
 
-[node name="UpgradeComponent" parent="." node_paths=PackedStringArray("experience_component") instance=ExtResource("8_g5ohr")]
+[node name="UpgradeComponent" parent="." node_paths=PackedStringArray("experience_component", "stat_component") instance=ExtResource("8_g5ohr")]
 position = Vector2(0, -57)
 experience_component = NodePath("../ExperienceComponent")
+stat_component = NodePath("../StatComponent")
+stat_scaler = ExtResource("6_jirwl")
+up_weapon = ExtResource("7_u6xnb")
+down_weapon = ExtResource("8_usxgj")
+right_weapon = ExtResource("9_p61p5")
+left_weapon = ExtResource("10_s4m4e")
 
 [node name="ExperienceComponent" type="Node2D" parent="."]
 script = ExtResource("9_io3wp")
@@ -88,9 +100,9 @@ max_level = 10
 initial_level_threshold = 10
 threshold_multiplier = 2
 
-[node name="HealthComponent" type="Node2D" parent="."]
+[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("stat_component")]
 script = ExtResource("10_buq5f")
-base_health = 100.0
+stat_component = NodePath("../StatComponent")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_left = -63.0
@@ -118,3 +130,6 @@ position = Vector2(1.13687e-12, 5)
 rotation = 1.5708
 scale = Vector2(1.5, 1.5)
 shape = SubResource("CapsuleShape2D_h8dy7")
+
+[node name="StatComponent" type="Node" parent="."]
+script = ExtResource("10_6qw1a")

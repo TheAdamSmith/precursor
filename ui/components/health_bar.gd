@@ -10,11 +10,11 @@ extends TextureProgressBar
 
 
 func _ready():
+	if not health_component.is_node_ready():
+		print("awaiting health")
+		await health_component.ready
 	scale = Vector2(2, 2)
 	health_component.health_update.connect(_on_health_update)
-	if not health_component.is_node_ready():
-		await health_component.ready
-	_on_health_update(health_component.current_health, health_component.base_health)
 
 
 func _on_health_update(current_health, base_health):

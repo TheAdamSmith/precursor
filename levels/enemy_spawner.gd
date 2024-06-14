@@ -13,12 +13,12 @@ var enemyModels = ["alien_v1", "alien_v2"]
 func spawn_enemy():
 	var position = Vector2(randi_range(min_x,max_x),randi_range(min_y,max_y))
 	var enemyModel = enemyModels.pick_random()
-	var enemySprite = load("res://enemies/enemyAnimatedSprite2D/" + enemyModel + ".tscn").instantiate()
+	var enemySprite = load("res://characters/enemies/enemyAnimatedSprite2D/" + enemyModel + ".tscn").instantiate()
 	
 	#set a generic name for the sprite frame object so that it can be referenced generically
 	enemySprite.set_name("enemySprite")
 	
-	var enemy = load("res://enemies/enemy.tscn").instantiate()
+	var enemy = load("res://characters/enemies/enemy.tscn").instantiate()
 	enemy.add_child(enemySprite)
 	enemy.global_position = position
 	enemy.add_to_group("enemy")

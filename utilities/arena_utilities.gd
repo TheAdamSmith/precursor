@@ -33,13 +33,13 @@ static func create_arenas_root_node(num_arenas, num_players_per_side, main_arena
 			spawner.owner = parent_node
 		for j in num_players_per_side:
 			if not player_spawned and i == main_arena:
-				var main_player = load("res://characters/playerv2.tscn").instantiate()
+				var main_player = load("res://characters/player/playerv2.tscn").instantiate()
 				parent_node.add_child(main_player)
 				main_player.owner = parent_node
 				main_player.position = arena.position + Vector2(ARENA_WIDTH / 2, ARENA_HEIGHT / 2)
 				player_spawned = true
 			else:
-				var computer_player = load("res://characters/computer_player.tscn").instantiate()
+				var computer_player = load("res://characters/player/computer_player.tscn").instantiate()
 				parent_node.add_child(computer_player)
 				computer_player.owner = parent_node
 				computer_player.position = arena.position + Vector2(ARENA_WIDTH / 2 + j * 2 * TILE_SIZE, ARENA_HEIGHT / 2) 
@@ -58,7 +58,7 @@ static func create_muliplayer_root_node(num_players, num_arenas, parent_node):
 		var players = []
 		var initial_positions = []
 		for j in num_players:
-			var main_player = load("res://characters/playerv2.tscn").instantiate()
+			var main_player = load("res://characters/player/playerv2.tscn").instantiate()
 			main_player.multiplayer_authority = peer_ids[j]
 			var initial_pos = arena.position + Vector2(ARENA_WIDTH / 2 + j * TILE_SIZE, ARENA_HEIGHT / 2)
 			main_player.position = initial_pos

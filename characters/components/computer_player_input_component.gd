@@ -3,7 +3,7 @@ extends Node2D
 
 @export var player : Player
 @export var upgrade_component : UpgradeComponent
-@export var speed : float
+@export var stat_component : StatComponent
 var timer : SceneTreeTimer
 var arena_center : Vector2
 var max_dist_to_center : float
@@ -55,4 +55,4 @@ func _physics_process(delta):
 	if not move_direction:
 		return
 	_prev_move_direction = move_direction
-	player.velocity = move_direction * speed
+	player.velocity = move_direction * stat_component.get_current_speed()

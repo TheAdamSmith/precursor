@@ -8,6 +8,7 @@ func _ready():
 
 
 func play_bgm(stream: AudioStream, volume_db: float = -10, force_restart: bool = false):
+	return
 	if not bgm_player:
 		bgm_player = AudioStreamPlayer.new()
 		add_child(bgm_player)
@@ -29,10 +30,12 @@ func stop_bgm():
 
 
 func _loop_bgm():
+	return
 	bgm_player.play()
 
 
 func play_sfx(owner: Node2D, stream: AudioStream, volume_db: float = 0, max_distance: float = 700):
+	return
 	var instance = AudioStreamPlayer2D.new()
 	instance.stream = stream
 	instance.finished.connect(remove_node.bind(instance))
