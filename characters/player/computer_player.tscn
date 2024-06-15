@@ -99,6 +99,7 @@ script = ExtResource("9_io3wp")
 max_level = 10
 initial_level_threshold = 10
 threshold_multiplier = 2
+exponent = 3.57
 
 [node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("stat_component")]
 script = ExtResource("10_buq5f")

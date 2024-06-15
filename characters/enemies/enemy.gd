@@ -5,7 +5,7 @@ class_name Enemy
 @onready var stat_component = $StatComponent
 
 # enemy properties
-@export var experience_given = 10
+@export var experience_given = 0.22
 
 # Attacks per second
 var player : Player
@@ -19,6 +19,7 @@ func _ready():
 	if arena_group and arena_group not in get_groups():
 		add_to_group(arena_group)
 	floor_snap_length = 0.0
+
 
 func _set_attack_animation_speed():
 	var sprite_frames = animated_sprite.get_sprite_frames()
@@ -45,7 +46,6 @@ func _physics_process(delta):
 		animated_sprite.set_flip_h(true)
 	else :
 		animated_sprite.set_flip_h(false)
-		
 	velocity = direction * stat_component.get_current_speed()
 
 	# check to see how many objects colliding with the mob

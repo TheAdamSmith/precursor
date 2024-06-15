@@ -23,6 +23,7 @@ static func create_arenas_root_node(num_arenas, num_players_per_side, main_arena
 		arena.owner = parent_node
 		if enemy_spawner:
 			var spawner = EnemySpawner.new()
+			spawner.enemy_spawn_scaler = ResourceLoader.load("res://characters/enemies/basic_enemy_spawn_scaler.tres")
 			# Following assumes 1 tile boundary
 			spawner.min_x = i * ARENA_WIDTH + TILE_SIZE
 			spawner.max_x = (i + 1) * ARENA_WIDTH - TILE_SIZE

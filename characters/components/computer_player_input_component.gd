@@ -42,12 +42,21 @@ func _physics_process(delta):
 	if not player or not is_instance_valid(player):
 		return
 	if upgrade_component and upgrade_component.upgrade_count > 0:
-		var rand_x_upgrade = randi_range(-1, 1)
-		var rand_y_upgrade = 0
-		if rand_x_upgrade == 0:
-			while rand_y_upgrade == 0:
-				rand_y_upgrade = randi_range(-1, 1)
-		upgrade_component.upgrade_input.emit(Vector2i(rand_x_upgrade, rand_y_upgrade))
+		if not upgrade_component.left_weapon_node:
+			upgrade_component.upgrade_input.emit(Vector2i.LEFT)
+		elif not upgrade_component.up_weapon_node:
+			upgrade_component.upgrade_input.emit(Vector2i.UP)
+		elif not upgrade_component.down_weapon_node:
+			upgrade_component.upgrade_input.emit(Vector2i.DOWN)
+		elif not upgrade_component.right_weapon_node:
+			upgrade_component.upgrade_input.emit(Vector2i.RIGHT)
+		else:
+			var rand_x_upgrade = randi_range(-1, 1)
+			var rand_y_upgrade = 0
+			if rand_x_upgrade == 0:
+				while rand_y_upgrade == 0:
+					rand_y_upgrade = randi_range(-1, 1)
+			upgrade_component.upgrade_input.emit(Vector2i(rand_x_upgrade, rand_y_upgrade))
 	if timer and timer.time_left != 0:
 		return
 	timer = get_tree().create_timer(randf_range(.1,.5))

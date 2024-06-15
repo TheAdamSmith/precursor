@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dt7xh03ye22rr"]
 
-[ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="1_on5qm"]
+[ext_resource type="Script" path="res://characters/enemies/enemy_spawner.gd" id="1_on5qm"]
 [ext_resource type="PackedScene" uid="uid://bry1y52kbn44d" path="res://characters/player/playerv2.tscn" id="2_kqhvk"]
 [ext_resource type="Script" path="res://characters/player/player_camera.gd" id="3_xh18g"]
 [ext_resource type="PackedScene" uid="uid://c7icek0pyocbw" path="res://levels/arenas/planet_arena.tscn" id="4_2lvn6"]

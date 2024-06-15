@@ -69,7 +69,6 @@ func _handle_upgrade_input(upgrade_vec):
 	else:
 		return
 	# Level up weapon
-	upgrade_node.bullet_damage *= 1.5
 	upgrade_count -= 1
 	if upgrade_count == 0:
 		hide()
