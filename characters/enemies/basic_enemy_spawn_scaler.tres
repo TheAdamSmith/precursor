@@ -1,29 +1,30 @@
-[gd_resource type="Resource" script_class="EnemySpawnScaler" load_steps=2 format=3 uid="uid://bynt3xb80slig"]
+[gd_resource type="Resource" script_class="EnemySpawnScaler" load_steps=2 format=3 uid="uid://bcu68cf7q5r5p"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy_spawn_scaler.gd" id="1_y6uu2"]
 
 [resource]
 script = ExtResource("1_y6uu2")
-enemy_spawns_per_level = 50
-spawner_stats_by_level = {
-1: {
-"base_stats": {
+sec_per_spawner_level_up = 60
+exp_per_level_exponent = 3.57
+enemy_base_stats = {
 "attacks_per_sec": 1.0,
+"damage": 1.0,
+"health": 10,
+"speed": 100
+}
+per_level_enemy_stat_addders = {
+"attacks_per_sec": 0.1,
 "damage": 5.0,
 "health": 30,
-"speed": 100
-},
-"enemy_models": ["alien_v1", "alien_v2"],
-"exp_given": 0.22
-},
-5: {
-"base_stats": {
-"attacks_per_sec": 1.0,
-"damage": 15.0,
-"health": 120,
-"speed": 150
-},
-"enemy_models": ["alien_v1", "alien_v2"],
-"exp_given": 12.14
+"speed": 5
 }
+per_level_enemy_stat_multipliers = {
+"attacks_per_sec": 0,
+"damage": 0,
+"health": 0,
+"speed": 0
+}
+enemy_models_by_level = {
+1: ["alien_v1", "alien_v2"],
+5: ["alien_v1", "alien_v2"]
 }

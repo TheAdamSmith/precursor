@@ -33,7 +33,7 @@ func _determine_weighted_movement_direction():
 	var move_direction = (
 		enemy_weight * closest_enemy.global_position.direction_to(global_position) + 
 		center_weight * global_position.direction_to(arena_center) +
-		_prev_move_direction
+		0.3 * _prev_move_direction
 	).normalized()
 	return move_direction
 

@@ -57,10 +57,25 @@ func _register_stat_adder(stat_name, adder):
 	stat_updated.emit(stat_name)
 
 
-func _register_stat_mutliplier(stat_name, multiplier):
+func _register_stat_multiplier(stat_name, multiplier):
 	_stat_cached[stat_name][0] = false
 	_stat_multipliers[stat_name].append(multiplier)
 	stat_updated.emit(stat_name)
+
+
+func register_all_adders(stat_dict, num_times=1):
+	for stat_name in stat_dict.keys():
+		_register_stat_adder(stat_name, stat_dict[stat_name] * num_times)
+
+
+func register_all_multipliers(stat_dict, num_times=1):
+	for stat_name in stat_dict.keys():
+		_register_stat_multiplier(stat_name, stat_dict[stat_name] * num_times)
+
+
+func _print_all_stats():
+	for stat_name in _base_stats.keys():
+		print("%s: %1.2f" % [stat_name, _get_modified_stat(stat_name)])
 
 
 func get_current_speed():

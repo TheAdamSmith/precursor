@@ -86,20 +86,9 @@ func _spawn_weapon(upgrade_scene, upgrade_vec, upgrade_rotation, y_scale):
 func _upgrade_stats(level):
 	if not stat_scaler:
 		return
-	for stat_name in stat_scaler.per_level_stat_adders.keys():
-		var stat_val = stat_scaler.per_level_stat_adders[stat_name]
-		stat_component._register_stat_adder(stat_name, stat_val)
-
-	for stat_name in stat_scaler.per_level_stat_multipliers.keys():
-		var stat_val = stat_scaler.per_level_stat_multipliers[stat_name]
-		stat_component._register_stat_mutliplier(stat_name, stat_val)
-
+	stat_component.register_all_adders(stat_scaler.per_level_stat_adders)
+	stat_component.register_all_multipliers(stat_scaler.per_level_stat_multipliers)
 	if level in stat_scaler.level_specific_adders:
-		for stat_name in stat_scaler.level_specific_adders[level].keys():
-			var stat_val = stat_scaler.level_specific_adders[level][stat_name]
-			stat_component._register_stat_adder(stat_name, stat_val)
-
+		stat_component.register_all_adders(stat_scaler.level_specific_adders[level])
 	if level in stat_scaler.level_specific_multipliers:
-		for stat_name in stat_scaler.level_specific_multipliers[level].keys():
-			var stat_val = stat_scaler.level_specific_multipliers[level][stat_name]
-			stat_component._register_stat_mutliplier(stat_name, stat_val)
+		stat_component.register_all_multipliers(stat_scaler.level_specific_multipliers[level])
