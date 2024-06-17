@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://b35ymjdw8y45f"]
+
+[ext_resource type="Script" path="res://weapons/bullets/grenade.gd" id="1_1vl1i"]
+[ext_resource type="Texture2D" uid="uid://oc4ej6u7o2y8" path="res://assets/guns_gameassets/PNG/Alternative color/grenade.png" id="2_o47ns"]
+[ext_resource type="Texture2D" uid="uid://cnbktw2xue711" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d1.png" id="3_l53sw"]
+[ext_resource type="Texture2D" uid="uid://dcu1y6wd07o73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d2.png" id="4_rmfhw"]
+[ext_resource type="Texture2D" uid="uid://cxwd2pqgsmkq3" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d3.png" id="5_vdxm0"]
+[ext_resource type="Texture2D" uid="uid://frtmsj2kr18o" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d4.png" id="6_u8mfa"]
+[ext_resource type="Texture2D" uid="uid://d21b5m3h5unwl" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d5.png" id="7_fohm5"]
+[ext_resource type="Texture2D" uid="uid://ckpf3hjj1ynkr" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d6.png" id="8_56s06"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yduv4"]
+radius = 8.0
+height = 16.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_foeqg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_l53sw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rmfhw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vdxm0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_u8mfa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fohm5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_56s06")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_haado"]
+radius = 8.00465
+
+[node name="Grenade" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 5
+gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_1vl1i")
+damage = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.8, 0.8)
+shape = SubResource("CapsuleShape2D_yduv4")
+
+[node name="SmallBullet" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.135802, 0.180307)
+texture = ExtResource("2_o47ns")
+
+[node name="Vfx" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_foeqg")
+
+[node name="AreaOfEffect" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaOfEffect"]
+shape = SubResource("CircleShape2D_haado")
+debug_color = Color(0.901961, 0.403922, 0, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_looped" from="Vfx" to="." method="_on_vfx_animation_looped"]

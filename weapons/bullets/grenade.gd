@@ -3,16 +3,18 @@ extends RigidBody2D
 
 @export var damage = 0.0
 @export var aoe_damage = 70.0
+@export var aoe_scale = 10
 
 var disabled = false
 var explosion_active = false
-
 
 
 func _ready():
 	top_level = true
 	$AreaOfEffect.body_entered.connect(_on_body_entered_aoe)
 	$Vfx.hide()
+	$Vfx.scale = Vector2(aoe_scale, aoe_scale)
+	$AreaOfEffect.scale = $Vfx.scale
 
 
 func _on_body_entered(body):

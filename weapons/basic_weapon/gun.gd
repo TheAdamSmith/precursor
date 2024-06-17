@@ -4,7 +4,7 @@ extends Node2D
 @export var fire_rate = 1.0
 @export var bullet_speed = 1000.0
 @export var bullet_damage = 10.0
-@export var bullet : PackedScene = preload("res://weapons/basic_weapon/bullet.tscn")
+@export var bullet : PackedScene = preload("res://weapons/bullets/bullet.tscn")
 
 var can_fire = true
 var initial_rotation

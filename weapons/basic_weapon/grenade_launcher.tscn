@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://b7oo4onbkakgp"]
 
 [ext_resource type="Script" path="res://weapons/basic_weapon/grenade_launcher.gd" id="1_cc7af"]
-[ext_resource type="PackedScene" uid="uid://b35ymjdw8y45f" path="res://weapons/basic_weapon/grenade.tscn" id="2_jf47e"]
+[ext_resource type="PackedScene" uid="uid://b35ymjdw8y45f" path="res://weapons/bullets/grenade.tscn" id="2_jf47e"]
 [ext_resource type="Texture2D" uid="uid://dohhi3glj4wpk" path="res://assets/guns_gameassets/PNG/shotgun2.png" id="2_js14w"]
 [ext_resource type="Texture2D" uid="uid://dm6ssfcfjpoqm" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h1.png" id="3_5p67h"]
 [ext_resource type="Texture2D" uid="uid://cd3hm8vhxkro" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h2.png" id="4_e8ui8"]
