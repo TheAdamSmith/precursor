@@ -9,12 +9,12 @@ exp_per_level_exponent = 3.57
 enemy_base_stats = {
 "attacks_per_sec": 1.0,
 "damage": 1.0,
-"health": 10,
+"health": 20,
 "speed": 100
 }
 per_level_enemy_stat_addders = {
 "attacks_per_sec": 0.1,
-"damage": 5.0,
+"damage": 2.0,
 "health": 30,
 "speed": 5
 }

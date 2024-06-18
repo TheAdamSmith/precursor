@@ -33,33 +33,37 @@ func _determine_weighted_movement_direction():
 	var move_direction = (
 		enemy_weight * closest_enemy.global_position.direction_to(global_position) + 
 		center_weight * global_position.direction_to(arena_center) +
-		0.3 * _prev_move_direction
+		0.5 * _prev_move_direction
 	).normalized()
 	return move_direction
+
+
+func _select_upgrade():
+	if not upgrade_component.left_weapon_node:
+		upgrade_component.upgrade_input.emit(Vector2i.LEFT)
+	elif not upgrade_component.up_weapon_node:
+		upgrade_component.upgrade_input.emit(Vector2i.UP)
+	elif not upgrade_component.down_weapon_node:
+		upgrade_component.upgrade_input.emit(Vector2i.DOWN)
+	elif not upgrade_component.right_weapon_node:
+		upgrade_component.upgrade_input.emit(Vector2i.RIGHT)
+	else:
+		var rand_x_upgrade = randi_range(-1, 1)
+		var rand_y_upgrade = 0
+		if rand_x_upgrade == 0:
+			while rand_y_upgrade == 0:
+				rand_y_upgrade = randi_range(-1, 1)
+		upgrade_component.upgrade_input.emit(Vector2i(rand_x_upgrade, rand_y_upgrade))
 
 
 func _physics_process(delta):
 	if not player or not is_instance_valid(player):
 		return
 	if upgrade_component and upgrade_component.upgrade_count > 0:
-		if not upgrade_component.left_weapon_node:
-			upgrade_component.upgrade_input.emit(Vector2i.LEFT)
-		elif not upgrade_component.up_weapon_node:
-			upgrade_component.upgrade_input.emit(Vector2i.UP)
-		elif not upgrade_component.down_weapon_node:
-			upgrade_component.upgrade_input.emit(Vector2i.DOWN)
-		elif not upgrade_component.right_weapon_node:
-			upgrade_component.upgrade_input.emit(Vector2i.RIGHT)
-		else:
-			var rand_x_upgrade = randi_range(-1, 1)
-			var rand_y_upgrade = 0
-			if rand_x_upgrade == 0:
-				while rand_y_upgrade == 0:
-					rand_y_upgrade = randi_range(-1, 1)
-			upgrade_component.upgrade_input.emit(Vector2i(rand_x_upgrade, rand_y_upgrade))
+		_select_upgrade()
 	if timer and timer.time_left != 0:
 		return
-	timer = get_tree().create_timer(randf_range(.1,.5))
+	timer = get_tree().create_timer(randf_range(.1,.2))
 	var move_direction = _determine_weighted_movement_direction()
 	if not move_direction:
 		return

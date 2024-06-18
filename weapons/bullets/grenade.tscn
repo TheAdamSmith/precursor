@@ -42,12 +42,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_haado"]
 radius = 8.00465
 
-[node name="Grenade" type="RigidBody2D"]
+[node name="Grenade" type="Area2D"]
 collision_layer = 16
 collision_mask = 5
-gravity_scale = 0.0
-max_contacts_reported = 1
-contact_monitor = true
 script = ExtResource("1_1vl1i")
 damage = 10.0
 
