@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://8krgtsb65k0h"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_ic6gj"]
-[ext_resource type="Script" path="res://characters/components/stat_component.gd" id="3_xwd0s"]
+[ext_resource type="Script" path="res://characters/components/character_stat_component.gd" id="3_56gg2"]
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="6_d0o6s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5bpiu"]
@@ -35,10 +35,10 @@ script = ExtResource("6_d0o6s")
 stat_component = NodePath("../StatComponent")
 
 [node name="StatComponent" type="Node" parent="."]
-script = ExtResource("3_xwd0s")
-_base_stats = {
-"attacks_per_sec": 1.5,
-"damage": 2.0,
+script = ExtResource("3_56gg2")
+base_stats = {
+"attacks_per_sec": 1.0,
+"damage": 5.0,
 "health": 80,
 "speed": 150
 }

@@ -12,10 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://b7oo4onbkakgp" path="res://weapons/basic_weapon/grenade_launcher.tscn" id="10_318n4"]
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="10_buq5f"]
 [ext_resource type="PackedScene" uid="uid://ce7uohvil47by" path="res://ui/components/health_bar.tscn" id="10_lie7l"]
-[ext_resource type="Script" path="res://characters/components/stat_component.gd" id="11_mq3sl"]
 [ext_resource type="PackedScene" uid="uid://c8kltbveyhbjo" path="res://ui/components/exp_label.tscn" id="11_x4h1m"]
 [ext_resource type="Script" path="res://characters/components/player_input_component.gd" id="12_t7dvb"]
 [ext_resource type="Script" path="res://characters/player/player_camera.gd" id="13_5ayu6"]
+[ext_resource type="Script" path="res://characters/components/character_stat_component.gd" id="16_a25d5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrqpl"]
 radius = 9.0
@@ -160,4 +160,4 @@ current = true
 replication_config = SubResource("SceneReplicationConfig_pgs22")
 
 [node name="StatComponent" type="Node" parent="."]
-script = ExtResource("11_mq3sl")
+script = ExtResource("16_a25d5")

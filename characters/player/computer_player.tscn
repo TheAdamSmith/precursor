@@ -9,12 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://cvinwqhgbqbxv" path="res://weapons/basic_weapon/shotgun.tscn" id="8_usxgj"]
 [ext_resource type="Script" path="res://characters/components/experience_component.gd" id="9_io3wp"]
 [ext_resource type="PackedScene" uid="uid://6nrsywyx2nfx" path="res://weapons/basic_weapon/sniper.tscn" id="9_p61p5"]
-[ext_resource type="Script" path="res://characters/components/stat_component.gd" id="10_6qw1a"]
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="10_buq5f"]
 [ext_resource type="PackedScene" uid="uid://ce7uohvil47by" path="res://ui/components/health_bar.tscn" id="10_lie7l"]
 [ext_resource type="PackedScene" uid="uid://b7oo4onbkakgp" path="res://weapons/basic_weapon/grenade_launcher.tscn" id="10_s4m4e"]
 [ext_resource type="PackedScene" uid="uid://c8kltbveyhbjo" path="res://ui/components/exp_label.tscn" id="11_x4h1m"]
 [ext_resource type="Script" path="res://characters/components/computer_player_input_component.gd" id="12_csdww"]
+[ext_resource type="Script" path="res://characters/components/character_stat_component.gd" id="15_bodee"]
 
 [sub_resource type="Animation" id="Animation_bhqmy"]
 length = 0.001
@@ -133,4 +133,4 @@ scale = Vector2(1.5, 1.5)
 shape = SubResource("CapsuleShape2D_h8dy7")
 
 [node name="StatComponent" type="Node" parent="."]
-script = ExtResource("10_6qw1a")
+script = ExtResource("15_bodee")

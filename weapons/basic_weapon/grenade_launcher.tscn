@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7oo4onbkakgp"]
+[gd_scene load_steps=16 format=3 uid="uid://b7oo4onbkakgp"]
 
 [ext_resource type="Script" path="res://weapons/basic_weapon/grenade_launcher.gd" id="1_cc7af"]
 [ext_resource type="PackedScene" uid="uid://b35ymjdw8y45f" path="res://weapons/bullets/grenade.tscn" id="2_jf47e"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ca73ela1e0s6f" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h5.png" id="7_y6wse"]
 [ext_resource type="Texture2D" uid="uid://criicn1j4dc73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h6.png" id="8_o5802"]
 [ext_resource type="Texture2D" uid="uid://cf2umap2pka2w" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h7.png" id="9_tt6fr"]
+[ext_resource type="Script" path="res://weapons/components/weapon_stat_component.gd" id="11_kqn4a"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xtuwr"]
 animations = [{
@@ -103,8 +104,6 @@ _data = {
 
 [node name="GrenadeLauncher" type="Node2D"]
 script = ExtResource("1_cc7af")
-fire_rate = 6.0
-bullet_speed = 300.0
 bullet = ExtResource("2_jf47e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -126,6 +125,16 @@ frame_progress = 0.718845
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_w8rn5")
+}
+
+[node name="WeaponStatComponent" type="Node" parent="."]
+script = ExtResource("11_kqn4a")
+base_stats = {
+"aoe_damage": 40.0,
+"bullet_damage": 10.0,
+"bullet_speed": 300.0,
+"fire_rate": 6.0,
+"piercing_num": 0
 }
 
 [connection signal="animation_looped" from="Vfx" to="." method="_on_vfx_animation_looped"]

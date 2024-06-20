@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bqi04w12vyyov"]
+[gd_scene load_steps=15 format=3 uid="uid://bqi04w12vyyov"]
 
 [ext_resource type="Script" path="res://weapons/basic_weapon/gun.gd" id="1_2ghu0"]
 [ext_resource type="Texture2D" uid="uid://djg721dy751o" path="res://assets/guns_gameassets/PNG/assaultrifle2.png" id="2_rbuid"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ca73ela1e0s6f" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h5.png" id="7_yabbg"]
 [ext_resource type="Texture2D" uid="uid://criicn1j4dc73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h6.png" id="8_8vai8"]
 [ext_resource type="Texture2D" uid="uid://cf2umap2pka2w" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h7.png" id="9_itssa"]
+[ext_resource type="Script" path="res://weapons/components/weapon_stat_component.gd" id="10_pxu0w"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xtuwr"]
 animations = [{
@@ -102,9 +103,6 @@ _data = {
 
 [node name="AssaultRifle" type="Node2D"]
 script = ExtResource("1_2ghu0")
-fire_rate = 0.3
-bullet_speed = 800.0
-bullet_damage = 4.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 2.38419e-07)
@@ -125,6 +123,16 @@ frame_progress = 0.718845
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_w8rn5")
+}
+
+[node name="WeaponStatComponent" type="Node" parent="."]
+script = ExtResource("10_pxu0w")
+base_stats = {
+"aoe_damage": 0.0,
+"bullet_damage": 5.0,
+"bullet_speed": 800.0,
+"fire_rate": 0.3,
+"piercing_num": 0
 }
 
 [connection signal="animation_looped" from="Vfx" to="." method="_on_vfx_animation_looped"]
