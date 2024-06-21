@@ -27,7 +27,7 @@ func _physics_process(delta):
 		self.rotation = initial_rotation
 	if can_fire:
 		_fire()
-		await get_tree().create_timer(stat_component.get_current_fire_rate()).timeout
+		await get_tree().create_timer(1.0 / stat_component.get_current_fire_rate()).timeout
 		can_fire = true
 
 

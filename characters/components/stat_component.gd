@@ -18,10 +18,21 @@ var _stat_cached = {} # Dictionary of 2 item lists containing [cached : bool, ca
 
 
 func _ready():
+	if _base_stats:
+		set_base_stats(_base_stats)
+
+
+func set_base_stats(base_stats):
+	_base_stats = base_stats
 	for stat_name in _base_stats.keys():
 		_stat_adders[stat_name] = []
 		_stat_multipliers[stat_name]  = []
 		_stat_cached[stat_name] = [true, _base_stats[stat_name]]
+
+
+func invalidate_cache():
+	for stat_name in _base_stats.keys():
+		_stat_cached[stat_name] = [false, null]
 
 
 func _get_modified_stat(stat_name):
