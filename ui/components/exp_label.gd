@@ -16,7 +16,7 @@ func _on_experience_update(_unused):
 	var experience = experience_component.experience
 	var level = experience_component.level
 	var last_level_threshold = experience_component._get_exp_threshold(level - 1)
-	text = "Lvl. %d\n%d/%d" % [
+	text = "Lvl. %d\n%1.2f/%1.2f" % [
 		level,
 		experience - last_level_threshold,
 		experience_component._get_exp_threshold(level) - last_level_threshold,

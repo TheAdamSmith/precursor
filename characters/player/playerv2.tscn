@@ -1,15 +1,25 @@
-[gd_scene load_steps=16 format=3 uid="uid://bry1y52kbn44d"]
+[gd_scene load_steps=26 format=3 uid="uid://bry1y52kbn44d"]
 
-[ext_resource type="Script" path="res://characters/playerv2.gd" id="1_6fimu"]
+[ext_resource type="Script" path="res://characters/player/playerv2.gd" id="1_6fimu"]
 [ext_resource type="Texture2D" uid="uid://3yv5hx2p3sch" path="res://models/Cowboy_final/Beetle_move.png" id="2_88k6x"]
 [ext_resource type="Animation" uid="uid://chkrcb7h1yobc" path="res://models/Cowboy_8bit/walkUp.res" id="6_6q8cu"]
+[ext_resource type="Resource" uid="uid://dcn4pfn8pdvl" path="res://characters/player/stat_scalers/player_stat_scaler.tres" id="6_wi67e"]
+[ext_resource type="PackedScene" uid="uid://bqi04w12vyyov" path="res://weapons/basic_weapon/assault_rifle.tscn" id="7_66yyg"]
+[ext_resource type="PackedScene" uid="uid://cvinwqhgbqbxv" path="res://weapons/basic_weapon/shotgun.tscn" id="8_fylpv"]
 [ext_resource type="PackedScene" uid="uid://b1vwu2a4upfbu" path="res://characters/components/upgrade_component.tscn" id="8_g5ohr"]
+[ext_resource type="Resource" uid="uid://bpwuwshsw5dk7" path="res://characters/player/stat_scalers/assault_rifle_scaler.tres" id="8_nwtkf"]
+[ext_resource type="PackedScene" uid="uid://6nrsywyx2nfx" path="res://weapons/basic_weapon/sniper.tscn" id="9_07ubn"]
 [ext_resource type="Script" path="res://characters/components/experience_component.gd" id="9_io3wp"]
+[ext_resource type="PackedScene" uid="uid://b7oo4onbkakgp" path="res://weapons/basic_weapon/grenade_launcher.tscn" id="10_318n4"]
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="10_buq5f"]
 [ext_resource type="PackedScene" uid="uid://ce7uohvil47by" path="res://ui/components/health_bar.tscn" id="10_lie7l"]
+[ext_resource type="Resource" uid="uid://b60j6x63ap54q" path="res://characters/player/stat_scalers/shotgun_scaler.tres" id="10_ltu68"]
 [ext_resource type="PackedScene" uid="uid://c8kltbveyhbjo" path="res://ui/components/exp_label.tscn" id="11_x4h1m"]
+[ext_resource type="Resource" uid="uid://dqx1fw4rocdgi" path="res://characters/player/stat_scalers/sniper_scaler.tres" id="12_gfwft"]
 [ext_resource type="Script" path="res://characters/components/player_input_component.gd" id="12_t7dvb"]
-[ext_resource type="Script" path="res://characters/player_camera.gd" id="13_5ayu6"]
+[ext_resource type="Script" path="res://characters/player/player_camera.gd" id="13_5ayu6"]
+[ext_resource type="Resource" uid="uid://tqhxjx66nxc8" path="res://characters/player/stat_scalers/grenade_launcher_scaler.tres" id="14_hd43f"]
+[ext_resource type="Script" path="res://characters/components/character_stat_component.gd" id="16_a25d5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrqpl"]
 radius = 9.0
@@ -97,25 +107,36 @@ libraries = {
 }
 speed_scale = 10.0
 
-[node name="PlayerInputComponent" type="Node" parent="." node_paths=PackedStringArray("character", "upgrade_component")]
+[node name="PlayerInputComponent" type="Node" parent="." node_paths=PackedStringArray("character", "upgrade_component", "stat_component")]
 script = ExtResource("12_t7dvb")
 character = NodePath("..")
 upgrade_component = NodePath("../UpgradeComponent")
-speed = 200.0
+stat_component = NodePath("../StatComponent")
 
-[node name="UpgradeComponent" parent="." node_paths=PackedStringArray("experience_component") instance=ExtResource("8_g5ohr")]
+[node name="UpgradeComponent" parent="." node_paths=PackedStringArray("experience_component", "stat_component") instance=ExtResource("8_g5ohr")]
 position = Vector2(0, -55)
 experience_component = NodePath("../ExperienceComponent")
+stat_component = NodePath("../StatComponent")
+stat_scaler = ExtResource("6_wi67e")
+up_weapon = ExtResource("7_66yyg")
+up_weapon_stat_scaler = ExtResource("8_nwtkf")
+down_weapon = ExtResource("8_fylpv")
+down_weapon_stat_scaler = ExtResource("10_ltu68")
+right_weapon = ExtResource("9_07ubn")
+right_weapon_stat_scaler = ExtResource("12_gfwft")
+left_weapon = ExtResource("10_318n4")
+left_weapon_stat_scaler = ExtResource("14_hd43f")
 
 [node name="ExperienceComponent" type="Node2D" parent="."]
 script = ExtResource("9_io3wp")
-max_level = 10
+max_level = 25
 initial_level_threshold = 10
 threshold_multiplier = 2
+exponent = 3.57
 
-[node name="HealthComponent" type="Node2D" parent="."]
+[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("stat_component")]
 script = ExtResource("10_buq5f")
-base_health = 100.0
+stat_component = NodePath("../StatComponent")
 
 [node name="Hud" type="CanvasLayer" parent="."]
 
@@ -145,3 +166,6 @@ current = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_pgs22")
+
+[node name="StatComponent" type="Node" parent="."]
+script = ExtResource("16_a25d5")

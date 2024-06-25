@@ -3,7 +3,7 @@ extends Node
 
 @export var character : CharacterBody2D
 @export var upgrade_component : UpgradeComponent
-@export var speed : float
+@export var stat_component : StatComponent
 
 
 func _ready():
@@ -23,7 +23,7 @@ func _unhandled_input(event):
 		"move_up",
 		"move_down",
 	)
-	character.velocity = moveDirection * speed
+	character.velocity = moveDirection * stat_component.get_current_speed()
 	var upgrade_vec
 	if event.is_action_pressed("up_upgrade"):
 		upgrade_vec = Vector2i.UP

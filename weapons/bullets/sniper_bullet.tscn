@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://ct68ompnbee8c"]
 
-[ext_resource type="Script" path="res://weapons/basic_weapon/bullet.gd" id="1_pv1xx"]
+[ext_resource type="Script" path="res://weapons/bullets/bullet.gd" id="1_pv1xx"]
 [ext_resource type="Texture2D" uid="uid://c6280vf2oqwwu" path="res://assets/guns_gameassets/PNG/Alternative color/large_bullet2.png" id="2_ibawo"]
 [ext_resource type="Texture2D" uid="uid://cnbktw2xue711" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d1.png" id="3_87uqd"]
 [ext_resource type="Texture2D" uid="uid://dcu1y6wd07o73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d2.png" id="4_5pxeb"]
@@ -39,13 +39,11 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="SniperBullet" type="RigidBody2D"]
+[node name="SniperBullet" type="Area2D"]
 collision_layer = 16
 collision_mask = 5
-gravity_scale = 0.0
-max_contacts_reported = 1
-contact_monitor = true
 script = ExtResource("1_pv1xx")
+piercing_num = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

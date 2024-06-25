@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="WeaponStatScaler" load_steps=2 format=3 uid="uid://dqx1fw4rocdgi"]
+
+[ext_resource type="Script" path="res://characters/components/weapon_stat_scaler.gd" id="1_86ttf"]
+
+[resource]
+script = ExtResource("1_86ttf")
+base_stats = {
+"aoe_damage": 0.0,
+"aoe_scale": 0.0,
+"bullet_damage": 50.0,
+"bullet_speed": 1000.0,
+"fire_rate": 0.25,
+"piercing_num": 1
+}
+per_level_stat_adders = {
+"aoe_damage": 0.0,
+"aoe_scale": 0.0,
+"bullet_damage": 15.0,
+"bullet_speed": 0.0,
+"fire_rate": 0.05,
+"piercing_num": 1
+}
+per_level_stat_multipliers = {
+"aoe_damage": 0.0,
+"aoe_scale": 0.0,
+"bullet_damage": 0.0,
+"bullet_speed": 0.0,
+"fire_rate": 0.0,
+"piercing_num": 0
+}
+level_specific_adders = {
+1: {
+"aoe_damage": 0.0,
+"aoe_scale": 0.0,
+"bullet_damage": 0.0,
+"bullet_speed": 0.0,
+"fire_rate": 0.0,
+"piercing_num": 0
+}
+}
+level_specific_multipliers = {
+1: {
+"aoe_damage": 0.0,
+"aoe_scale": 0.0,
+"bullet_damage": 0.0,
+"bullet_speed": 0.0,
+"fire_rate": 0.0,
+"piercing_num": 0
+}
+}

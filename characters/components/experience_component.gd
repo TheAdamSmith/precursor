@@ -7,20 +7,22 @@ signal level_update(level)
 @export var max_level : int
 @export var initial_level_threshold : int
 @export var threshold_multiplier : int
+@export var exponent : float
 
 var experience
 var level
 
 
 func _ready():
-	experience = 0
-	level = 0
+	experience = 0.0
+	level = 1
 
 
 func _get_exp_threshold(_level):
 	if _level <= 0:
 		return 0
-	return pow(threshold_multiplier, _level) * initial_level_threshold
+	#return pow(threshold_multiplier, _level) * initial_level_threshold
+	return pow(_level, exponent)
 
 
 func add_exp(exp):
