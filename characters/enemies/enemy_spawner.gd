@@ -44,7 +44,6 @@ func spawn_enemy():
 	enemy.stat_component._base_stats = _enemy_base_stats
 	enemy.stat_component.register_all_adders(enemy_spawn_scaler.per_level_enemy_stat_addders, spawner_level)
 	enemy.stat_component.register_all_multipliers(enemy_spawn_scaler.per_level_enemy_stat_multipliers, spawner_level)
-	enemy.stat_component._print_all_stats()
 	num_enemies_spawned += 1
 
 

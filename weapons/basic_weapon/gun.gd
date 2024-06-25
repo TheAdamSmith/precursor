@@ -49,7 +49,9 @@ func _fire():
 
 func _create_bullet():
 	# Basic method, can be overridden by subclass
-	return bullet.instantiate()
+	var bullet_node = bullet.instantiate()
+	bullet_node.piercing_num = stat_component.get_current_piercing_num()
+	return bullet_node
 
 
 func _on_vfx_animation_looped():
