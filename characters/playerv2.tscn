@@ -1,15 +1,21 @@
-[gd_scene load_steps=16 format=3 uid="uid://bry1y52kbn44d"]
+[gd_scene load_steps=25 format=3 uid="uid://bry1y52kbn44d"]
 
 [ext_resource type="Script" path="res://characters/playerv2.gd" id="1_6fimu"]
 [ext_resource type="Texture2D" uid="uid://3yv5hx2p3sch" path="res://models/Cowboy_final/Beetle_move.png" id="2_88k6x"]
 [ext_resource type="Animation" uid="uid://chkrcb7h1yobc" path="res://models/Cowboy_8bit/walkUp.res" id="6_6q8cu"]
 [ext_resource type="PackedScene" uid="uid://b1vwu2a4upfbu" path="res://characters/components/upgrade_component.tscn" id="8_g5ohr"]
+[ext_resource type="Script" path="res://characters/components/creep_send_component.gd" id="8_kx8s1"]
 [ext_resource type="Script" path="res://characters/components/experience_component.gd" id="9_io3wp"]
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="10_buq5f"]
 [ext_resource type="PackedScene" uid="uid://ce7uohvil47by" path="res://ui/components/health_bar.tscn" id="10_lie7l"]
+[ext_resource type="Texture2D" uid="uid://b8h13m5pwfaal" path="res://assets/misc_sprites/health_bar_grey.png" id="10_pqw4g"]
+[ext_resource type="Texture2D" uid="uid://cvhx4i6uflvcs" path="res://assets/misc_sprites/health_bar_yellow.png" id="11_04656"]
+[ext_resource type="Shader" path="res://shaders/glow.gdshader" id="11_nh26u"]
 [ext_resource type="PackedScene" uid="uid://c8kltbveyhbjo" path="res://ui/components/exp_label.tscn" id="11_x4h1m"]
 [ext_resource type="Script" path="res://characters/components/player_input_component.gd" id="12_t7dvb"]
 [ext_resource type="Script" path="res://characters/player_camera.gd" id="13_5ayu6"]
+[ext_resource type="Script" path="res://ui/components/creep_send_bar.gd" id="13_8w3ce"]
+[ext_resource type="FontFile" uid="uid://jbnljjgfvvl3" path="res://assets/fonts/256BYTES.TTF" id="14_p3xse"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrqpl"]
 radius = 9.0
@@ -52,6 +58,22 @@ _data = {
 "idle": ExtResource("6_6q8cu"),
 "walk": SubResource("Animation_wu6ow")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1nlb8"]
+shader = ExtResource("11_nh26u")
+shader_parameter/glow_color = Color(0.435294, 0.682353, 0.639216, 0.662745)
+shader_parameter/glow_power = 0.0
+shader_parameter/glow_shift = 0.0
+shader_parameter/glow_radius = 7.0
+
+[sub_resource type="Theme" id="Theme_a35xo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xtrfy"]
+font = ExtResource("14_p3xse")
+font_size = 31
+font_color = Color(0.0196078, 0.0196078, 0.0196078, 1)
+outline_size = 2
+outline_color = Color(0.694118, 0.694118, 0.694118, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pgs22"]
 properties/0/path = NodePath(".:position")
@@ -117,6 +139,13 @@ threshold_multiplier = 2
 script = ExtResource("10_buq5f")
 base_health = 100.0
 
+[node name="CreepSendComponent" type="Node2D" parent="."]
+script = ExtResource("8_kx8s1")
+
+[node name="Timer" type="Timer" parent="CreepSendComponent"]
+process_callback = 0
+one_shot = true
+
 [node name="Hud" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" parent="Hud" node_paths=PackedStringArray("health_component") instance=ExtResource("10_lie7l")]
@@ -125,6 +154,7 @@ offset_bottom = 16.0
 scale = Vector2(0.734612, 1.3485)
 size_flags_horizontal = 0
 size_flags_vertical = 0
+size_flags_stretch_ratio = 8.85
 health_component = NodePath("../../HealthComponent")
 
 [node name="ExpLabel" parent="Hud" node_paths=PackedStringArray("experience_component") instance=ExtResource("11_x4h1m")]
@@ -136,6 +166,38 @@ offset_right = 0.0
 grow_horizontal = 0
 experience_component = NodePath("../../ExperienceComponent")
 
+[node name="CreepSendBar" type="TextureProgressBar" parent="Hud"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_1nlb8")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -43.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 1)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_a35xo")
+value = 50.0
+rounded = true
+texture_under = ExtResource("10_pqw4g")
+texture_progress = ExtResource("11_04656")
+script = ExtResource("13_8w3ce")
+
+[node name="Label" type="Label" parent="Hud/CreepSendBar"]
+layout_mode = 0
+offset_left = 1.5
+offset_top = -35.0
+offset_right = 61.5
+offset_bottom = 22.0
+text = "2x"
+label_settings = SubResource("LabelSettings_xtrfy")
+
 [node name="PlayerCamera" type="Camera2D" parent="."]
 script = ExtResource("13_5ayu6")
 zoom_max = Vector2(0.5, 0.5)
@@ -145,3 +207,7 @@ current = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_pgs22")
+
+[connection signal="creep_send_update" from="CreepSendComponent" to="Hud/CreepSendBar" method="_on_creep_send_component_creep_send_update"]
+[connection signal="timeout" from="CreepSendComponent/Timer" to="CreepSendComponent" method="_on_timer_timeout"]
+[connection signal="timeout" from="CreepSendComponent/Timer" to="Hud/CreepSendBar" method="_on_timer_timeout"]

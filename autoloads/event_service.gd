@@ -97,10 +97,12 @@ func _on_entity_death(damaging_entity, dying_entity):
 	if dying_character.has_method("give_experience"):
 		var damaging_character = _get_character_body_2d_parent(damaging_entity)
 		if damaging_character:
-			var exp_comps = damaging_character.find_children("", "ExperienceComponent")
-			if exp_comps:
-				for exp_comp in exp_comps:
-					exp_comp.add_exp(dying_character.give_experience())
+			var exp_comp = damaging_character.get_node("ExperienceComponent")
+			var creep_send_comp = damaging_character.get_node("CreepSendComponent")
+			if exp_comp:
+				exp_comp.add_exp(dying_character.give_experience())
+			if creep_send_comp:
+				creep_send_comp.add_progress(dying_character.give_experience())
 	if dying_character.is_in_group("player"):
 		var player_camera = dying_character.find_child("PlayerCamera")
 		if player_camera:
