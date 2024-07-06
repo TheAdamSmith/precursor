@@ -60,7 +60,6 @@ func _physics_process(delta):
 		level_up_timer = get_tree().create_timer(enemy_spawn_scaler.sec_per_spawner_level_up)
 		return
 	if level_up_timer.time_left == 0.0:
-		print("SPAWNER LEVELED")
 		spawner_level += 1
 		level_up_timer = get_tree().create_timer(enemy_spawn_scaler.sec_per_spawner_level_up)
 	
