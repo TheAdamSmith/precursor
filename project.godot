@@ -22,6 +22,10 @@ PauseScreen="*res://ui/pause_screen.tscn"
 SoundManager="*res://autoloads/sound_manager.gd"
 MultiplayerManager="*res://autoloads/multiplayer_manager.gd"
 
+[dotnet]
+
+project/assembly_name="Precursor"
+
 [input]
 
 ui_accept={

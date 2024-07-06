@@ -1,14 +1,24 @@
-[gd_scene load_steps=14 format=3 uid="uid://dshjlrawv1gyb"]
+[gd_scene load_steps=24 format=3 uid="uid://dshjlrawv1gyb"]
 
-[ext_resource type="Script" path="res://characters/playerv2.gd" id="1_6fimu"]
+[ext_resource type="Script" path="res://characters/player/playerv2.gd" id="1_6fimu"]
 [ext_resource type="Texture2D" uid="uid://3yv5hx2p3sch" path="res://models/Cowboy_final/Beetle_move.png" id="2_kn8q8"]
 [ext_resource type="Animation" uid="uid://chkrcb7h1yobc" path="res://models/Cowboy_8bit/walkUp.res" id="6_6q8cu"]
+[ext_resource type="Resource" uid="uid://dcn4pfn8pdvl" path="res://characters/player/stat_scalers/player_stat_scaler.tres" id="6_jirwl"]
+[ext_resource type="PackedScene" uid="uid://bqi04w12vyyov" path="res://weapons/basic_weapon/assault_rifle.tscn" id="7_u6xnb"]
 [ext_resource type="PackedScene" uid="uid://b1vwu2a4upfbu" path="res://characters/components/upgrade_component.tscn" id="8_g5ohr"]
+[ext_resource type="PackedScene" uid="uid://cvinwqhgbqbxv" path="res://weapons/basic_weapon/shotgun.tscn" id="8_usxgj"]
+[ext_resource type="Resource" uid="uid://bpwuwshsw5dk7" path="res://characters/player/stat_scalers/assault_rifle_scaler.tres" id="8_wvlb4"]
 [ext_resource type="Script" path="res://characters/components/experience_component.gd" id="9_io3wp"]
+[ext_resource type="PackedScene" uid="uid://6nrsywyx2nfx" path="res://weapons/basic_weapon/sniper.tscn" id="9_p61p5"]
+[ext_resource type="Resource" uid="uid://b60j6x63ap54q" path="res://characters/player/stat_scalers/shotgun_scaler.tres" id="10_3rki1"]
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="10_buq5f"]
 [ext_resource type="PackedScene" uid="uid://ce7uohvil47by" path="res://ui/components/health_bar.tscn" id="10_lie7l"]
+[ext_resource type="PackedScene" uid="uid://b7oo4onbkakgp" path="res://weapons/basic_weapon/grenade_launcher.tscn" id="10_s4m4e"]
 [ext_resource type="PackedScene" uid="uid://c8kltbveyhbjo" path="res://ui/components/exp_label.tscn" id="11_x4h1m"]
+[ext_resource type="Resource" uid="uid://dqx1fw4rocdgi" path="res://characters/player/stat_scalers/sniper_scaler.tres" id="12_b8mbw"]
 [ext_resource type="Script" path="res://characters/components/computer_player_input_component.gd" id="12_csdww"]
+[ext_resource type="Resource" uid="uid://tqhxjx66nxc8" path="res://characters/player/stat_scalers/grenade_launcher_scaler.tres" id="14_gmbx7"]
+[ext_resource type="Script" path="res://characters/components/character_stat_component.gd" id="15_bodee"]
 
 [sub_resource type="Animation" id="Animation_bhqmy"]
 length = 0.001
@@ -72,25 +82,36 @@ libraries = {
 }
 speed_scale = 10.0
 
-[node name="ComputerPlayerInputComponent" type="Node2D" parent="." node_paths=PackedStringArray("player", "upgrade_component")]
+[node name="ComputerPlayerInputComponent" type="Node2D" parent="." node_paths=PackedStringArray("player", "upgrade_component", "stat_component")]
 script = ExtResource("12_csdww")
 player = NodePath("..")
 upgrade_component = NodePath("../UpgradeComponent")
-speed = 200.0
+stat_component = NodePath("../StatComponent")
 
-[node name="UpgradeComponent" parent="." node_paths=PackedStringArray("experience_component") instance=ExtResource("8_g5ohr")]
+[node name="UpgradeComponent" parent="." node_paths=PackedStringArray("experience_component", "stat_component") instance=ExtResource("8_g5ohr")]
 position = Vector2(0, -57)
 experience_component = NodePath("../ExperienceComponent")
+stat_component = NodePath("../StatComponent")
+stat_scaler = ExtResource("6_jirwl")
+up_weapon = ExtResource("7_u6xnb")
+up_weapon_stat_scaler = ExtResource("8_wvlb4")
+down_weapon = ExtResource("8_usxgj")
+down_weapon_stat_scaler = ExtResource("10_3rki1")
+right_weapon = ExtResource("9_p61p5")
+right_weapon_stat_scaler = ExtResource("12_b8mbw")
+left_weapon = ExtResource("10_s4m4e")
+left_weapon_stat_scaler = ExtResource("14_gmbx7")
 
 [node name="ExperienceComponent" type="Node2D" parent="."]
 script = ExtResource("9_io3wp")
 max_level = 10
 initial_level_threshold = 10
 threshold_multiplier = 2
+exponent = 3.57
 
-[node name="HealthComponent" type="Node2D" parent="."]
+[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("stat_component")]
 script = ExtResource("10_buq5f")
-base_health = 100.0
+stat_component = NodePath("../StatComponent")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_left = -63.0
@@ -118,3 +139,6 @@ position = Vector2(1.13687e-12, 5)
 rotation = 1.5708
 scale = Vector2(1.5, 1.5)
 shape = SubResource("CapsuleShape2D_h8dy7")
+
+[node name="StatComponent" type="Node" parent="."]
+script = ExtResource("15_bodee")

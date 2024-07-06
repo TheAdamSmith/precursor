@@ -1,10 +1,8 @@
 class_name Gun
 extends Node2D
 
-@export var fire_rate = 1.0
-@export var bullet_speed = 1000.0
-@export var bullet_damage = 10.0
-@export var bullet : PackedScene = preload("res://weapons/basic_weapon/bullet.tscn")
+@onready var stat_component = $WeaponStatComponent
+@export var bullet : PackedScene = preload("res://weapons/bullets/bullet.tscn")
 
 var can_fire = true
 var initial_rotation
@@ -29,7 +27,7 @@ func _physics_process(delta):
 		self.rotation = initial_rotation
 	if can_fire:
 		_fire()
-		await get_tree().create_timer(fire_rate).timeout
+		await get_tree().create_timer(1.0 / stat_component.get_current_fire_rate()).timeout
 		can_fire = true
 
 
@@ -39,11 +37,11 @@ func _fire():
 	$Vfx.play()
 	SoundManager.play_sfx(self, load("res://assets/audio/sfx/single_pistol_gunshot.mp3"), -20)
 	var bullet_instance = _create_bullet()
-	bullet_instance.damage = bullet_damage
+	bullet_instance.damage = stat_component.get_current_bullet_damage()
 	bullet_instance.set_z_index(1)
 	bullet_instance.global_position = $BulletPoint.global_position
 	bullet_instance.global_rotation = global_rotation
-	bullet_instance.apply_impulse(Vector2(bullet_speed, 0).rotated(global_rotation))
+	bullet_instance.apply_impulse(Vector2(stat_component.get_current_bullet_speed(), 0).rotated(global_rotation))
 	add_child(bullet_instance)
 	can_fire = false
 	$AnimationPlayer.play("recoil")
@@ -51,7 +49,9 @@ func _fire():
 
 func _create_bullet():
 	# Basic method, can be overridden by subclass
-	return bullet.instantiate()
+	var bullet_node = bullet.instantiate()
+	bullet_node.piercing_num = stat_component.get_current_piercing_num()
+	return bullet_node
 
 
 func _on_vfx_animation_looped():

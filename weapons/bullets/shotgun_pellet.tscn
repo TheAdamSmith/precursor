@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://c1vmwq2tc8n0a"]
 
-[ext_resource type="Script" path="res://weapons/basic_weapon/bullet.gd" id="1_4lbvs"]
+[ext_resource type="Script" path="res://weapons/bullets/bullet.gd" id="1_4lbvs"]
 [ext_resource type="Texture2D" uid="uid://jnuf8ntsk8cn" path="res://assets/misc_sprites/shotgun_pellet.png" id="2_6fv2k"]
 [ext_resource type="Texture2D" uid="uid://cnbktw2xue711" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d1.png" id="3_3eya4"]
 [ext_resource type="Texture2D" uid="uid://dcu1y6wd07o73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d2.png" id="4_x2s48"]
@@ -38,12 +38,9 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="ShotgunPellet" type="RigidBody2D"]
+[node name="ShotgunPellet" type="Area2D"]
 collision_layer = 16
 collision_mask = 5
-gravity_scale = 0.0
-max_contacts_reported = 1
-contact_monitor = true
 script = ExtResource("1_4lbvs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
