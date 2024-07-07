@@ -27,9 +27,8 @@ func load_settings():
 
 
 func save_new_settings(new_settings):
-	print(ResourceSaver.save(new_settings, SAVED_SETTINGS_PATH))
+	ResourceSaver.save(new_settings, SAVED_SETTINGS_PATH)
 	load_settings()
-	print("new settings loaded")
 
 
 func get_true_music_volume_db(base_volume_linear):
