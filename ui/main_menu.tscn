@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ble25jlxswky7"]
+[gd_scene load_steps=10 format=3 uid="uid://ble25jlxswky7"]
 
 [ext_resource type="Script" path="res://ui/components/base_menu.gd" id="1_txnvf"]
 [ext_resource type="Script" path="res://ui/components/open_new_scene_button.gd" id="2_31nul"]
 [ext_resource type="Texture2D" uid="uid://cjec7m7mqg5rm" path="res://assets/misc_sprites/tmp_title.png" id="2_eeitk"]
 [ext_resource type="Script" path="res://ui/components/quit_game_button.gd" id="2_vsj0k"]
+[ext_resource type="Script" path="res://ui/components/overlay_menu_button.gd" id="3_rgmy4"]
 [ext_resource type="Texture2D" uid="uid://dij1fcvbhojrt" path="res://assets/misc_sprites/title_background.png" id="5_3xta2"]
 [ext_resource type="Script" path="res://ui/components/background.gd" id="6_lee4k"]
 [ext_resource type="PackedScene" uid="uid://l3fqkrc78nis" path="res://audio/bgm_selector.tscn" id="7_kt5m1"]
@@ -52,6 +53,14 @@ theme_override_font_sizes/font_size = 32
 text = "Multiplayer"
 script = ExtResource("2_31nul")
 next_scene_path = "res://ui/multiplayer_menu.tscn"
+
+[node name="SettingsButton" type="Button" parent="HBoxContainer" node_paths=PackedStringArray("return_focus")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+script = ExtResource("3_rgmy4")
+overlay_menu_path = "res://ui/settings_menu.tscn"
+return_focus = NodePath("../SinglePlayerButton")
 
 [node name="QuitGameButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2

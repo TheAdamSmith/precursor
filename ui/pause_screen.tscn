@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://buda5r5xpr724"]
+[gd_scene load_steps=7 format=3 uid="uid://buda5r5xpr724"]
 
 [ext_resource type="Script" path="res://autoloads/pause_screen.gd" id="1_4lxnp"]
 [ext_resource type="Script" path="res://ui/components/base_menu.gd" id="1_elhuq"]
 [ext_resource type="Script" path="res://ui/components/open_new_scene_button.gd" id="2_pyns1"]
 [ext_resource type="Script" path="res://ui/components/change_pause_state_button.gd" id="2_rtyes"]
 [ext_resource type="Script" path="res://ui/components/quit_game_button.gd" id="3_dg1bm"]
+[ext_resource type="Script" path="res://ui/components/overlay_menu_button.gd" id="5_tiox4"]
 
 [node name="PauseScreen" type="CanvasLayer"]
 script = ExtResource("1_4lxnp")
@@ -54,6 +55,13 @@ mouse_filter = 1
 text = "Main Menu"
 script = ExtResource("2_pyns1")
 next_scene_path = "res://ui/main_menu.tscn"
+
+[node name="SettingsButton" type="Button" parent="PauseMenu/VBoxContainer" node_paths=PackedStringArray("return_focus")]
+layout_mode = 2
+text = "Settings"
+script = ExtResource("5_tiox4")
+overlay_menu_path = "res://ui/settings_menu.tscn"
+return_focus = NodePath("../ResumeButton")
 
 [node name="QuitGameButton" type="Button" parent="PauseMenu/VBoxContainer"]
 layout_mode = 2
