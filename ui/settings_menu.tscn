@@ -1,0 +1,96 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnbihj6wf04l0"]
+
+[ext_resource type="Script" path="res://ui/components/base_menu.gd" id="1_upsau"]
+[ext_resource type="Script" path="res://ui/components/menu_tab_button.gd" id="4_cifa3"]
+[ext_resource type="Texture2D" uid="uid://dij1fcvbhojrt" path="res://assets/misc_sprites/title_background.png" id="5_5wlbf"]
+[ext_resource type="Script" path="res://ui/components/background.gd" id="6_51bn4"]
+
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("initial_focus")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_upsau")
+initial_focus = NodePath("TabContainer/AudioSettings")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 185.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 48
+text = "Settings"
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 448.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.72, 0.72)
+mouse_filter = 2
+texture = ExtResource("5_5wlbf")
+expand_mode = 1
+script = ExtResource("6_51bn4")
+metadata/_edit_use_anchors_ = true
+
+[node name="TabContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_top = 64.0
+offset_right = 40.0
+offset_bottom = 104.0
+
+[node name="AudioSettings" type="Button" parent="TabContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Audio Settings"
+script = ExtResource("4_cifa3")
+
+[node name="Menu" type="HBoxContainer" parent="TabContainer/AudioSettings"]
+visible = false
+layout_mode = 0
+offset_top = 56.0
+offset_right = 113.0
+offset_bottom = 96.0
+
+[node name="LabelsContainer" type="VBoxContainer" parent="TabContainer/AudioSettings/Menu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/AudioSettings/Menu/LabelsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Music Volume"
+
+[node name="OptionsContainer" type="VBoxContainer" parent="TabContainer/AudioSettings/Menu"]
+layout_mode = 2
+
+[node name="DisplaySettings" type="Button" parent="TabContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Display Settings"
+script = ExtResource("4_cifa3")
+
+[node name="Menu" type="HBoxContainer" parent="TabContainer/DisplaySettings"]
+offset_left = -235.0
+offset_top = 56.0
+offset_right = -120.0
+offset_bottom = 96.0
+
+[node name="LabelsContainer" type="VBoxContainer" parent="TabContainer/DisplaySettings/Menu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/DisplaySettings/Menu/LabelsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Window Mode"
+
+[node name="OptionsContainer" type="VBoxContainer" parent="TabContainer/DisplaySettings/Menu"]
+layout_mode = 2
