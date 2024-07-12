@@ -6,6 +6,6 @@
 script = ExtResource("1_qrcab")
 window_mode = 0
 mute = false
-main_volume_linear = 1.0
+master_volume_linear = 1.0
 music_volume_linear = 0.5
 sfx_volume_linear = 0.5

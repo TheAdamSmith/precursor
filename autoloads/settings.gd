@@ -35,7 +35,7 @@ func get_true_music_volume_db(base_volume_linear):
 	if current_settings.mute:
 		return linear_to_db(0.0)
 	return linear_to_db(
-		current_settings.main_volume_linear *
+		current_settings.master_volume_linear *
 		current_settings.music_volume_linear *
 		base_volume_linear
 	)
@@ -45,7 +45,7 @@ func get_true_sfx_volume_db(base_volume_linear):
 	if current_settings.mute:
 		return linear_to_db(0.0)
 	return linear_to_db(
-		current_settings.main_volume_linear *
+		current_settings.master_volume_linear *
 		current_settings.sfx_volume_linear *
 		base_volume_linear
 	)
@@ -59,8 +59,8 @@ func get_muted():
 	return current_settings.mute
 
 
-func get_main_volume_linear():
-	return current_settings.main_volume_linear
+func get_master_volume_linear():
+	return current_settings.master_volume_linear
 
 
 func get_music_volume_linear():
@@ -79,8 +79,8 @@ func get_default_muted():
 	return default_settings.mute
 
 
-func get_default_main_volume_linear():
-	return default_settings.main_volume_linear
+func get_default_master_volume_linear():
+	return default_settings.master_volume_linear
 
 
 func get_default_music_volume_linear():

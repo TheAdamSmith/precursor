@@ -15,6 +15,6 @@ enum WindowMode {
 
 # Audio Settings
 @export var mute : bool = false
-@export_range(0.0, 1.0, 0.001) var main_volume_linear : float = 1.0
+@export_range(0.0, 1.0, 0.001) var master_volume_linear : float = 1.0
 @export_range(0.0, 1.0, 0.001) var music_volume_linear : float = 0.5
 @export_range(0.0, 1.0, 0.001) var sfx_volume_linear : float = 0.5

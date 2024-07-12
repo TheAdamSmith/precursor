@@ -7,6 +7,7 @@
 
 [node name="SettingsMenu" type="CanvasLayer" node_paths=PackedStringArray("initial_tab")]
 process_mode = 3
+layer = 2
 script = ExtResource("1_qnkba")
 initial_tab = NodePath("TabContainer/AudioSettings")
 
@@ -69,16 +70,16 @@ layout_mode = 2
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 2.0
 
-[node name="MainVolumeContainer" type="HBoxContainer" parent="TabContainer/AudioSettings/Menu"]
+[node name="MasterVolumeContainer" type="HBoxContainer" parent="TabContainer/AudioSettings/Menu"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TabContainer/AudioSettings/Menu/MainVolumeContainer"]
+[node name="Label" type="Label" parent="TabContainer/AudioSettings/Menu/MasterVolumeContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 24
-text = "Main Volume"
+text = "Master Volume"
 
-[node name="HSlider" type="HSlider" parent="TabContainer/AudioSettings/Menu/MainVolumeContainer"]
+[node name="HSlider" type="HSlider" parent="TabContainer/AudioSettings/Menu/MasterVolumeContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4

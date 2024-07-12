@@ -21,7 +21,7 @@ var setting_state : SettingsState
 
 # Audio Settings
 @onready var mute_check_button = $TabContainer/AudioSettings/Menu/MuteVolumeContainer/CheckButton
-@onready var main_volume_slider = $TabContainer/AudioSettings/Menu/MainVolumeContainer/HSlider
+@onready var master_volume_slider = $TabContainer/AudioSettings/Menu/MasterVolumeContainer/HSlider
 @onready var music_volume_slider = $TabContainer/AudioSettings/Menu/MusicVolumeContainer/HSlider
 @onready var sfx_volume_slider = $TabContainer/AudioSettings/Menu/SFXVolumeContainer/HSlider
 
@@ -68,7 +68,7 @@ func settings_changed():
 	return (
 		window_mode_option.selected != Settings.get_window_mode() or
 		mute_check_button.button_pressed != Settings.get_muted() or
-		not is_equal_approx(main_volume_slider.value, Settings.get_main_volume_linear()) or
+		not is_equal_approx(master_volume_slider.value, Settings.get_master_volume_linear()) or
 		not is_equal_approx(music_volume_slider.value, Settings.get_music_volume_linear()) or
 		not is_equal_approx(sfx_volume_slider.value, Settings.get_sfx_volume_linear())
 	)
@@ -77,7 +77,7 @@ func settings_changed():
 func display_current_settings():
 	window_mode_option.selected = Settings.get_window_mode()
 	mute_check_button.button_pressed = Settings.get_muted()
-	main_volume_slider.value = Settings.get_main_volume_linear()
+	master_volume_slider.value = Settings.get_master_volume_linear()
 	music_volume_slider.value = Settings.get_music_volume_linear()
 	sfx_volume_slider.value = Settings.get_sfx_volume_linear()
 
@@ -86,7 +86,7 @@ func apply_new_settings():
 	var settings_file = SettingsFile.new()
 	settings_file.window_mode = window_mode_option.selected
 	settings_file.mute = mute_check_button.button_pressed
-	settings_file.main_volume_linear = main_volume_slider.value
+	settings_file.master_volume_linear = master_volume_slider.value
 	settings_file.music_volume_linear = music_volume_slider.value
 	settings_file.sfx_volume_linear = sfx_volume_slider.value
 	Settings.save_new_settings(settings_file)
@@ -98,7 +98,7 @@ func apply_new_settings():
 func restore_default_settings():
 	window_mode_option.selected = Settings.get_default_window_mode()
 	mute_check_button.button_pressed = Settings.get_default_muted()
-	main_volume_slider.value = Settings.get_default_main_volume_linear()
+	master_volume_slider.value = Settings.get_default_master_volume_linear()
 	music_volume_slider.value = Settings.get_default_music_volume_linear()
 	sfx_volume_slider.value = Settings.get_default_sfx_volume_linear()
 
