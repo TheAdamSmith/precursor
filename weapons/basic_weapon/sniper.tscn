@@ -1,8 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://6nrsywyx2nfx"]
+[gd_scene load_steps=16 format=3 uid="uid://6nrsywyx2nfx"]
 
 [ext_resource type="Script" path="res://weapons/basic_weapon/gun.gd" id="1_aiupw"]
 [ext_resource type="Texture2D" uid="uid://ckr0qsbqw50tr" path="res://assets/guns_gameassets/PNG/sniper.png" id="2_hwrre"]
-[ext_resource type="PackedScene" uid="uid://ct68ompnbee8c" path="res://weapons/basic_weapon/sniper_bullet.tscn" id="2_m628n"]
+[ext_resource type="PackedScene" uid="uid://ct68ompnbee8c" path="res://weapons/bullets/sniper_bullet.tscn" id="2_m628n"]
 [ext_resource type="Texture2D" uid="uid://dm6ssfcfjpoqm" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h1.png" id="3_bcqcx"]
 [ext_resource type="Texture2D" uid="uid://cd3hm8vhxkro" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h2.png" id="4_li7or"]
 [ext_resource type="Texture2D" uid="uid://cowubpylvk1ev" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h3.png" id="5_s53mv"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ca73ela1e0s6f" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h5.png" id="7_v1kk2"]
 [ext_resource type="Texture2D" uid="uid://criicn1j4dc73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h6.png" id="8_yuhtr"]
 [ext_resource type="Texture2D" uid="uid://cf2umap2pka2w" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h7.png" id="9_ilgyg"]
+[ext_resource type="Script" path="res://weapons/components/weapon_stat_component.gd" id="11_1b2gm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xtuwr"]
 animations = [{
@@ -103,9 +104,6 @@ _data = {
 
 [node name="Sniper" type="Node2D"]
 script = ExtResource("1_aiupw")
-fire_rate = 3.0
-bullet_speed = 1500.0
-bullet_damage = 40.0
 bullet = ExtResource("2_m628n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -127,6 +125,16 @@ frame_progress = 0.718845
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_w8rn5")
+}
+
+[node name="WeaponStatComponent" type="Node" parent="."]
+script = ExtResource("11_1b2gm")
+base_stats = {
+"aoe_damage": 0.0,
+"bullet_damage": 40.0,
+"bullet_speed": 1000.0,
+"fire_rate": 4.0,
+"piercing_num": 1
 }
 
 [connection signal="animation_looped" from="Vfx" to="." method="_on_vfx_animation_looped"]

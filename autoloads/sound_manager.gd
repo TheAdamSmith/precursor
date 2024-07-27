@@ -1,17 +1,20 @@
 extends Node2D
 
-var bgm_player: AudioStreamPlayer
+var bgm_player : AudioStreamPlayer
+var bgm_player_base_volume_linear : float
 
 
 func _ready():
+	Settings.new_settings.connect(_on_settings_update)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 
-func play_bgm(stream: AudioStream, volume_db: float = -10, force_restart: bool = false):
+func play_bgm(stream: AudioStream, base_volume_linear: float = 1.0, force_restart: bool = false):
 	if not bgm_player:
 		bgm_player = AudioStreamPlayer.new()
 		add_child(bgm_player)
-	bgm_player.volume_db = volume_db
+	bgm_player_base_volume_linear = base_volume_linear
+	bgm_player.volume_db = Settings.get_true_music_volume_db(bgm_player_base_volume_linear)
 	if stream == bgm_player.stream and not force_restart:
 		return
 	bgm_player.autoplay = true
@@ -32,11 +35,11 @@ func _loop_bgm():
 	bgm_player.play()
 
 
-func play_sfx(owner: Node2D, stream: AudioStream, volume_db: float = 0, max_distance: float = 700):
+func play_sfx(owner: Node2D, stream: AudioStream, base_volume_linear: float = 1.0, max_distance: float = 700):
 	var instance = AudioStreamPlayer2D.new()
 	instance.stream = stream
 	instance.finished.connect(remove_node.bind(instance))
-	instance.volume_db = volume_db
+	instance.volume_db = Settings.get_true_sfx_volume_db(base_volume_linear)
 	instance.max_distance = max_distance
 	owner.add_child(instance)
 	instance.play()
@@ -44,3 +47,9 @@ func play_sfx(owner: Node2D, stream: AudioStream, volume_db: float = 0, max_dist
 
 func remove_node(instance: AudioStreamPlayer2D):
 	instance.queue_free()
+
+
+func _on_settings_update(settings : SettingsFile):
+	if not bgm_player:
+		return
+	bgm_player.volume_db = Settings.get_true_music_volume_db(bgm_player_base_volume_linear)

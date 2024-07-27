@@ -1,16 +1,13 @@
 extends CharacterBody2D
 class_name Enemy
 
-var speed = 100.0
-
 @onready var animated_sprite = get_node("enemySprite")
+@onready var stat_component = $StatComponent
 
 # enemy properties
-@export var contact_damage = 5.0
-@export var experience_given = 10
+@export var experience_given = 0.22
 
 # Attacks per second
-@export var attack_speed = 1.0
 var player : Player
 var arena_group : String
 var can_attack_timer : SceneTreeTimer
@@ -23,10 +20,11 @@ func _ready():
 		add_to_group(arena_group)
 	floor_snap_length = 0.0
 
+
 func _set_attack_animation_speed():
 	var sprite_frames = animated_sprite.get_sprite_frames()
 	var num_frames = sprite_frames.get_frame_count("attack")
-	sprite_frames.set_animation_speed("attack", num_frames * attack_speed)
+	sprite_frames.set_animation_speed("attack", num_frames * stat_component.get_current_attacks_per_sec())
 
 
 func give_experience():
@@ -48,19 +46,18 @@ func _physics_process(delta):
 		animated_sprite.set_flip_h(true)
 	else :
 		animated_sprite.set_flip_h(false)
-		
-	velocity = direction * speed
+	velocity = direction * stat_component.get_current_speed()
 
 	# check to see how many objects colliding with the mob
 	# play attack animation on collision
 	var overlaps = get_node("AttackBox").get_overlapping_bodies()
 	var overlaps_player = overlaps.has(player)
 	if overlaps_player and (not can_attack_timer or can_attack_timer.time_left == 0):
-		EventService.entity_damaged.emit(self, player, contact_damage)
+		EventService.entity_damaged.emit(self, player, stat_component.get_current_damage())
 		_set_attack_animation_speed()
 		animated_sprite.play("attack")
 		SoundManager.play_sfx(self, load("res://assets/audio/sfx/hit.wav"))
-		can_attack_timer = get_tree().create_timer(1 / attack_speed)
+		can_attack_timer = get_tree().create_timer(1 / stat_component.get_current_attacks_per_sec())
 	elif not overlaps_player:
 		animated_sprite.play("move")
 	move_and_slide()
