@@ -40,7 +40,6 @@ func _on_glow_timer_timeout():
 
 func _on_creep_send_component_creep_send_update(current_value: float, next_send_value: float, current_combo: int) -> void:
 	if next_send_value > max_value:
-		print("glow time")
 		start_glow = true
 	max_value = next_send_value
 	value = (float(current_value) / float(next_send_value)) * 100.0
