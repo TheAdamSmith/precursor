@@ -6,5 +6,6 @@
 !levels*
 !models*
 !ui*
+save_files/*
 *.tmp
 

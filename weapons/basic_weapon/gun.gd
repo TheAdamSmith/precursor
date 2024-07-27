@@ -35,7 +35,7 @@ func _fire():
 	# Basic fire method, can be overridden by subclass
 	$Vfx.show()
 	$Vfx.play()
-	SoundManager.play_sfx(self, load("res://assets/audio/sfx/single_pistol_gunshot.mp3"), -20)
+	SoundManager.play_sfx(self, load("res://assets/audio/sfx/single_pistol_gunshot.mp3"), 0.5)
 	var bullet_instance = _create_bullet()
 	bullet_instance.damage = stat_component.get_current_bullet_damage()
 	bullet_instance.set_z_index(1)

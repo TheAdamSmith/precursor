@@ -10,10 +10,11 @@ extends Node
 @export var stop_bgm: bool = false 
 # set to true if you want the BGM to restart from the beginning for the same audio file
 @export var restart_bgm: bool = false 
+@export_range(0.0, 1.0, 0.001) var bgm_volume_linear : float = 1.0
 
 func _ready() -> void:
 	if bgm and not stop_bgm:
-		SoundManager.play_bgm(bgm, -10, restart_bgm)
+		SoundManager.play_bgm(bgm, bgm_volume_linear, restart_bgm)
 	elif stop_bgm:
 		SoundManager.stop_bgm()
 	else:

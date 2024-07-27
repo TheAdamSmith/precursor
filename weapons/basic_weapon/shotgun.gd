@@ -12,7 +12,7 @@ func _ready():
 func _fire():
 	$Vfx.show()
 	$Vfx.play()
-	SoundManager.play_sfx(self, load("res://assets/audio/sfx/single_pistol_gunshot.mp3"), -20)
+	SoundManager.play_sfx(self, load("res://assets/audio/sfx/single_pistol_gunshot.mp3"), 0.5)
 	var bullet_points = $BulletPoints.get_children()
 	var angle_per_bullet = bullet_spread_deg / bullet_points.size()
 	for i in bullet_points.size():
