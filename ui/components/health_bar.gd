@@ -17,7 +17,7 @@ func _ready():
 	health_component.health_update.connect(_on_health_update)
 
 
-func _on_health_update(current_health, base_health):
+func _on_health_update(current_health, base_health, _health_diff):
 	$Label.text = "%d/%d" % [current_health, base_health]
 	var health_ratio = current_health / base_health
 	if health_ratio > max_mid_health_ratio:

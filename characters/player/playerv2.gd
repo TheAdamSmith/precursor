@@ -2,10 +2,12 @@ class_name Player
 extends CharacterBody2D
 
 @onready var animations = $AnimationPlayer
-@onready var audio_listener_2d: AudioListener2D = $AudioListener2D
-@onready var marker2D=$Marker2D
+@onready var audio_listener_2d : AudioListener2D = $AudioListener2D
+@onready var marker2D = $Marker2D
+@onready var sprite = $Marker2D/Cowboy
 @export var multiplayer_authority : int
 var arena_group : String
+var flashing_shader : ShaderMaterial
 
 
 func _ready():
@@ -17,6 +19,7 @@ func _ready():
 	add_to_group(arena_group)
 	floor_snap_length = 0.0
 	z_index = 2
+	flashing_shader = sprite.material
 
 
 @rpc("any_peer", "call_local", "reliable")
@@ -35,6 +38,10 @@ func update_animation():
 	else:
 		marker2D.scale.x = sign(velocity.x) if velocity.x != 0 else marker2D.scale.x
 		animations.play("walk")
+
+
+func _on_health_update():
+	flashing_shader.set_shader_parameter("start_time", Time.get_ticks_msec())
 
 
 func _physics_process(delta):
