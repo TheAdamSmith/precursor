@@ -27,12 +27,13 @@ radius = 9.0
 height = 26.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l2u4k"]
+resource_local_to_scene = true
 shader = ExtResource("2_38yix")
 shader_parameter/red = 1.0
 shader_parameter/green = 0.25
 shader_parameter/blue = 0.25
 shader_parameter/max_intensity = 0.5
-shader_parameter/cycle_duration_sec = 0.2
+shader_parameter/period_sec = 1.0
 shader_parameter/num_cycles = 10.0
 shader_parameter/start_time = 0.0
 
@@ -99,6 +100,7 @@ script = ExtResource("1_6fimu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visibility_layer = 2
+z_index = 1
 position = Vector2(1.13687e-12, 5)
 rotation = 1.5708
 scale = Vector2(1.5, 1.5)

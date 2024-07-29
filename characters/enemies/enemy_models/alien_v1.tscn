@@ -1,20 +1,17 @@
 [gd_scene load_steps=8 format=3 uid="uid://c6ivcx4tl0tvq"]
 
 [ext_resource type="Texture2D" uid="uid://bnssffkwqib3h" path="res://models/enemy_models/alien-v1/alien-v1-attack1.png" id="1_3p4wo"]
-[ext_resource type="Shader" path="res://shaders/flashing.gdshader" id="1_x4x4d"]
+[ext_resource type="Shader" path="res://shaders/enemy.gdshader" id="1_xp631"]
 [ext_resource type="Texture2D" uid="uid://ct18fnph6ptrn" path="res://models/enemy_models/alien-v1/alien-v1-attack2.png" id="2_nm60i"]
 [ext_resource type="Texture2D" uid="uid://fc32k8b80a7s" path="res://models/enemy_models/alien-v1/alien-v1-move1.png" id="3_83ob5"]
 [ext_resource type="Texture2D" uid="uid://c78q7q2kmdlt7" path="res://models/enemy_models/alien-v1/alien-v1-move2.png" id="4_kvp8f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8jq2b"]
-shader = ExtResource("1_x4x4d")
-shader_parameter/red = 0.0
-shader_parameter/green = 0.0
-shader_parameter/blue = 0.0
-shader_parameter/max_intensity = 1.0
-shader_parameter/cycle_duration_sec = 1.0
-shader_parameter/num_cycles = 1.0
-shader_parameter/start_time = 0.0
+resource_local_to_scene = true
+shader = ExtResource("1_xp631")
+shader_parameter/red_adder = 0.0
+shader_parameter/green_adder = 0.0
+shader_parameter/blue_adder = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4h5hd"]
 animations = [{
