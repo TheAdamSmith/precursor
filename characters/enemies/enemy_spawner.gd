@@ -77,8 +77,6 @@ func _set_enemy_stats(enemy, enemy_type):
 	var type_multipliers = enemy_spawn_scaler.stat_multipliers_by_type[enemy_type].duplicate()
 	type_multipliers.erase("exp")
 	enemy.stat_component.register_all_multipliers(type_multipliers)
-	if enemy_type > 0:
-		enemy.stat_component._print_all_stats()
 
 
 func _physics_process(delta):
