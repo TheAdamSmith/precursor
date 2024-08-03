@@ -71,11 +71,13 @@ func _set_enemy_stats(enemy, enemy_type):
 	var base_enemy_exp = pow(spawner_level + 1, enemy_spawn_scaler.exp_per_level_exponent) / 50.0
 	enemy.experience_given = base_enemy_exp * enemy_spawn_scaler.stat_multipliers_by_type[enemy_type]["exp"]
 	add_child(enemy)
+	enemy.scale *= enemy_spawn_scaler.stat_multipliers_by_type[enemy_type]["size"]
 	enemy.stat_component._base_stats = _enemy_base_stats
 	enemy.stat_component.register_all_adders(enemy_spawn_scaler.per_level_enemy_stat_addders, spawner_level)
 	enemy.stat_component.register_all_multipliers(enemy_spawn_scaler.per_level_enemy_stat_multipliers, spawner_level)
 	var type_multipliers = enemy_spawn_scaler.stat_multipliers_by_type[enemy_type].duplicate()
 	type_multipliers.erase("exp")
+	type_multipliers.erase("size")
 	enemy.stat_component.register_all_multipliers(type_multipliers)
 
 
