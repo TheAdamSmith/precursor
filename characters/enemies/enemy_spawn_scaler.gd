@@ -1,7 +1,7 @@
 class_name EnemySpawnScaler
 extends Resource
 
-enum EnemyType {
+enum EnemyTier {
 	TRASH,
 	NORMAL,
 	ELITE,
@@ -31,15 +31,15 @@ enum EnemyType {
 	1: ["alien_v1", "alien_v2"],
 	5: ["alien_v1", "alien_v2"],
 }
-@export var enemy_type_spawn_chance_by_level = {
+@export var enemy_tier_spawn_chance_by_level = {
 	1: {
-		EnemyType.TRASH: 0.9,
-		EnemyType.NORMAL: 0.1,
-		EnemyType.ELITE: 0.0,
+		EnemyTier.TRASH: 0.9,
+		EnemyTier.NORMAL: 0.1,
+		EnemyTier.ELITE: 0.0,
 	}
 }
-@export var stat_multipliers_by_type = {
-	EnemyType.TRASH: {
+@export var stat_multipliers_by_tier = {
+	EnemyTier.TRASH: {
 		"speed": 1.0,
 		"health": 1.0,
 		"attacks_per_sec": 1.0,
@@ -47,7 +47,7 @@ enum EnemyType {
 		"exp": 1.0,
 		"size": 1.0,
 	},
-	EnemyType.NORMAL: {
+	EnemyTier.NORMAL: {
 		"speed": 1.25,
 		"health": 5.0,
 		"attacks_per_sec": 1.5,
@@ -55,7 +55,7 @@ enum EnemyType {
 		"exp": 5.0,
 		"size": 1.5,
 	},
-	EnemyType.ELITE: {
+	EnemyTier.ELITE: {
 		"speed": 1.5,
 		"health": 10.0,
 		"attacks_per_sec": 2,
@@ -64,18 +64,18 @@ enum EnemyType {
 		"size": 2.0,
 	},
 }
-@export var shader_vals_by_type = {
-	EnemyType.TRASH: {
+@export var shader_vals_by_tier = {
+	EnemyTier.TRASH: {
 		"red_adder": 0.0,
 		"green_adder": 0.0,
 		"blue_adder": 0.0,
 	},
-	EnemyType.NORMAL: {
+	EnemyTier.NORMAL: {
 		"red_adder": 0.5,
 		"green_adder": -0.5,
 		"blue_adder": -0.5,
 	},
-	EnemyType.ELITE: {
+	EnemyTier.ELITE: {
 		"red_adder": 0.25,
 		"green_adder": -0.5,
 		"blue_adder": 0.25,
