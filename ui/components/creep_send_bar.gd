@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 
 func _on_glow_timer_timeout():
 	glowing = false
-	glow_timer.queue_free()
+	call_deferred("glow_timer.queue_free")
 	get_material().set_shader_parameter("glow_power", 0.0)
 
 

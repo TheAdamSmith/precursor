@@ -7,6 +7,7 @@ class_name EnemySpawner
 @export var max_y : int
 @export var spawn_time = 1.0
 @export var enemy_spawn_scaler : EnemySpawnScaler
+
 var spawn_timer : SceneTreeTimer
 var level_up_timer : SceneTreeTimer
 var disabled = false
@@ -19,6 +20,10 @@ var _enemy_base_stats
 var _enemy_exp
 var _enemy_models
 
+@onready var enemy_scene = load("res://characters/enemies/enemy.tscn")
+@onready var _enemy_model_scenes = {}
+
+
 func spawn_enemy():
 	if not _enemy_base_stats:
 		_enemy_base_stats = enemy_spawn_scaler.enemy_base_stats
@@ -27,12 +32,16 @@ func spawn_enemy():
 	_enemy_exp = pow(spawner_level + 1, enemy_spawn_scaler.exp_per_level_exponent) / 50.0
 	var position = Vector2(randi_range(min_x,max_x),randi_range(min_y,max_y))
 	var enemy_model = _enemy_models.pick_random()
-	var enemy_sprite = load("res://characters/enemies/enemy_models/" + enemy_model + ".tscn").instantiate()
+	# cache loaded scenes of enemies so they don't have to be reloaded every time
+	if enemy_model not in _enemy_model_scenes.keys():
+		print("loading")
+		_enemy_model_scenes[enemy_model] = load("res://characters/enemies/enemy_models/" + enemy_model + ".tscn")
+	var enemy_sprite = _enemy_model_scenes[enemy_model].instantiate()
 	
 	#set a generic name for the sprite frame object so that it can be referenced generically
 	enemy_sprite.set_name("enemySprite")
 	
-	var enemy = load("res://characters/enemies/enemy.tscn").instantiate()
+	var enemy = enemy_scene.instantiate()
 	enemy.add_child(enemy_sprite)
 	enemy.global_position = position
 	enemy.add_to_group("enemy")
@@ -40,11 +49,15 @@ func spawn_enemy():
 		arena_group = ArenaUtilities.get_arena_name_by_position(enemy.global_position)
 	enemy.add_to_group(arena_group)
 	enemy.experience_given = _enemy_exp
+	#enemy.call_deferred("stat_component._base_stats", _enemy_base_stats)
+	#enemy.call_deferred("stat_component.register_all_adders", enemy_spawn_scaler.per_level_enemy_stat_addders, spawner_level)
+	#enemy.call_deferred("stat_component.register_all_multipliers", enemy_spawn_scaler.per_level_enemy_stat_multipliers, spawner_level)
 	add_child(enemy)
 	enemy.stat_component._base_stats = _enemy_base_stats
 	enemy.stat_component.register_all_adders(enemy_spawn_scaler.per_level_enemy_stat_addders, spawner_level)
 	enemy.stat_component.register_all_multipliers(enemy_spawn_scaler.per_level_enemy_stat_multipliers, spawner_level)
 	num_enemies_spawned += 1
+	#call_deferred("add_child", enemy)
 
 
 func _physics_process(delta):

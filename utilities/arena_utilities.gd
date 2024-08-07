@@ -30,6 +30,8 @@ static func create_arenas_root_node(num_arenas, num_players_per_side, main_arena
 			spawner.min_y = TILE_SIZE
 			spawner.max_y = ARENA_HEIGHT - TILE_SIZE
 			spawner.spawn_time = 1 / (enemies_per_second_per_player * num_players_per_side)
+			spawner.name = "Arena" + str(i) + "Spawner"
+			spawner.arena_group = ArenaUtilities.get_arena_name_by_position(arena.global_position)
 			parent_node.add_child(spawner)
 			spawner.owner = parent_node
 		for j in num_players_per_side:
