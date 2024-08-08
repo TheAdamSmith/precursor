@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://dshjlrawv1gyb"]
+[gd_scene load_steps=26 format=3 uid="uid://dshjlrawv1gyb"]
 
 [ext_resource type="Script" path="res://characters/player/playerv2.gd" id="1_6fimu"]
+[ext_resource type="Shader" path="res://shaders/flashing.gdshader" id="2_gmkeu"]
 [ext_resource type="Texture2D" uid="uid://3yv5hx2p3sch" path="res://models/Cowboy_final/Beetle_move.png" id="2_kn8q8"]
 [ext_resource type="Animation" uid="uid://chkrcb7h1yobc" path="res://models/Cowboy_8bit/walkUp.res" id="6_6q8cu"]
 [ext_resource type="Resource" uid="uid://dcn4pfn8pdvl" path="res://characters/player/stat_scalers/player_stat_scaler.tres" id="6_jirwl"]
@@ -19,6 +20,17 @@
 [ext_resource type="Script" path="res://characters/components/computer_player_input_component.gd" id="12_csdww"]
 [ext_resource type="Resource" uid="uid://tqhxjx66nxc8" path="res://characters/player/stat_scalers/grenade_launcher_scaler.tres" id="14_gmbx7"]
 [ext_resource type="Script" path="res://characters/components/character_stat_component.gd" id="15_bodee"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_84u7u"]
+resource_local_to_scene = true
+shader = ExtResource("2_gmkeu")
+shader_parameter/red = 0.0
+shader_parameter/green = 0.0
+shader_parameter/blue = 0.0
+shader_parameter/max_intensity = 1.0
+shader_parameter/period_sec = 1.0
+shader_parameter/num_cycles = 1.0
+shader_parameter/start_time = 0.0
 
 [sub_resource type="Animation" id="Animation_bhqmy"]
 length = 0.001
@@ -71,6 +83,7 @@ script = ExtResource("1_6fimu")
 [node name="Marker2D" type="Marker2D" parent="."]
 
 [node name="Cowboy" type="Sprite2D" parent="Marker2D"]
+material = SubResource("ShaderMaterial_84u7u")
 position = Vector2(0, -1)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_kn8q8")
