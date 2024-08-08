@@ -4,8 +4,11 @@ extends CharacterBody2D
 @onready var animations = $AnimationPlayer
 @onready var audio_listener_2d: AudioListener2D = $AudioListener2D
 @onready var marker2D=$Marker2D
+@onready var stat_component = $StatComponent
 @export var multiplayer_authority : int
+
 var arena_group : String
+var move_direction : Vector2 = Vector2.ZERO
 
 
 func _ready():
@@ -38,6 +41,7 @@ func update_animation():
 
 
 func _physics_process(delta):
+	velocity = move_direction * stat_component.get_current_speed()
 	move_and_slide()
 	update_animation()
 

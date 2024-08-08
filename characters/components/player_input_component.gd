@@ -1,7 +1,7 @@
 class_name PlayerInputComponent
 extends Node
 
-@export var character : CharacterBody2D
+@export var character : Player
 @export var upgrade_component : UpgradeComponent
 @export var stat_component : StatComponent
 
@@ -17,13 +17,13 @@ func _unhandled_input(event):
 		set_process(false)
 		set_process_input(false)
 		return
-	var moveDirection = Input.get_vector(
+	var move_direction = Input.get_vector(
 		"move_left",
 		"move_right",
 		"move_up",
 		"move_down",
 	)
-	character.velocity = moveDirection * stat_component.get_current_speed()
+	character.move_direction = move_direction
 	var upgrade_vec
 	if event.is_action_pressed("up_upgrade"):
 		upgrade_vec = Vector2i.UP
