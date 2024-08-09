@@ -1,5 +1,7 @@
 class_name DashComponent
-extends Node
+extends Node2D
+
+@onready var trail = $Trail
 
 @export var dash_speed_multiplier : float
 @export var dash_duration_sec : float
@@ -8,6 +10,12 @@ extends Node
 @export var stat_component : StatComponent
 
 var cooldown_timer : SceneTreeTimer
+var dash_timer : SceneTreeTimer
+var trail_queue : Array
+
+
+func _ready():
+	trail.stop_adding_points()
 
 
 func _unhandled_input(event):
@@ -16,3 +24,10 @@ func _unhandled_input(event):
 	if event.is_action_pressed("dash"):
 		stat_component.register_temp_multiplier("speed", dash_speed_multiplier, dash_duration_sec)
 		cooldown_timer = get_tree().create_timer(cooldown_duration_sec)
+		dash_timer = get_tree().create_timer(dash_duration_sec) 
+		trail.start_adding_points()
+
+
+func _physics_process(delta):
+	if dash_timer and dash_timer.time_left == 0.0:
+		trail.stop_adding_points()

@@ -104,7 +104,6 @@ func register_temp_multiplier(stat_name, multiplier, duration_sec):
 
 
 func _clear_timed_out_stats():
-	print("timeout!")
 	for stat_name in _temp_multipliers.keys():
 		var remove_indexs = []
 		for i in _temp_multipliers[stat_name].size():
@@ -112,7 +111,6 @@ func _clear_timed_out_stats():
 			if temp_stat_dict["timer"].time_left == 0:
 				remove_indexs.append(i)
 		for remove_idx in remove_indexs:
-			print("removing %s %s" % [stat_name, _temp_multipliers[stat_name][remove_idx]])
 			_temp_multipliers[stat_name].remove_at(remove_idx)
 			_stat_cached[stat_name][0] = false
 			stat_updated.emit(stat_name)
