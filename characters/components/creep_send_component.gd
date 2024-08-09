@@ -30,8 +30,8 @@ func add_progress(value: float):
 	current_value += value + (current_combo * combo_mult)
 	if current_value >= next_send_value:
 		# send creeps over here
-		EventService.creep_send.emit(get_parent(), times_sent + 1)
 		times_sent += 1
+		EventService.creep_send.emit(get_parent(), times_sent)
 		current_value = current_value - next_send_value
 		next_send_value = next_send_value + 10
 	timer.start(combo_time)

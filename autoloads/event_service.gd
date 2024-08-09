@@ -104,7 +104,7 @@ func _on_entity_death(damaging_entity, dying_entity):
 			if exp_comp:
 				exp_comp.add_exp(dying_character.give_experience())
 			if creep_send_comp:
-				creep_send_comp.add_progress(dying_character.give_experience() * 500)
+				creep_send_comp.add_progress(dying_character.give_experience() * 50)
 	if dying_character.is_in_group("player"):
 		var player_camera = dying_character.find_child("PlayerCamera")
 		if player_camera:
@@ -123,11 +123,10 @@ func _on_creep_send(sending_player, amount):
 	# get all enemy spawners within all arenas except of sending_player
 	# call spawn() $amount times
 	var sending_arena = ArenaUtilities.get_arena_name_by_position(sending_player.global_position)
-	print("sending " + str(amount) + " creeps from arena: " + sending_arena)
+	print("sending " + str(amount) + " creeps from " + sending_arena)
 	for n in sending_player.owner.find_children("", "EnemySpawner"):
 		if n.arena_group != sending_arena:
 			for i in range(0, amount):
-				print("spawning " + str(i))
 				n.spawn_enemy()
 
 

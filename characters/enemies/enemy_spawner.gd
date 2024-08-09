@@ -53,9 +53,6 @@ func spawn_enemy():
 		arena_group = ArenaUtilities.get_arena_name_by_position(enemy.global_position)
 	enemy.add_to_group(arena_group)
 	enemy.experience_given = _enemy_exp
-	#enemy.call_deferred("stat_component._base_stats", _enemy_base_stats)
-	#enemy.call_deferred("stat_component.register_all_adders", enemy_spawn_scaler.per_level_enemy_stat_addders, spawner_level)
-	#enemy.call_deferred("stat_component.register_all_multipliers", enemy_spawn_scaler.per_level_enemy_stat_multipliers, spawner_level)
 	_set_enemy_stats(enemy, enemy_tier)
 	num_enemies_spawned += 1
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bry1y52kbn44d"]
+[gd_scene load_steps=37 format=3 uid="uid://bry1y52kbn44d"]
 
 [ext_resource type="Script" path="res://characters/player/playerv2.gd" id="1_6fimu"]
 [ext_resource type="Shader" path="res://shaders/flashing.gdshader" id="2_38yix"]
