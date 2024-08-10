@@ -8,6 +8,8 @@ extends Node2D
 @export var cooldown_duration_sec : float
 @export var dash_invulnerability = false
 @export var invulnerability_duration_sec = 0.0
+@export var dash_intangibility = false
+@export var intangibility_duration_sec = 0.0
 @export var stat_component : StatComponent
 @export var health_component : HealthComponent
 
