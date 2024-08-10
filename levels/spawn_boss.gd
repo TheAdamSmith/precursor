@@ -3,8 +3,8 @@ class_name BossSpawner
 
 var bossModels = ["roosterBoss"]
 var bossSpawned = false
-@export var mapCenterX = 200
-@export var mapCenterY = 200
+@export var mapCenterX = 400
+@export var mapCenterY = 400
 var arena_group : String
 
 # Called when the node enters the scene tree for the first time.
@@ -30,7 +30,7 @@ func spawn_boss():
 	
 	# get sub folder in path
 	var bossPath =  bossModel + "/" + bossModel
-	var bossSpawn = load("res://bosses/roosterBoss/roosterBoss.tscn").instantiate()
+	var bossSpawn = load("res://bosses/rooster_boss/roosterBoss.tscn").instantiate()
 	#bossSpawn.set_name("roosterBoss")
 	#set a generic name for the sprite frame object so that it can be referenced generically
 	#bossSprite.set_name("bossSprite")
