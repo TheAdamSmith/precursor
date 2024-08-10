@@ -23,7 +23,7 @@ func _unhandled_input(event):
 		"move_up",
 		"move_down",
 	)
-	character.move_direction = move_direction
+	character.move_direction = move_direction.normalized()
 	var upgrade_vec
 	if event.is_action_pressed("up_upgrade"):
 		upgrade_vec = Vector2i.UP

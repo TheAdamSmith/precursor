@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bry1y52kbn44d"]
+[gd_scene load_steps=32 format=3 uid="uid://bry1y52kbn44d"]
 
 [ext_resource type="Script" path="res://characters/player/playerv2.gd" id="1_6fimu"]
 [ext_resource type="Shader" path="res://shaders/flashing.gdshader" id="2_38yix"]
@@ -95,8 +95,11 @@ properties/4/spawn = true
 properties/4/replication_mode = 1
 
 [sub_resource type="Curve" id="Curve_jvyho"]
-_data = [Vector2(0, 0.054945), 0.0, 0.0, 0, 0, Vector2(0.0105263, 0.571429), 0.0, 0.0, 0, 0, Vector2(0.0263158, 0.879121), 0.0, 0.0, 0, 0, Vector2(0.0578947, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.021978), 0.0, 0.0, 0, 0]
-point_count = 5
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.021978), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_tq8eq"]
+colors = PackedColorArray(0.317647, 0.87451, 1, 1, 1, 1, 1, 0)
 
 [node name="playerv2" type="CharacterBody2D"]
 collision_layer = 2
@@ -193,13 +196,15 @@ script = ExtResource("16_a25d5")
 [node name="DashComponent" type="Node2D" parent="." node_paths=PackedStringArray("stat_component")]
 script = ExtResource("21_mi3fk")
 dash_speed_multiplier = 10.0
-dash_duration_sec = 0.1
-cooldown_duration_sec = 1.0
+dash_duration_sec = 0.15
+cooldown_duration_sec = 2.0
 stat_component = NodePath("../StatComponent")
 
 [node name="Trail" type="Line2D" parent="DashComponent"]
-width = 20.0
+width = 30.0
 width_curve = SubResource("Curve_jvyho")
-default_color = Color(0.0117647, 0, 1, 1)
+default_color = Color(0, 0.898039, 0.901961, 1)
+gradient = SubResource("Gradient_tq8eq")
 script = ExtResource("23_k4ype")
-max_length = 100
+max_length = 20
+point_fade_time_sec = 0.05
