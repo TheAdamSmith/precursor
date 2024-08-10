@@ -7,7 +7,9 @@ extends Node2D
 @export var dash_duration_sec : float
 @export var cooldown_duration_sec : float
 @export var dash_invulnerability = false
+@export var invulnerability_duration_sec = 0.0
 @export var stat_component : StatComponent
+@export var health_component : HealthComponent
 
 var cooldown_timer : SceneTreeTimer
 var dash_timer : SceneTreeTimer
@@ -26,6 +28,8 @@ func _unhandled_input(event):
 		cooldown_timer = get_tree().create_timer(cooldown_duration_sec)
 		dash_timer = get_tree().create_timer(dash_duration_sec) 
 		trail.start_adding_points()
+		if dash_invulnerability:
+			health_component.set_invulnerable(invulnerability_duration_sec)
 
 
 func _physics_process(delta):

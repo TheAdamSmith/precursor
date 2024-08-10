@@ -193,12 +193,15 @@ replication_config = SubResource("SceneReplicationConfig_pgs22")
 [node name="StatComponent" type="Node" parent="."]
 script = ExtResource("16_a25d5")
 
-[node name="DashComponent" type="Node2D" parent="." node_paths=PackedStringArray("stat_component")]
+[node name="DashComponent" type="Node2D" parent="." node_paths=PackedStringArray("stat_component", "health_component")]
 script = ExtResource("21_mi3fk")
 dash_speed_multiplier = 10.0
 dash_duration_sec = 0.15
 cooldown_duration_sec = 2.0
+dash_invulnerability = true
+invulnerability_duration_sec = 0.3
 stat_component = NodePath("../StatComponent")
+health_component = NodePath("../HealthComponent")
 
 [node name="Trail" type="Line2D" parent="DashComponent"]
 width = 30.0

@@ -25,6 +25,7 @@ func _ready():
 	z_index = 2
 	flashing_shader = sprite.material
 	$HealthComponent.health_update.connect(_on_health_update)
+	$HealthComponent.invulnerable.connect(_on_invulnerability_update)
 
 
 @rpc("any_peer", "call_local", "reliable")
@@ -47,6 +48,18 @@ func update_animation():
 
 func _on_health_update(current_health, base_health, difference):
 	_flash_shader(difference)
+
+
+func _on_invulnerability_update(invulnerable, duration):
+	if not invulnerable or duration == 0.0:
+		return
+	flashing_shader.set_shader_parameter("start_time", float(Time.get_ticks_msec() * 1e-3))
+	flashing_shader.set_shader_parameter("num_cycles", duration / 0.3)
+	flashing_shader.set_shader_parameter("period_sec", 0.3)
+	flashing_shader.set_shader_parameter("intensity", 0.5)
+	flashing_shader.set_shader_parameter("blue", 1.0)
+	flashing_shader.set_shader_parameter("green", 1.0)
+	flashing_shader.set_shader_parameter("red", 1.0)
 
 
 func _flash_shader(health_diff):
