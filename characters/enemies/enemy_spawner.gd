@@ -73,12 +73,12 @@ func _set_enemy_stats(enemy, enemy_tier):
 	add_child(enemy)
 	enemy.scale *= enemy_spawn_scaler.stat_multipliers_by_tier[enemy_tier]["size"]
 	enemy.stat_component._base_stats = _enemy_base_stats
-	enemy.stat_component.register_all_adders(enemy_spawn_scaler.per_level_enemy_stat_addders, spawner_level)
-	enemy.stat_component.register_all_multipliers(enemy_spawn_scaler.per_level_enemy_stat_multipliers, spawner_level)
+	enemy.stat_component.register_all_adders(enemy_spawn_scaler.per_level_enemy_stat_addders, spawner_level, false)
+	enemy.stat_component.register_all_multipliers(enemy_spawn_scaler.per_level_enemy_stat_multipliers, spawner_level, false)
 	var type_multipliers = enemy_spawn_scaler.stat_multipliers_by_tier[enemy_tier].duplicate()
 	type_multipliers.erase("exp")
 	type_multipliers.erase("size")
-	enemy.stat_component.register_all_multipliers(type_multipliers)
+	enemy.stat_component.register_all_multipliers(type_multipliers, 1)
 
 
 func _physics_process(delta):

@@ -1,0 +1,87 @@
+[gd_resource type="Resource" script_class="DashStatScaler" load_steps=2 format=3 uid="uid://duy8rbinvtdl7"]
+
+[ext_resource type="Script" path="res://characters/abilities/dash_stat_scaler.gd" id="1_vqsga"]
+
+[resource]
+script = ExtResource("1_vqsga")
+per_level_stat_adders = {
+"aoe_scale": 0.0,
+"cooldown_duration_sec": 0.0,
+"damage": 20.0,
+"duration_sec": 0.0,
+"intangibility_duration_sec": 0.0,
+"invulnerability_duration_sec": 0.0,
+"knockback_power": 0.0,
+"speed_multiplier": 0.0,
+"stun_duration_sec": 0.0
+}
+per_level_stat_multipliers = {
+"aoe_scale": 0.0,
+"cooldown_duration_sec": 0.0,
+"damage": 0.0,
+"duration_sec": 0.0,
+"intangibility_duration_sec": 0.0,
+"invulnerability_duration_sec": 0.0,
+"knockback_power": 0.0,
+"speed_multiplier": 0.0,
+"stun_duration_sec": 0.0
+}
+level_specific_adders = {
+2: {
+"aoe_scale": 0.0,
+"cooldown_duration_sec": -0.5,
+"damage": 0.0,
+"duration_sec": 0.0,
+"intangibility_duration_sec": 0.0,
+"invulnerability_duration_sec": 0.3,
+"knockback_power": 0.0,
+"speed_multiplier": 0.0,
+"stun_duration_sec": 0.0
+},
+3: {
+"aoe_scale": 1.25,
+"cooldown_duration_sec": -0.5,
+"damage": 50.0,
+"duration_sec": 0.0,
+"intangibility_duration_sec": 0.0,
+"invulnerability_duration_sec": 0.0,
+"knockback_power": 0.0,
+"speed_multiplier": 1.0,
+"stun_duration_sec": 0.0
+},
+4: {
+"aoe_scale": 0.0,
+"cooldown_duration_sec": -0.5,
+"damage": 100.0,
+"duration_sec": 0.0,
+"intangibility_duration_sec": 0.15,
+"invulnerability_duration_sec": 0.0,
+"knockback_power": 0.0,
+"speed_multiplier": 1.0,
+"stun_duration_sec": 0.0
+},
+8: {
+"aoe_scale": 0.0,
+"cooldown_duration_sec": -1.0,
+"damage": 100.0,
+"duration_sec": 0.0,
+"intangibility_duration_sec": 0.0,
+"invulnerability_duration_sec": 0.0,
+"knockback_power": 0.0,
+"speed_multiplier": 0.0,
+"stun_duration_sec": 0.0
+},
+}
+level_specific_multipliers = {
+10: {
+"aoe_scale": 0.0,
+"cooldown_duration_sec": 0.0,
+"damage": 2.0,
+"duration_sec": 0.0,
+"intangibility_duration_sec": 0.0,
+"invulnerability_duration_sec": 0.0,
+"knockback_power": 0.0,
+"speed_multiplier": 0.0,
+"stun_duration_sec": 0.0
+}
+}

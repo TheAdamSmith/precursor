@@ -11,8 +11,8 @@ func _ready():
 	top_level = true
 	$AreaOfEffect.body_entered.connect(_on_body_entered_aoe)
 	$Vfx.hide()
-	$Vfx.scale = Vector2(aoe_scale, aoe_scale)
-	$AreaOfEffect.scale = $Vfx.scale
+	$AreaOfEffect.scale = Vector2(aoe_scale, aoe_scale)
+	$Vfx.scale *= $AreaOfEffect.scale
 
 
 func _on_body_entered(body):

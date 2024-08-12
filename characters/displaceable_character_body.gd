@@ -1,0 +1,2 @@
+class_name DisplaceableCharacterBody2D
+extends CharacterBody2D
