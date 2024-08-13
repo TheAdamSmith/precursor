@@ -10,12 +10,13 @@ radius = 25.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_8wa81"]
 radius = 29.8329
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("stat_component")]
 collision_layer = 4
 collision_mask = 15
 motion_mode = 1
 floor_snap_length = 0.0
 script = ExtResource("1_ic6gj")
+stat_component = NodePath("StatComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 3)

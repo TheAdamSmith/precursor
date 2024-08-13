@@ -10,7 +10,7 @@ signal change_pause_state
 #  In-game Signals
 signal entity_damaged(damaging_entity, damaged_entity, base_damage)
 signal entity_death(damaging_entity, dying_entity)
-signal creep_send(sending_player, amount)
+signal creep_send(sending_player)
 
 enum GAME_STATE {MENU, IN_PROGRESS}
 enum GAME_TYPE {SINGLE_PLAYER, MULTIPLAYER}
@@ -104,7 +104,7 @@ func _on_entity_death(damaging_entity, dying_entity):
 			if exp_comp:
 				exp_comp.add_exp(dying_character.give_experience())
 			if creep_send_comp:
-				creep_send_comp.add_progress(dying_character.give_experience() * 50)
+				creep_send_comp.add_progress(dying_character.give_experience() * creep_send_comp.creep_xp_mult)
 	if dying_character.is_in_group("player"):
 		var player_camera = dying_character.find_child("PlayerCamera")
 		if player_camera:
@@ -119,15 +119,16 @@ func _on_entity_death(damaging_entity, dying_entity):
 	dying_character.queue_free()
 
 
-func _on_creep_send(sending_player, amount):
-	# get all enemy spawners within all arenas except of sending_player
-	# call spawn() $amount times
+func _on_creep_send(sending_player):
 	var sending_arena = ArenaUtilities.get_arena_name_by_position(sending_player.global_position)
-	print("sending " + str(amount) + " creeps from " + sending_arena)
-	for n in sending_player.owner.find_children("", "EnemySpawner"):
-		if n.arena_group != sending_arena:
+	var spawner = ArenaUtilities.get_spawner_by_arena_name(sending_arena)
+	if spawner:
+		var exp_comp = sending_player.find_child("ExperienceComponent")
+		if exp_comp:
+			var amount = exp_comp.level
+			print("sending " + str(amount) + " creeps from " + sending_arena)
 			for i in range(0, amount):
-				n.spawn_enemy()
+				spawner.spawn_enemy()
 
 
 func _get_character_body_2d_parent(child):

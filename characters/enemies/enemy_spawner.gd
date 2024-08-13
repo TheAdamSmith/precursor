@@ -12,6 +12,7 @@ var spawn_timer : SceneTreeTimer
 var level_up_timer : SceneTreeTimer
 var disabled = false
 var arena_group
+var _enemy_model_scenes = {}
 
 var num_enemies_spawned = 0
 var spawner_level = 1
@@ -22,10 +23,11 @@ var _enemy_models
 var _enemy_spawn_chance
 
 @onready var enemy_scene = load("res://characters/enemies/enemy.tscn")
-@onready var _enemy_model_scenes = {}
 
 
 func spawn_enemy():
+	if disabled:
+		return
 	if not _enemy_base_stats:
 		_enemy_base_stats = enemy_spawn_scaler.enemy_base_stats
 	if spawner_level in enemy_spawn_scaler.enemy_models_by_level.keys():
@@ -37,7 +39,6 @@ func spawn_enemy():
 	var enemy_model = _enemy_models.pick_random()
 	# cache loaded scenes of enemies so they don't have to be reloaded every time
 	if enemy_model not in _enemy_model_scenes.keys():
-		print("loading")
 		_enemy_model_scenes[enemy_model] = load("res://characters/enemies/enemy_models/" + enemy_model + ".tscn")
 	var enemy_sprite = _enemy_model_scenes[enemy_model].instantiate()
 	
@@ -45,6 +46,8 @@ func spawn_enemy():
 	enemy_sprite.set_name("enemySprite")
 	_set_enemy_shader_params(enemy_sprite, enemy_tier)
 	
+	if not enemy_scene:
+		enemy_scene = load("res://characters/enemies/enemy.tscn")
 	var enemy = enemy_scene.instantiate()
 	enemy.add_child(enemy_sprite)
 	enemy.global_position = position
@@ -52,7 +55,6 @@ func spawn_enemy():
 	if not arena_group:
 		arena_group = ArenaUtilities.get_arena_name_by_position(enemy.global_position)
 	enemy.add_to_group(arena_group)
-	enemy.experience_given = _enemy_exp
 	_set_enemy_stats(enemy, enemy_tier)
 	num_enemies_spawned += 1
 
@@ -82,10 +84,9 @@ func _set_enemy_stats(enemy, enemy_tier):
 	enemy.experience_given = base_enemy_exp * enemy_spawn_scaler.stat_multipliers_by_tier[enemy_tier]["exp"]
 	add_child(enemy)
 	enemy.scale *= enemy_spawn_scaler.stat_multipliers_by_tier[enemy_tier]["size"]
-	enemy.stat_component._base_stats = _enemy_base_stats
+	enemy.stat_component.set_base_stats(_enemy_base_stats) 
 	enemy.stat_component.register_all_adders(enemy_spawn_scaler.per_level_enemy_stat_addders, spawner_level)
 	enemy.stat_component.register_all_multipliers(enemy_spawn_scaler.per_level_enemy_stat_multipliers, spawner_level)
-	num_enemies_spawned += 1
 	var type_multipliers = enemy_spawn_scaler.stat_multipliers_by_tier[enemy_tier].duplicate()
 	type_multipliers.erase("exp")
 	type_multipliers.erase("size")

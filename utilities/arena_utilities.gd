@@ -4,6 +4,12 @@ const TILE_SIZE = 32  # In pixels
 const ARENA_WIDTH = 64 * TILE_SIZE  # In pixels
 const ARENA_HEIGHT = 64 * TILE_SIZE  # In pixels
 
+static var arenas: Dictionary = {} # mapping arena_group(str): EnemySpawner(class)
+
+
+static func get_spawner_by_arena_name(arena_group: String) -> EnemySpawner:
+	return arenas[arena_group]
+
 
 static func get_arena_name_by_position(global_position : Vector2):
 	return "arena%d" % floori(global_position.x / ARENA_WIDTH)
@@ -18,6 +24,7 @@ static func create_arenas_root_node(num_arenas, num_players_per_side, main_arena
 		# Will want to reconsider if we ever use more than 2 arenas
 		arena.position.x = i * ARENA_WIDTH
 		arena.position.y = 0
+		var arena_group = ArenaUtilities.get_arena_name_by_position(arena.global_position)
 		arena.z_index = -1
 		parent_node.add_child(arena)
 		arena.owner = parent_node
@@ -31,20 +38,23 @@ static func create_arenas_root_node(num_arenas, num_players_per_side, main_arena
 			spawner.max_y = ARENA_HEIGHT - TILE_SIZE
 			spawner.spawn_time = 1 / (enemies_per_second_per_player * num_players_per_side)
 			spawner.name = "Arena" + str(i) + "Spawner"
-			spawner.arena_group = ArenaUtilities.get_arena_name_by_position(arena.global_position)
+			spawner.arena_group = arena_group
 			parent_node.add_child(spawner)
 			spawner.owner = parent_node
+			arenas[arena_group] = spawner
 		for j in num_players_per_side:
 			if not player_spawned and i == main_arena:
 				var main_player = load("res://characters/player/playerv2.tscn").instantiate()
 				parent_node.add_child(main_player)
 				main_player.owner = parent_node
+				main_player.arena_group = arena_group
 				main_player.position = arena.position + Vector2(ARENA_WIDTH / 2, ARENA_HEIGHT / 2)
 				player_spawned = true
 			else:
 				var computer_player = load("res://characters/player/computer_player.tscn").instantiate()
 				parent_node.add_child(computer_player)
 				computer_player.owner = parent_node
+				computer_player.arena_group = arena_group
 				computer_player.position = arena.position + Vector2(ARENA_WIDTH / 2 + j * 2 * TILE_SIZE, ARENA_HEIGHT / 2) 
 	return parent_node
 
