@@ -1,5 +1,5 @@
 class_name Player
-extends CharacterBody2D
+extends DisplaceableCharacterBody2D
 
 @onready var animations = $AnimationPlayer
 @onready var audio_listener_2d : AudioListener2D = $AudioListener2D
@@ -10,7 +10,6 @@ extends CharacterBody2D
 @export var multiplayer_authority : int
 
 var arena_group : String
-var move_direction : Vector2 = Vector2.ZERO
 var shader : ShaderMaterial
 var flashing_timer : SceneTreeTimer
 var intangible_timer : SceneTreeTimer
@@ -104,8 +103,8 @@ func _on_flashing_timeout():
 
 
 func _physics_process(delta):
-	velocity = move_direction * stat_component.get_current_speed()
-	move_and_slide()
+	max_velocity = stat_component.get_current_speed()
+	accelerate_and_collide(delta)
 	update_animation()
 
 

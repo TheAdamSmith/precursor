@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends DisplaceableCharacterBody2D
 class_name Enemy
 
 @onready var animated_sprite = get_node("enemySprite")
@@ -76,7 +76,9 @@ func _physics_process(delta):
 		animated_sprite.set_flip_h(true)
 	else :
 		animated_sprite.set_flip_h(false)
-	velocity = direction * stat_component.get_current_speed()
+	move_direction = direction
+	max_velocity = stat_component.get_current_speed()
+	accelerate_and_collide(delta)
 
 	# check to see how many objects colliding with the mob
 	# play attack animation on collision
@@ -90,4 +92,3 @@ func _physics_process(delta):
 		can_attack_timer = get_tree().create_timer(1 / stat_component.get_current_attacks_per_sec())
 	elif not overlaps_player:
 		animated_sprite.play("move")
-	move_and_slide()

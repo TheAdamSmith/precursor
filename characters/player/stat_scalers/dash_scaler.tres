@@ -70,7 +70,7 @@ level_specific_adders = {
 "knockback_power": 0.0,
 "speed_multiplier": 0.0,
 "stun_duration_sec": 0.0
-},
+}
 }
 level_specific_multipliers = {
 10: {

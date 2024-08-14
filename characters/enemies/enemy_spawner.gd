@@ -21,6 +21,8 @@ var _enemy_models
 var _enemy_spawn_chance
 
 func spawn_enemy():
+	#if num_enemies_spawned >= 1:
+		#return
 	if not _enemy_base_stats:
 		_enemy_base_stats = enemy_spawn_scaler.enemy_base_stats
 	if spawner_level in enemy_spawn_scaler.enemy_models_by_level.keys():
@@ -78,7 +80,7 @@ func _set_enemy_stats(enemy, enemy_tier):
 	var type_multipliers = enemy_spawn_scaler.stat_multipliers_by_tier[enemy_tier].duplicate()
 	type_multipliers.erase("exp")
 	type_multipliers.erase("size")
-	enemy.stat_component.register_all_multipliers(type_multipliers, 1)
+	enemy.stat_component.register_all_multipliers(type_multipliers, 1)                       
 
 
 func _physics_process(delta):
@@ -96,4 +98,3 @@ func _physics_process(delta):
 	if level_up_timer.time_left == 0.0:
 		spawner_level += 1
 		level_up_timer = get_tree().create_timer(enemy_spawn_scaler.sec_per_spawner_level_up)
-	
