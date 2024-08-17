@@ -10,6 +10,7 @@ signal change_pause_state
 #  In-game Signals
 signal entity_damaged(damaging_entity, damaged_entity, base_damage)
 signal entity_death(damaging_entity, dying_entity)
+signal creep_send(sending_player)
 
 enum GAME_STATE {MENU, IN_PROGRESS}
 enum GAME_TYPE {SINGLE_PLAYER, MULTIPLAYER}
@@ -33,6 +34,7 @@ func _ready():
 	# Connect in-game signals
 	entity_damaged.connect(_on_entity_damaged)
 	entity_death.connect(_on_entity_death)
+	creep_send.connect(_on_creep_send)
 
 
 func _input(event):
@@ -97,10 +99,12 @@ func _on_entity_death(damaging_entity, dying_entity):
 	if dying_character.has_method("give_experience"):
 		var damaging_character = _get_character_body_2d_parent(damaging_entity)
 		if damaging_character:
-			var exp_comps = damaging_character.find_children("", "ExperienceComponent")
-			if exp_comps:
-				for exp_comp in exp_comps:
-					exp_comp.add_exp(dying_character.give_experience())
+			var exp_comp = damaging_character.get_node("ExperienceComponent")
+			var creep_send_comp = damaging_character.find_child("CreepSendComponent")
+			if exp_comp:
+				exp_comp.add_exp(dying_character.give_experience())
+			if creep_send_comp:
+				creep_send_comp.add_progress(dying_character.give_experience() * creep_send_comp.creep_xp_mult)
 	if dying_character.is_in_group("player"):
 		var player_camera = dying_character.find_child("PlayerCamera")
 		if player_camera:
@@ -113,6 +117,18 @@ func _on_entity_death(damaging_entity, dying_entity):
 				game_over_label = "You Lose!"
 			PauseScreen.pause_state_changed(get_tree().paused, game_over_label)
 	dying_character.queue_free()
+
+
+func _on_creep_send(sending_player):
+	var sending_arena = ArenaUtilities.get_arena_name_by_position(sending_player.global_position)
+	var spawner = ArenaUtilities.get_spawner_by_arena_name(sending_arena)
+	if spawner:
+		var exp_comp = sending_player.find_child("ExperienceComponent")
+		if exp_comp:
+			var amount = exp_comp.level
+			print("sending " + str(amount) + " creeps from " + sending_arena)
+			for i in range(0, amount):
+				spawner.spawn_enemy()
 
 
 func _get_character_body_2d_parent(child):
