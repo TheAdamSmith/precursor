@@ -16,6 +16,9 @@ collision_mask = 15
 motion_mode = 1
 floor_snap_length = 0.0
 script = ExtResource("1_ic6gj")
+mass = 2.0
+max_displaced_speed = 400.0
+displaced_duration_sec = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 3)

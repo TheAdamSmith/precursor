@@ -103,8 +103,17 @@ func _on_flashing_timeout():
 
 
 func _physics_process(delta):
-	max_velocity = stat_component.get_current_speed()
-	accelerate_and_collide(delta)
+	velocity = move_direction * stat_component.get_current_speed()
+	move_and_collide(velocity * delta, true)
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider is DisplaceableCharacterBody2D:
+			var dir_to = global_position.direction_to(collider.global_position)
+			var angle_to = dir_to.angle_to(velocity)
+			var impulse = cos(angle_to) * dir_to * mass * velocity.length()
+			collider.apply_impulse(impulse)
+	move_and_slide()
 	update_animation()
 
 

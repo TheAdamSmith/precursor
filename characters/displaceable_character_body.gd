@@ -2,9 +2,12 @@ class_name DisplaceableCharacterBody2D
 extends CharacterBody2D
 
 @export var mass : float = 1.0
-@export var acceleration_after_displacement : float = 500
-@export var max_velocity : float
+@export var acceleration_after_displacement = 500.0
+@export var max_speed : float
+@export var max_displaced_speed : float
+@export var displaced_duration_sec = 1.0
 var displaced = false
+var displaced_timer : SceneTreeTimer
 
 
 var move_direction : Vector2 = Vector2.ZERO :
@@ -14,37 +17,32 @@ var move_direction : Vector2 = Vector2.ZERO :
 		return move_direction
 
 
-func apply_impulse(impulse_vec : Vector2):
+func apply_impulse(impulse_vec : Vector2, displace_duration : float):
 	velocity += impulse_vec / mass
+	if not displaced:
+		displaced_timer = get_tree().create_timer(displaced_duration_sec)
 	displaced = true
-	#call_deferred("_set_displaced_velocity", impulse_vec)
-
-
-func _set_displaced_velocity(impulse_vec : Vector2):
-	velocity += impulse_vec / mass
-	displaced = true
-	if self is Enemy:
-		print("Velocity after displacement:",velocity)
 
 
 func accelerate_and_collide(delta):
 	if displaced:
-		if self is Enemy:
-			print("Velocity before accel:",velocity)
 		var tmp_move_dir = move_direction if move_direction != Vector2.ZERO else -velocity.normalized()
 		velocity += move_direction * acceleration_after_displacement * delta
-	if (velocity.length() >= max_velocity and move_direction.angle_to(velocity) < PI / 8)  or not displaced:
+	if displaced and velocity.length() >= max_displaced_speed:
+		velocity = velocity.normalized() * max_displaced_speed
+	if not displaced or displaced_timer.time_left == 0.0:
 		displaced = false
-		velocity = move_direction * max_velocity
+		velocity = move_direction * max_speed
+	if not displaced:
+		move_and_slide()
+		return
 	move_and_collide(velocity * delta, true)
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		if collider is DisplaceableCharacterBody2D:
-			var impulse = global_position.direction_to(collider.global_position) * mass * velocity.length()
+			var dir_to = global_position.direction_to(collider.global_position)
+			var angle_to = dir_to.angle_to(velocity)
+			var impulse = cos(angle_to) * dir_to * mass * velocity.length()
 			collider.apply_impulse(impulse)
-	if self is Enemy and displaced:
-		print("Velocity before slide:",velocity)
 	move_and_slide()
-	if self is Enemy and displaced:
-		print("Velocity after slide:",velocity)

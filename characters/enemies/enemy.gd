@@ -77,7 +77,7 @@ func _physics_process(delta):
 	else :
 		animated_sprite.set_flip_h(false)
 	move_direction = direction
-	max_velocity = stat_component.get_current_speed()
+	max_speed = stat_component.get_current_speed()
 	accelerate_and_collide(delta)
 
 	# check to see how many objects colliding with the mob
