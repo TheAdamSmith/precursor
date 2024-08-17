@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dshjlrawv1gyb"]
+[gd_scene load_steps=27 format=3 uid="uid://dshjlrawv1gyb"]
 
 [ext_resource type="Script" path="res://characters/player/playerv2.gd" id="1_6fimu"]
 [ext_resource type="Shader" path="res://shaders/character.gdshader" id="2_gmkeu"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://characters/components/computer_player_input_component.gd" id="12_csdww"]
 [ext_resource type="Resource" uid="uid://tqhxjx66nxc8" path="res://characters/player/stat_scalers/grenade_launcher_scaler.tres" id="14_gmbx7"]
 [ext_resource type="Script" path="res://characters/components/character_stat_component.gd" id="15_bodee"]
+[ext_resource type="Script" path="res://characters/components/creep_send_component.gd" id="18_wxmb3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_84u7u"]
 resource_local_to_scene = true
@@ -126,6 +127,13 @@ exponent = 3.57
 script = ExtResource("10_buq5f")
 stat_component = NodePath("../StatComponent")
 
+[node name="CreepSendComponent" type="Node2D" parent="."]
+script = ExtResource("18_wxmb3")
+
+[node name="Timer" type="Timer" parent="CreepSendComponent"]
+process_callback = 0
+one_shot = true
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_left = -63.0
 offset_top = 23.0
@@ -155,3 +163,5 @@ shape = SubResource("CapsuleShape2D_h8dy7")
 
 [node name="StatComponent" type="Node" parent="."]
 script = ExtResource("15_bodee")
+
+[connection signal="timeout" from="CreepSendComponent/Timer" to="CreepSendComponent" method="_on_timer_timeout"]
