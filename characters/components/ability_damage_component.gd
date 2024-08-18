@@ -22,6 +22,8 @@ func _on_stat_update(stat_name):
 
 func set_active():
 	ability_active = true
+	for body in get_overlapping_bodies():
+		_on_body_entered(body)
 
 
 func set_inactive():
@@ -32,3 +34,9 @@ func _on_body_entered(body):
 	if not ability_active:
 		return
 	EventService.entity_damaged.emit(self, body, ability_stat_component.get_current_damage())
+	if ability_stat_component.get_current_knockback_impulse_scalar() != 0.0 and body is DisplaceableCharacterBody2D:
+		var dir_to = global_position.direction_to(body.global_position)
+		var impulse = dir_to * ability_stat_component.get_current_knockback_impulse_scalar()
+		body.apply_impulse(impulse, ability_stat_component.get_current_knockback_max_speed_mult())
+	if ability_stat_component.get_current_stun_duration_sec():
+		pass

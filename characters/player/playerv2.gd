@@ -5,7 +5,6 @@ extends DisplaceableCharacterBody2D
 @onready var audio_listener_2d : AudioListener2D = $AudioListener2D
 @onready var marker2D = $Marker2D
 @onready var sprite = $Marker2D/Cowboy
-@onready var stat_component = $StatComponent
 
 @export var multiplayer_authority : int
 
@@ -111,7 +110,7 @@ func _physics_process(delta):
 		if collider is DisplaceableCharacterBody2D:
 			var dir_to = global_position.direction_to(collider.global_position)
 			var angle_to = dir_to.angle_to(velocity)
-			var impulse = cos(angle_to) * dir_to * mass * velocity.length()
+			var impulse = cos(angle_to) * dir_to * stat_component.get_current_mass() * velocity.length()
 			collider.apply_impulse(impulse)
 	move_and_slide()
 	update_animation()

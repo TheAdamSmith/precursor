@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bry1y52kbn44d"]
+[gd_scene load_steps=49 format=3 uid="uid://bry1y52kbn44d"]
 
 [ext_resource type="Script" path="res://characters/player/playerv2.gd" id="1_6fimu"]
 [ext_resource type="Shader" path="res://shaders/character.gdshader" id="2_38yix"]
@@ -136,11 +136,12 @@ colors = PackedColorArray(0.317647, 0.87451, 1, 1, 1, 1, 1, 0)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ex0kh"]
 radius = 39.0
 
-[node name="playerv2" type="CharacterBody2D"]
+[node name="playerv2" type="CharacterBody2D" node_paths=PackedStringArray("stat_component")]
 collision_layer = 2
 collision_mask = 15
 motion_mode = 1
 script = ExtResource("1_6fimu")
+stat_component = NodePath("StatComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visibility_layer = 2
@@ -269,12 +270,6 @@ replication_config = SubResource("SceneReplicationConfig_pgs22")
 
 [node name="StatComponent" type="Node" parent="."]
 script = ExtResource("16_a25d5")
-base_stats = {
-"attacks_per_sec": 1.0,
-"damage": 10.0,
-"health": 10000,
-"speed": 200
-}
 
 [node name="DashComponent" type="Node2D" parent="." node_paths=PackedStringArray("player", "player_stat_component", "player_health_component")]
 script = ExtResource("21_mi3fk")
@@ -315,7 +310,8 @@ base_stats = {
 "duration_sec": 0.15,
 "intangibility_duration_sec": 0.0,
 "invulnerability_duration_sec": 0.0,
-"knockback_power": 0.0,
+"knockback_impulse_scalar": 0.0,
+"knockback_max_speed_mult": 0.0,
 "speed_multiplier": 10.0,
 "stun_duration_sec": 0.0
 }

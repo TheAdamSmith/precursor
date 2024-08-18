@@ -7,10 +7,11 @@ extends StatComponent
 	"duration_sec": 0.0,
 	"cooldown_duration_sec": 0.0,
 	"damage": 0.0,
-	"aoe_scale": 1.0,
+	"aoe_scale": 0.0,
 	"invulnerability_duration_sec": 0.0,
 	"intangibility_duration_sec":0.0,
-	"knockback_power": 0.0,
+	"knockback_impulse_scalar": 0.0,
+	"knockback_max_speed_mult": 0.0,
 	"stun_duration_sec": 0.0,
 }
 
@@ -48,8 +49,12 @@ func get_current_intangibility_duration_sec():
 	return _get_modified_stat("intangibility_duration_sec")
 
 
-func get_current_knockback_power():
-	return _get_modified_stat("knockback_power")
+func get_current_knockback_impulse_scalar():
+	return _get_modified_stat("knockback_impulse_scalar")
+
+
+func get_current_knockback_max_speed_mult():
+	return _get_modified_stat("knockback_max_speed_mult")
 
 
 func get_current_stun_duration_sec():

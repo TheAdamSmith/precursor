@@ -3,11 +3,6 @@ class_name Enemy
 
 @onready var animated_sprite = get_node("enemySprite")
 
-# below is set via inspector ref.
-# prior impl with @onready and $StatComponent syntax was returning null
-# in weird circumstances
-@export var stat_component: StatComponent 
-
 # enemy properties
 @export var experience_given = 0.22
 

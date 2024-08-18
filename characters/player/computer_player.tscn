@@ -25,13 +25,16 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_84u7u"]
 resource_local_to_scene = true
 shader = ExtResource("2_gmkeu")
-shader_parameter/red = 0.0
-shader_parameter/green = 0.0
-shader_parameter/blue = 0.0
-shader_parameter/max_intensity = 1.0
-shader_parameter/period_sec = 1.0
-shader_parameter/num_cycles = 1.0
-shader_parameter/start_time = 0.0
+shader_parameter/red_adder = 0.0
+shader_parameter/green_adder = 0.0
+shader_parameter/blue_adder = 0.0
+shader_parameter/flashing_red = 0.0
+shader_parameter/flashing_green = 0.0
+shader_parameter/flashing_blue = 0.0
+shader_parameter/flashing_max_intensity = 1.0
+shader_parameter/flashing = false
+shader_parameter/flashing_period_sec = 1.0
+shader_parameter/flashing_start_time_sec = 0.0
 
 [sub_resource type="Animation" id="Animation_bhqmy"]
 length = 0.001
@@ -75,11 +78,12 @@ _data = {
 radius = 9.0
 height = 26.0
 
-[node name="computer_player" type="CharacterBody2D"]
+[node name="computer_player" type="CharacterBody2D" node_paths=PackedStringArray("stat_component")]
 visibility_layer = 2
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_6fimu")
+stat_component = NodePath("StatComponent")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 

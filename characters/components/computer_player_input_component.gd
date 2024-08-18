@@ -68,4 +68,4 @@ func _physics_process(delta):
 	if not move_direction:
 		return
 	_prev_move_direction = move_direction
-	player.velocity = move_direction * stat_component.get_current_speed()
+	player.move_direction = move_direction
