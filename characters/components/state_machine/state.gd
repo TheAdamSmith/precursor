@@ -1,7 +1,11 @@
 class_name State
 extends Node2D
 
-@export var state_machine : StateMachine
+var state_machine : StateMachine
+
+
+func _ready():
+	state_machine = get_parent()
 
 
 func enter():

@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://8krgtsb65k0h"]
+[gd_scene load_steps=8 format=3 uid="uid://8krgtsb65k0h"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_ic6gj"]
 [ext_resource type="Script" path="res://characters/components/character_stat_component.gd" id="3_56gg2"]
+[ext_resource type="Script" path="res://characters/components/state_machine/state_machine.gd" id="4_ycho5"]
+[ext_resource type="Script" path="res://characters/components/state_machine/follow_player_state.gd" id="5_1blob"]
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="6_d0o6s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5bpiu"]
@@ -46,3 +48,10 @@ base_stats = {
 "mass": 2.0,
 "speed": 150
 }
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_ycho5")
+initial_state = NodePath("FollowPlayerState")
+
+[node name="FollowPlayerState" type="Node2D" parent="StateMachine"]
+script = ExtResource("5_1blob")

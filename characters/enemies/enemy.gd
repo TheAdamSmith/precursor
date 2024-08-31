@@ -61,22 +61,12 @@ func give_experience():
 	return experience_given
 
 
-func _find_player():
-	player = ArenaUtilities.find_closest_in_arena_by_group(self, "player", arena_group)
-
-
 func _physics_process(delta):
-	if not player and not _find_player():
-		return
-	if not is_instance_valid(player):
-		return
-	var direction = global_position.direction_to(player.global_position)
 	# flip the animated sprite body in the direction of travel
-	if direction.x > 0:
+	if move_direction.x > 0:
 		animated_sprite.set_flip_h(true)
 	else :
 		animated_sprite.set_flip_h(false)
-	move_direction = direction
 	max_speed = stat_component.get_current_speed()
 	accelerate_and_collide(delta)
 

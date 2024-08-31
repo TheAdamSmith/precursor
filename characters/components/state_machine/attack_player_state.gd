@@ -1,0 +1,2 @@
+class_name AttackPlayerState
+extends EnemyState
