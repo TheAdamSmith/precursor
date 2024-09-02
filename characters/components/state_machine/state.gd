@@ -22,3 +22,7 @@ func process(delta):
 
 func physics_process(delta):
 	pass
+
+
+func _transition(next_state : State):
+	state_machine.transition.emit(self, next_state)

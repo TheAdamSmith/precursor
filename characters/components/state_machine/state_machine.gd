@@ -1,5 +1,5 @@
 class_name StateMachine
-extends Node
+extends Node2D
 
 signal transition(curr : State, next : State)
 

@@ -10,7 +10,6 @@ class_name Enemy
 # Attacks per second
 var player : Player
 var arena_group : String
-var can_attack_timer : SceneTreeTimer
 var shader : ShaderMaterial
 var flashing_timer : SceneTreeTimer
 
@@ -72,13 +71,13 @@ func _physics_process(delta):
 
 	# check to see how many objects colliding with the mob
 	# play attack animation on collision
-	var overlaps = get_node("AttackBox").get_overlapping_bodies()
-	var overlaps_player = overlaps.has(player)
-	if overlaps_player and (not can_attack_timer or can_attack_timer.time_left == 0):
-		EventService.entity_damaged.emit(self, player, stat_component.get_current_damage())
-		_set_attack_animation_speed()
-		animated_sprite.play("attack")
-		SoundManager.play_sfx(self, load("res://assets/audio/sfx/hit.wav"))
-		can_attack_timer = get_tree().create_timer(1 / stat_component.get_current_attacks_per_sec())
-	elif not overlaps_player:
-		animated_sprite.play("move")
+	#var overlaps = get_node("AttackBox").get_overlapping_bodies()
+	#var overlaps_player = overlaps.has(player)
+	#if overlaps_player and (not can_attack_timer or can_attack_timer.time_left == 0):
+		#EventService.entity_damaged.emit(self, player, stat_component.get_current_damage())
+		#_set_attack_animation_speed()
+		#animated_sprite.play("attack")
+		#SoundManager.play_sfx(self, load("res://assets/audio/sfx/hit.wav"))
+		#can_attack_timer = get_tree().create_timer(1.0 / stat_component.get_current_attacks_per_sec())
+	#elif not overlaps_player:
+		#animated_sprite.play("move")

@@ -8,6 +8,7 @@ var enemy : DisplaceableCharacterBody2D
 
 func _find_player():
 	player = ArenaUtilities.find_closest_in_arena_by_group(enemy, "player", arena_group)
+	return player
 
 
 func enter():
