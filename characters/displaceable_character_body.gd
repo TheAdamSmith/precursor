@@ -44,7 +44,6 @@ func accelerate_and_collide(delta):
 		tmp_max_speed_mult = base_displaced_max_speed_mult
 		displaced = false
 	if displaced:
-		print()
 		var tmp_move_dir = move_direction if move_direction != Vector2.ZERO else -velocity.normalized()
 		velocity += move_direction * stat_component.get_current_acceleration_after_displacement() * delta
 	if displaced and velocity.length() >= max_displaced_speed:
