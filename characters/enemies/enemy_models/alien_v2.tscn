@@ -1,10 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsly2k2xpl86e"]
+[gd_scene load_steps=16 format=3 uid="uid://bsly2k2xpl86e"]
 
 [ext_resource type="Texture2D" uid="uid://bm45nhj47fv3e" path="res://models/enemy_models/alien-v2/alien-v2-attack1.png" id="1_t07ef"]
 [ext_resource type="Texture2D" uid="uid://cbjlwdmkadu0n" path="res://models/enemy_models/alien-v2/alien-v2-move1.png" id="1_xxv0n"]
 [ext_resource type="Shader" path="res://shaders/character.gdshader" id="1_ytshg"]
 [ext_resource type="Texture2D" uid="uid://d1134k8fuhmt5" path="res://models/enemy_models/alien-v2/alien-v2-move2.png" id="2_gloyl"]
 [ext_resource type="Texture2D" uid="uid://5oj2ree8vyj6" path="res://models/enemy_models/alien-v2/alien-v2-attack2.png" id="2_i51mh"]
+[ext_resource type="Script" path="res://characters/components/character_stat_component.gd" id="6_ujxre"]
+[ext_resource type="Script" path="res://characters/components/state_machine/state_machine.gd" id="7_asc5y"]
+[ext_resource type="Script" path="res://characters/components/state_machine/follow_player_state.gd" id="8_053yq"]
+[ext_resource type="Script" path="res://characters/components/state_machine/attack_player_state.gd" id="9_3bcm3"]
+[ext_resource type="Script" path="res://characters/components/ranged_attack_component.gd" id="10_b87fa"]
+[ext_resource type="Script" path="res://weapons/basic_weapon/gun.gd" id="11_kd6la"]
+[ext_resource type="Script" path="res://weapons/components/weapon_stat_component.gd" id="12_hcplr"]
+[ext_resource type="PackedScene" uid="uid://dkvb0dnesm03j" path="res://weapons/bullets/enemy_bullet.tscn" id="12_iekr2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_op8ev"]
 resource_local_to_scene = true
@@ -49,3 +57,48 @@ animations = [{
 material = SubResource("ShaderMaterial_op8ev")
 sprite_frames = SubResource("SpriteFrames_ulp8j")
 animation = &"attack"
+
+[node name="StatComponent" type="Node" parent="."]
+script = ExtResource("6_ujxre")
+base_stats = {
+"acceleration_after_displacement": 100.0,
+"attacks_per_sec": 1.0,
+"damage": 5.0,
+"displaced_duration_sec": 0.15,
+"health": 80,
+"mass": 2.0,
+"speed": 150
+}
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("7_asc5y")
+initial_state = NodePath("FollowPlayerState")
+
+[node name="FollowPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("attack_state")]
+script = ExtResource("8_053yq")
+transition_to_attack_distance = 1000.0
+attack_state = NodePath("../AttackPlayerState")
+
+[node name="AttackPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("follow_state", "attack_component")]
+script = ExtResource("9_3bcm3")
+follow_state = NodePath("../FollowPlayerState")
+attack_component = NodePath("RangedAttackComponent")
+
+[node name="RangedAttackComponent" type="Node2D" parent="StateMachine/AttackPlayerState" node_paths=PackedStringArray("gun", "stat_component")]
+script = ExtResource("10_b87fa")
+gun = NodePath("Gun")
+stat_component = NodePath("../../../StatComponent")
+
+[node name="Gun" type="Node2D" parent="StateMachine/AttackPlayerState/RangedAttackComponent"]
+script = ExtResource("11_kd6la")
+bullet = ExtResource("12_iekr2")
+
+[node name="WeaponStatComponent" type="Node" parent="StateMachine/AttackPlayerState/RangedAttackComponent/Gun"]
+script = ExtResource("12_hcplr")
+base_stats = {
+"aoe_damage": 0.0,
+"bullet_damage": 5.0,
+"bullet_speed": 350.0,
+"fire_rate": 0.3,
+"piercing_num": 0
+}

@@ -12,12 +12,15 @@ func physics_process(delta):
 	if not is_instance_valid(player):
 		return
 	var direction = enemy.global_position.direction_to(player.global_position)
+	var distance = enemy.global_position.distance_to(player.global_position)
 	enemy.move_direction = direction
 	if transition_to_attack_distance == 0.0:
 		for collision_idx in enemy.get_slide_collision_count():
 			var collision = enemy.get_slide_collision(collision_idx)
 			if collision.get_collider() is Player:
 				_transition(attack_state)
+	elif distance < transition_to_attack_distance:
+		_transition(attack_state)
 
 
 func exit():
