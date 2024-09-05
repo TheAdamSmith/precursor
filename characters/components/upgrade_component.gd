@@ -7,6 +7,8 @@ signal upgrade_input(upgrade_vec)
 @export var experience_component : ExperienceComponent
 @export var stat_component : StatComponent
 @export var stat_scaler : StatScaler
+@export var dash_component : DashComponent
+@export var dash_scaler : DashStatScaler
 @export var up_weapon : PackedScene
 @export var up_weapon_stat_scaler : WeaponStatScaler
 @export var down_weapon : PackedScene
@@ -36,6 +38,8 @@ func _on_level_update(level):
 	show()
 	upgrade_count += 1
 	_upgrade_stats(level)
+	if dash_component:
+		_upgrade_node(dash_component, dash_scaler, level)
 
 
 func _handle_upgrade_input(upgrade_vec):
@@ -96,9 +100,20 @@ func _handle_upgrade_input(upgrade_vec):
 		return
 	if weapon_level > 1:
 		_upgrade_weapon(upgrade_node, weapon_stat_scaler, weapon_level)
+	
 	upgrade_count -= 1
 	if upgrade_count == 0:
 		hide()
+
+
+func _upgrade_node(upgrade_node, stat_scaler, upgrade_level):
+	var stat_component = upgrade_node.stat_component
+	stat_component.register_all_adders(stat_scaler.per_level_stat_adders)
+	stat_component.register_all_multipliers(stat_scaler.per_level_stat_multipliers)
+	if upgrade_level in stat_scaler.level_specific_adders:
+		stat_component.register_all_adders(stat_scaler.level_specific_adders[upgrade_level])
+	if upgrade_level in stat_scaler.level_specific_multipliers:
+		stat_component.register_all_multipliers(stat_scaler.level_specific_multipliers[upgrade_level])
 
 
 func _spawn_weapon(upgrade_scene, upgrade_base_stats, upgrade_vec, upgrade_rotation, y_scale):
@@ -112,13 +127,7 @@ func _spawn_weapon(upgrade_scene, upgrade_base_stats, upgrade_vec, upgrade_rotat
  
 
 func _upgrade_weapon(upgrade_node, weapon_stat_scaler, weapon_level):
-	var weapon_stat_component = upgrade_node.stat_component
-	weapon_stat_component.register_all_adders(weapon_stat_scaler.per_level_stat_adders)
-	weapon_stat_component.register_all_multipliers(weapon_stat_scaler.per_level_stat_multipliers)
-	if weapon_level in weapon_stat_scaler.level_specific_adders:
-		weapon_stat_component.register_all_adders(weapon_stat_scaler.level_specific_adders[weapon_level])
-	if weapon_level in weapon_stat_scaler.level_specific_multipliers:
-		weapon_stat_component.register_all_multipliers(weapon_stat_scaler.level_specific_multipliers[weapon_level])
+	_upgrade_node(upgrade_node, weapon_stat_scaler, weapon_level)
 
 
 func _upgrade_stats(level):

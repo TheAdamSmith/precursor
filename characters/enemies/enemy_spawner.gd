@@ -90,7 +90,7 @@ func _set_enemy_stats(enemy, enemy_tier):
 	var type_multipliers = enemy_spawn_scaler.stat_multipliers_by_tier[enemy_tier].duplicate()
 	type_multipliers.erase("exp")
 	type_multipliers.erase("size")
-	enemy.stat_component.register_all_multipliers(type_multipliers)
+	enemy.stat_component.register_all_multipliers(type_multipliers, 1)                       
 
 
 func _physics_process(delta):
@@ -108,4 +108,3 @@ func _physics_process(delta):
 	if level_up_timer.time_left == 0.0:
 		spawner_level += 1
 		level_up_timer = get_tree().create_timer(enemy_spawn_scaler.sec_per_spawner_level_up)
-	

@@ -1,7 +1,7 @@
 [gd_scene load_steps=27 format=3 uid="uid://dshjlrawv1gyb"]
 
 [ext_resource type="Script" path="res://characters/player/playerv2.gd" id="1_6fimu"]
-[ext_resource type="Shader" path="res://shaders/flashing.gdshader" id="2_gmkeu"]
+[ext_resource type="Shader" path="res://shaders/character.gdshader" id="2_gmkeu"]
 [ext_resource type="Texture2D" uid="uid://3yv5hx2p3sch" path="res://models/Cowboy_final/Beetle_move.png" id="2_kn8q8"]
 [ext_resource type="Animation" uid="uid://chkrcb7h1yobc" path="res://models/Cowboy_8bit/walkUp.res" id="6_6q8cu"]
 [ext_resource type="Resource" uid="uid://dcn4pfn8pdvl" path="res://characters/player/stat_scalers/player_stat_scaler.tres" id="6_jirwl"]
@@ -25,13 +25,16 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_84u7u"]
 resource_local_to_scene = true
 shader = ExtResource("2_gmkeu")
-shader_parameter/red = 0.0
-shader_parameter/green = 0.0
-shader_parameter/blue = 0.0
-shader_parameter/max_intensity = 1.0
-shader_parameter/period_sec = 1.0
-shader_parameter/num_cycles = 1.0
-shader_parameter/start_time = 0.0
+shader_parameter/red_adder = 0.0
+shader_parameter/green_adder = 0.0
+shader_parameter/blue_adder = 0.0
+shader_parameter/flashing_red = 0.0
+shader_parameter/flashing_green = 0.0
+shader_parameter/flashing_blue = 0.0
+shader_parameter/flashing_max_intensity = 1.0
+shader_parameter/flashing = false
+shader_parameter/flashing_period_sec = 1.0
+shader_parameter/flashing_start_time_sec = 0.0
 
 [sub_resource type="Animation" id="Animation_bhqmy"]
 length = 0.001
@@ -75,11 +78,12 @@ _data = {
 radius = 9.0
 height = 26.0
 
-[node name="computer_player" type="CharacterBody2D"]
+[node name="computer_player" type="CharacterBody2D" node_paths=PackedStringArray("stat_component")]
 visibility_layer = 2
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_6fimu")
+stat_component = NodePath("StatComponent")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 

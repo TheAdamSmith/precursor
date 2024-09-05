@@ -1,38 +1,47 @@
-[gd_scene load_steps=12 format=3 uid="uid://b35ymjdw8y45f"]
+[gd_scene load_steps=14 format=3 uid="uid://b35ymjdw8y45f"]
 
 [ext_resource type="Script" path="res://weapons/bullets/grenade.gd" id="1_1vl1i"]
 [ext_resource type="Texture2D" uid="uid://oc4ej6u7o2y8" path="res://assets/guns_gameassets/PNG/Alternative color/grenade.png" id="2_o47ns"]
-[ext_resource type="Texture2D" uid="uid://cnbktw2xue711" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d1.png" id="3_l53sw"]
-[ext_resource type="Texture2D" uid="uid://dcu1y6wd07o73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d2.png" id="4_rmfhw"]
-[ext_resource type="Texture2D" uid="uid://cxwd2pqgsmkq3" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d3.png" id="5_vdxm0"]
-[ext_resource type="Texture2D" uid="uid://frtmsj2kr18o" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d4.png" id="6_u8mfa"]
-[ext_resource type="Texture2D" uid="uid://d21b5m3h5unwl" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d5.png" id="7_fohm5"]
-[ext_resource type="Texture2D" uid="uid://ckpf3hjj1ynkr" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d6.png" id="8_56s06"]
+[ext_resource type="Texture2D" uid="uid://dwi3bhiwqt0xn" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-a/explosion-a1.png" id="3_a2ume"]
+[ext_resource type="Texture2D" uid="uid://dph8er6rxme3j" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-a/explosion-a2.png" id="4_37lem"]
+[ext_resource type="Texture2D" uid="uid://lfcytx2qvqcj" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-a/explosion-a3.png" id="5_80j8a"]
+[ext_resource type="Texture2D" uid="uid://cj8i6ggpujtkp" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-a/explosion-a4.png" id="6_xacv8"]
+[ext_resource type="Texture2D" uid="uid://1e5iunt1wmri" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-a/explosion-a5.png" id="7_l5a1f"]
+[ext_resource type="Texture2D" uid="uid://b7fjatnghrdxw" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-a/explosion-a6.png" id="8_gyslm"]
+[ext_resource type="Texture2D" uid="uid://cy1tw8n0xu444" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-a/explosion-a7.png" id="9_hfipk"]
+[ext_resource type="Texture2D" uid="uid://cg7h2y6j86fa6" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-a/explosion-a8.png" id="10_ehgo7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yduv4"]
 radius = 8.0
 height = 16.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_foeqg"]
+resource_local_to_scene = true
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_l53sw")
+"texture": ExtResource("3_a2ume")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_rmfhw")
+"texture": ExtResource("4_37lem")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_vdxm0")
+"texture": ExtResource("5_80j8a")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_u8mfa")
+"texture": ExtResource("6_xacv8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_fohm5")
+"texture": ExtResource("7_l5a1f")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_56s06")
+"texture": ExtResource("8_gyslm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hfipk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ehgo7")
 }],
 "loop": true,
 "name": &"default",
@@ -40,7 +49,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_haado"]
-radius = 8.00465
+radius = 22.0227
 
 [node name="Grenade" type="Area2D"]
 collision_layer = 16
@@ -63,7 +72,7 @@ sprite_frames = SubResource("SpriteFrames_foeqg")
 
 [node name="AreaOfEffect" type="Area2D" parent="."]
 collision_layer = 16
-collision_mask = 5
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaOfEffect"]
 shape = SubResource("CircleShape2D_haado")
