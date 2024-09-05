@@ -4,6 +4,7 @@ extends EnemyState
 ## If 0.0, transition on contact, if negative, never transition to attack
 @export var transition_to_attack_distance : float
 @export var attack_state : AttackPlayerState
+@export var slide_on_attack = false
 
 
 func physics_process(delta):
@@ -24,4 +25,5 @@ func physics_process(delta):
 
 
 func exit():
-	enemy.move_direction = Vector2.ZERO
+	if not slide_on_attack:
+		enemy.move_direction = Vector2.ZERO

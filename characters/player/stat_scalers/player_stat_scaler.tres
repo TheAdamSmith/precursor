@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="StatScaler" load_steps=2 format=3 uid="uid://dcn4pfn8pdvl"]
 
-[ext_resource type="Script" path="res://characters/components/stat_scaler.gd" id="1_nh61f"]
+[ext_resource type="Script" path="res://characters/components/stats/stat_scaler.gd" id="1_nh61f"]
 
 [resource]
 script = ExtResource("1_nh61f")

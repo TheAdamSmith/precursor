@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponStatScaler" load_steps=2 format=3 uid="uid://tqhxjx66nxc8"]
 
-[ext_resource type="Script" path="res://characters/components/weapon_stat_scaler.gd" id="1_l7fut"]
+[ext_resource type="Script" path="res://characters/components/stats/weapon_stat_scaler.gd" id="1_l7fut"]
 
 [resource]
 script = ExtResource("1_l7fut")
@@ -9,7 +9,9 @@ base_stats = {
 "aoe_scale": 5.0,
 "bullet_damage": 10.0,
 "bullet_speed": 300.0,
+"bullet_spread_deg": 0.0,
 "fire_rate": 0.18,
+"num_bullets_per_shot": 1,
 "piercing_num": 0
 }
 per_level_stat_adders = {

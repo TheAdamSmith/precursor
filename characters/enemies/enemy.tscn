@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://8krgtsb65k0h"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_ic6gj"]
-[ext_resource type="Script" path="res://characters/components/character_stat_component.gd" id="3_56gg2"]
+[ext_resource type="Script" path="res://characters/components/stats/character_stat_component.gd" id="3_56gg2"]
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="6_d0o6s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5bpiu"]

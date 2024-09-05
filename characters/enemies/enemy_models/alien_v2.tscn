@@ -5,7 +5,7 @@
 [ext_resource type="Shader" path="res://shaders/character.gdshader" id="1_ytshg"]
 [ext_resource type="Texture2D" uid="uid://d1134k8fuhmt5" path="res://models/enemy_models/alien-v2/alien-v2-move2.png" id="2_gloyl"]
 [ext_resource type="Texture2D" uid="uid://5oj2ree8vyj6" path="res://models/enemy_models/alien-v2/alien-v2-attack2.png" id="2_i51mh"]
-[ext_resource type="Script" path="res://characters/components/character_stat_component.gd" id="6_ujxre"]
+[ext_resource type="Script" path="res://characters/components/stats/character_stat_component.gd" id="6_ujxre"]
 [ext_resource type="Script" path="res://characters/components/state_machine/state_machine.gd" id="7_asc5y"]
 [ext_resource type="Script" path="res://characters/components/state_machine/follow_player_state.gd" id="8_053yq"]
 [ext_resource type="Script" path="res://characters/components/state_machine/attack_player_state.gd" id="9_3bcm3"]
@@ -76,11 +76,13 @@ initial_state = NodePath("FollowPlayerState")
 
 [node name="FollowPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("attack_state")]
 script = ExtResource("8_053yq")
-transition_to_attack_distance = 1000.0
+transition_to_attack_distance = 300.0
 attack_state = NodePath("../AttackPlayerState")
+slide_on_attack = true
 
 [node name="AttackPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("follow_state", "attack_component")]
 script = ExtResource("9_3bcm3")
+transition_to_follow_distance = 300.0
 follow_state = NodePath("../FollowPlayerState")
 attack_component = NodePath("RangedAttackComponent")
 
@@ -99,6 +101,8 @@ base_stats = {
 "aoe_damage": 0.0,
 "bullet_damage": 5.0,
 "bullet_speed": 350.0,
+"bullet_spread_deg": 0.0,
 "fire_rate": 0.3,
+"num_bullets_per_shot": 1,
 "piercing_num": 0
 }

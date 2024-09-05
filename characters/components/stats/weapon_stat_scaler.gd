@@ -12,6 +12,8 @@ extends Resource
 	"piercing_num": 0,
 	"aoe_damage": 0.0,
 	"aoe_scale": 0.0,
+	"num_bullets_per_shot": 0,
+	"bullet_spread_deg": 0.0,
 }
 
 @export var per_level_stat_adders = {
@@ -21,6 +23,8 @@ extends Resource
 	"piercing_num": 0,
 	"aoe_damage": 0.0,
 	"aoe_scale": 0.0,
+	"num_bullets_per_shot": 0,
+	"bullet_spread_deg": 0.0,
 }
 
 @export var per_level_stat_multipliers = {
@@ -30,6 +34,8 @@ extends Resource
 	"piercing_num": 0,
 	"aoe_damage": 0.0,
 	"aoe_scale": 0.0,
+	"num_bullets_per_shot": 0,
+	"bullet_spread_deg": 0.0,
 }
 
 @export var level_specific_adders = {
@@ -40,6 +46,8 @@ extends Resource
 		"piercing_num": 0,
 		"aoe_damage": 0.0,
 		"aoe_scale": 0.0,
+		"num_bullets_per_shot": 0,
+		"bullet_spread_deg": 0.0,
 	}
 }
 
@@ -51,5 +59,7 @@ extends Resource
 		"piercing_num": 0,
 		"aoe_damage": 0.0,
 		"aoe_scale": 0.0,
+		"num_bullets_per_shot": 0,
+		"bullet_spread_deg": 0.0,
 	}
 }

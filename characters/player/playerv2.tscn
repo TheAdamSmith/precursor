@@ -27,7 +27,7 @@
 [ext_resource type="Script" path="res://ui/components/creep_send_bar.gd" id="13_8w3ce"]
 [ext_resource type="Resource" uid="uid://tqhxjx66nxc8" path="res://characters/player/stat_scalers/grenade_launcher_scaler.tres" id="14_hd43f"]
 [ext_resource type="FontFile" uid="uid://jbnljjgfvvl3" path="res://assets/fonts/256BYTES.TTF" id="14_p3xse"]
-[ext_resource type="Script" path="res://characters/components/character_stat_component.gd" id="16_a25d5"]
+[ext_resource type="Script" path="res://characters/components/stats/character_stat_component.gd" id="16_a25d5"]
 [ext_resource type="Script" path="res://characters/abilities/dash_component.gd" id="21_mi3fk"]
 [ext_resource type="Script" path="res://characters/components/trail.gd" id="23_k4ype"]
 [ext_resource type="Texture2D" uid="uid://j0ng1evcqkw3" path="res://models/Cowboy_8bit/dash-icon.png" id="24_qn7bx"]
