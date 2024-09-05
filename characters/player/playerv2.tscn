@@ -258,6 +258,22 @@ offset_bottom = 22.0
 text = "2x"
 label_settings = SubResource("LabelSettings_xtrfy")
 
+[node name="AbilityIcon" type="Sprite2D" parent="Hud" node_paths=PackedStringArray("ability_component")]
+position = Vector2(283, 612)
+texture = ExtResource("24_qn7bx")
+script = ExtResource("25_0dmqk")
+ability_component = NodePath("../../DashComponent")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Hud/AbilityIcon"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 48.0
+offset_bottom = 48.0
+scale = Vector2(0.5, 0.5)
+fill_mode = 4
+texture_under = ExtResource("26_4te7w")
+texture_progress = ExtResource("27_1ri7c")
+
 [node name="PlayerCamera" type="Camera2D" parent="."]
 script = ExtResource("13_5ayu6")
 zoom_max = Vector2(0.5, 0.5)
@@ -285,21 +301,6 @@ gradient = SubResource("Gradient_tq8eq")
 script = ExtResource("23_k4ype")
 max_length = 20
 point_fade_time_sec = 0.05
-
-[node name="AbilityIcon" type="Sprite2D" parent="DashComponent"]
-position = Vector2(0, 39)
-texture = ExtResource("24_qn7bx")
-script = ExtResource("25_0dmqk")
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="DashComponent/AbilityIcon"]
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 48.0
-offset_bottom = 48.0
-scale = Vector2(0.5, 0.5)
-fill_mode = 4
-texture_under = ExtResource("26_4te7w")
-texture_progress = ExtResource("27_1ri7c")
 
 [node name="DashStatComponent" type="Node" parent="DashComponent"]
 script = ExtResource("28_8ptal")

@@ -3,7 +3,6 @@ extends Node2D
 
 @onready var ability_damage = $AbilityDamageComponent
 @onready var trail = $Trail
-@onready var icon = $AbilityIcon
 @onready var stat_component = $DashStatComponent
 
 @export var player : Player
@@ -36,8 +35,8 @@ func _unhandled_input(event):
 			player_health_component.set_invulnerable(stat_component.get_current_invulnerability_duration_sec())
 		if stat_component.get_current_intangibility_duration_sec() != 0.0:
 			player.set_intangible(stat_component.get_current_intangibility_duration_sec())
-		if icon:
-			icon.set_timer(cooldown_timer)
+		#if icon:
+			#icon.set_timer(cooldown_timer)
 
 
 func _physics_process(delta):
