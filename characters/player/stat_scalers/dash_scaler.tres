@@ -48,7 +48,7 @@ level_specific_adders = {
 "duration_sec": 0.0,
 "intangibility_duration_sec": 0.0,
 "invulnerability_duration_sec": 0.0,
-"knockback_impulse_scalar": 1000.0,
+"knockback_impulse_scalar": 0.0,
 "knockback_max_speed_mult": 0.0,
 "speed_multiplier": 1.0,
 "stun_duration_sec": 0.0
