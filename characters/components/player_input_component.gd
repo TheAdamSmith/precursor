@@ -2,7 +2,7 @@ class_name PlayerInputComponent
 extends Node
 
 @export var character : Player
-@export var upgrade_component : UpgradeComponent
+@export var upgrade_component : PlayerUpgradeComponent
 @export var stat_component : StatComponent
 
 

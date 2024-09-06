@@ -5,12 +5,7 @@ extends Node
 signal stat_updated(stat_name)
 
 
-@export var _base_stats = {
-	"speed": 200,
-	"health": 100,
-	"attacks_per_sec": 1.0,
-	"damage": 10.0,
-}
+@export var _base_stats = {}
 
 var _stat_adders = {}
 var _stat_multipliers = {}
@@ -144,19 +139,3 @@ func _clear_timed_out_stats():
 func _print_all_stats():
 	for stat_name in _base_stats.keys():
 		print("%s: %1.2f" % [stat_name, _get_modified_stat(stat_name)])
-
-
-func get_current_speed():
-	return _get_modified_stat("speed")
-
-
-func get_current_health():
-	return _get_modified_stat("health")
-
-
-func get_current_attacks_per_sec():
-	return _get_modified_stat("attacks_per_sec")
-
-
-func get_current_damage():
-	return _get_modified_stat("damage")

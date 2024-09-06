@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b1vwu2a4upfbu"]
 
-[ext_resource type="Script" path="res://characters/components/upgrade_component.gd" id="1_weoy7"]
+[ext_resource type="Script" path="res://characters/components/player_upgrade_component.gd" id="1_weoy7"]
 [ext_resource type="Texture2D" uid="uid://ciardivejjxpj" path="res://assets/misc_sprites/right_arrow_button.png" id="2_icc2w"]
 [ext_resource type="Texture2D" uid="uid://4k2jct7pr62a" path="res://assets/misc_sprites/down_arrow_button.png" id="3_wk1hg"]
 [ext_resource type="Texture2D" uid="uid://c3pgljkv7b8qf" path="res://assets/misc_sprites/left_arrow_button.png" id="4_32vy7"]

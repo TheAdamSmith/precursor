@@ -2,7 +2,7 @@ class_name ComputerPlayerInputComponent
 extends Node2D
 
 @export var player : Player
-@export var upgrade_component : UpgradeComponent
+@export var upgrade_component : PlayerUpgradeComponent
 @export var stat_component : StatComponent
 var timer : SceneTreeTimer
 var arena_center : Vector2

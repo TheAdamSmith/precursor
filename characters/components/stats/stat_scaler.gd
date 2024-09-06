@@ -1,39 +1,17 @@
 class_name StatScaler
 extends Resource
 
+# Stat name -> base val
+@export var base_stats : Dictionary
+
 # Stat name -> adder val
-@export var per_level_stat_adders = {
-	"speed": 0.0,
-	"health": 0.0,
-	"damage": 0.0,
-	"attacks_per_sec": 0.0,
-}
+@export var per_level_stat_adders : Dictionary
 
 # Stat name -> multiplier val
-@export var per_level_stat_multipliers = {
-	"speed": 0.0,
-	"health": 0.0,
-	"damage": 0.0,
-	"attacks_per_sec": 0.0,
-}
+@export var per_level_stat_multipliers : Dictionary
 
 # dict[level] = Dict of stat name -> adder
-@export var level_specific_adders : Dictionary = {
-	1: {
-		"speed": 0.0,
-		"health": 0.0,
-		"damage": 0.0,
-		"attacks_per_sec": 0.0,
-	}
-}
+@export var level_specific_adders : Dictionary
 
 # dict[level] = Dict of stat name -> mutliplier
-@export var level_specific_multipliers : Dictionary = {
-	1: {
-		"speed": 0.0,
-		"health": 0.0,
-		"damage": 0.0,
-		"attacks_per_sec": 0.0,
-	}
-}
-
+@export var level_specific_multipliers : Dictionary
