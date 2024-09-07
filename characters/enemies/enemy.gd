@@ -1,9 +1,10 @@
 extends DisplaceableCharacterBody2D
 class_name Enemy
 
+signal attack_started
+
 @onready var animated_sprite = $AnimatedSprite2D
 @export var upgrade_component : EnemyUpgradeComponent
-
 
 # Attacks per second
 var player : Player
@@ -22,12 +23,19 @@ func _ready():
 	upgrade_component.set_shader(shader)
 	upgrade_component.set_enemy_shader_params()
 	$HealthComponent.health_update.connect(_on_health_update)
+	attack_started.connect(_on_attack_started)
+
+
+func _on_attack_started():
+	_set_attack_animation_speed()
+	animated_sprite.play("attack")
 
 
 func _set_attack_animation_speed():
-	var sprite_frames = animated_sprite.get_sprite_frames()
+	var sprite_frames : SpriteFrames = animated_sprite.get_sprite_frames()
 	var num_frames = sprite_frames.get_frame_count("attack")
 	sprite_frames.set_animation_speed("attack", num_frames * stat_component.get_current_attacks_per_sec())
+	sprite_frames.set_animation_loop("attack", false)
 
 
 func _on_health_update(current_health, base_health, difference):
@@ -62,23 +70,12 @@ func give_experience():
 
 func _physics_process(delta):
 	scale = Vector2(stat_component.get_current_scale(), stat_component.get_current_scale())
-	# flip the animated sprite body in the direction of travel
-	if move_direction.x > 0:
-		animated_sprite.set_flip_h(true)
-	else :
-		animated_sprite.set_flip_h(false)
 	max_speed = stat_component.get_current_speed()
 	accelerate_and_collide(delta)
-
-	# check to see how many objects colliding with the mob
-	# play attack animation on collision
-	#var overlaps = get_node("AttackBox").get_overlapping_bodies()
-	#var overlaps_player = overlaps.has(player)
-	#if overlaps_player and (not can_attack_timer or can_attack_timer.time_left == 0):
-		#EventService.entity_damaged.emit(self, player, stat_component.get_current_damage())
-		#_set_attack_animation_speed()
-		#animated_sprite.play("attack")
-		#SoundManager.play_sfx(self, load("res://assets/audio/sfx/hit.wav"))
-		#can_attack_timer = get_tree().create_timer(1.0 / stat_component.get_current_attacks_per_sec())
-	#elif not overlaps_player:
-		#animated_sprite.play("move")
+	if animated_sprite.animation == "attack" and animated_sprite.is_playing():
+		return
+	if move_direction.x > 0:
+		animated_sprite.set_flip_h(true)
+	else:
+		animated_sprite.set_flip_h(false)
+	animated_sprite.play("move")

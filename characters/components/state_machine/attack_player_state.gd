@@ -9,6 +9,7 @@ extends EnemyState
 func enter():
 	super.enter()
 	attack_component.enabled = true
+	attack_component.enemy = self.enemy
 
 
 func exit():

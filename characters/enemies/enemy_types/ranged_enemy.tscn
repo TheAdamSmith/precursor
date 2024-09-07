@@ -71,13 +71,13 @@ initial_state = NodePath("FollowPlayerState")
 
 [node name="FollowPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("attack_state")]
 script = ExtResource("7_7jqbn")
-transition_to_attack_distance = 500.0
+transition_to_attack_distance = 400.0
 attack_state = NodePath("../AttackPlayerState")
 slide_on_attack = true
 
 [node name="AttackPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("follow_state", "attack_component")]
 script = ExtResource("8_vfkj7")
-transition_to_follow_distance = 500.0
+transition_to_follow_distance = 400.0
 follow_state = NodePath("../FollowPlayerState")
 attack_component = NodePath("RangedAttackComponent")
 
