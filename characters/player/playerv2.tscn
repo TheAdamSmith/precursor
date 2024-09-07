@@ -190,10 +190,8 @@ left_weapon_stat_scaler = ExtResource("14_hd43f")
 
 [node name="ExperienceComponent" type="Node2D" parent="."]
 script = ExtResource("9_io3wp")
-max_level = 25
-initial_level_threshold = 10
-threshold_multiplier = 2
-exponent = 3.57
+max_level = 30
+exponent = 3.0
 
 [node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("stat_component")]
 script = ExtResource("10_buq5f")
@@ -279,6 +277,7 @@ position = Vector2(16, 23)
 texture = ExtResource("24_qn7bx")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Hud/AbilityIcon"]
+layout_mode = 0
 offset_top = 7.0
 offset_right = 64.0
 offset_bottom = 71.0

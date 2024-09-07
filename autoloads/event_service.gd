@@ -126,7 +126,6 @@ func _on_creep_send(sending_player):
 		var exp_comp = sending_player.find_child("ExperienceComponent")
 		if exp_comp:
 			var amount = exp_comp.level
-			print("sending " + str(amount) + " creeps from " + sending_arena)
 			for i in range(0, amount):
 				spawner.spawn_enemy()
 

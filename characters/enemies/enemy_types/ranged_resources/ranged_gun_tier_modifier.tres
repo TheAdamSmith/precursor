@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EnemyTierModifier" load_steps=2 format=3 uid="uid://3kesr24uygfh"]
+
+[ext_resource type="Script" path="res://characters/components/stats/enemy_tier_modifier.gd" id="1_lw74p"]
+
+[resource]
+script = ExtResource("1_lw74p")
+stat_adders_by_tier = {
+1: {
+"bullet_spread_deg": 5.0,
+"num_bullets_per_shot": 1.0
+},
+2: {
+"bullet_spread_deg": 10.0,
+"num_bullets_per_shot": 2.0
+}
+}
+stat_multipliers_by_tier = {
+1: {
+"bullet_damage": 1.25,
+"bullet_speed": 1.1
+},
+2: {
+"bullet_damage": 1.5,
+"bullet_speed": 1.2
+}
+}
+shader_vals_by_tier = {}

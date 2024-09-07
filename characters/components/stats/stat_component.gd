@@ -27,6 +27,7 @@ func set_base_stats(base_stats):
 		_temp_adders[stat_name] = []
 		_temp_multipliers[stat_name]  = []
 		_stat_cached[stat_name] = [true, _base_stats[stat_name]]
+		stat_updated.emit(stat_name)
 
 
 func invalidate_cache():

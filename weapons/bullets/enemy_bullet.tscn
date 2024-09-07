@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dkvb0dnesm03j"]
+[gd_scene load_steps=13 format=3 uid="uid://dkvb0dnesm03j"]
 
 [ext_resource type="Script" path="res://weapons/bullets/bullet.gd" id="1_u21b5"]
-[ext_resource type="Texture2D" uid="uid://k7s5t0du7hib" path="res://assets/guns_gameassets/PNG/small_bullet2.png" id="2_nqjjb"]
+[ext_resource type="Texture2D" uid="uid://cfywt64dveuyw" path="res://assets/misc_sprites/enemy-fireball.png" id="2_br73m"]
+[ext_resource type="Shader" path="res://shaders/fire_effect.gdshader" id="2_q3fde"]
 [ext_resource type="Texture2D" uid="uid://cnbktw2xue711" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d1.png" id="3_nn2ir"]
 [ext_resource type="Texture2D" uid="uid://dcu1y6wd07o73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d2.png" id="4_dinrf"]
 [ext_resource type="Texture2D" uid="uid://cxwd2pqgsmkq3" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d3.png" id="5_ukgho"]
@@ -10,8 +11,19 @@
 [ext_resource type="Texture2D" uid="uid://ckpf3hjj1ynkr" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-d/explosion-d6.png" id="8_ncki1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yduv4"]
-radius = 5.0
-height = 18.0
+radius = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qk2fn"]
+shader = ExtResource("2_q3fde")
+shader_parameter/brighter_color = Color(1, 0.8, 0, 1)
+shader_parameter/brighter_period_sec = 1.2
+shader_parameter/brighter_intensity = 0.3
+shader_parameter/middle_color = Color(1, 0.56, 0, 1)
+shader_parameter/middle_period_sec = 1.8
+shader_parameter/middle_intensity = 0.4
+shader_parameter/darker_color = Color(0.64, 0.2, 0.05, 1)
+shader_parameter/darker_period_sec = 2.4
+shader_parameter/darker_intensity = 0.5
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_foeqg"]
 animations = [{
@@ -49,12 +61,13 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_yduv4")
 
 [node name="SmallBullet" type="Sprite2D" parent="."]
-position = Vector2(0.0525558, 0.10511)
-rotation = 1.5708
-scale = Vector2(0.569391, 0.440459)
-texture = ExtResource("2_nqjjb")
+material = SubResource("ShaderMaterial_qk2fn")
+position = Vector2(2.38419e-07, -4.76837e-07)
+scale = Vector2(1.75, 1.625)
+texture = ExtResource("2_br73m")
 
 [node name="Vfx" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_foeqg")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,10 +1,8 @@
 extends DisplaceableCharacterBody2D
 class_name Enemy
 
-@onready var animated_sprite = get_node("enemySprite")
-
-# enemy properties
-@export var experience_given = 0.22
+@onready var animated_sprite = $AnimatedSprite2D
+@export var upgrade_component : EnemyUpgradeComponent
 
 
 # Attacks per second
@@ -21,6 +19,8 @@ func _ready():
 		add_to_group(arena_group)
 	floor_snap_length = 0.0
 	shader = animated_sprite.material
+	upgrade_component.set_shader(shader)
+	upgrade_component.set_enemy_shader_params()
 	$HealthComponent.health_update.connect(_on_health_update)
 
 
@@ -57,10 +57,11 @@ func _on_flashing_timeout():
 
 
 func give_experience():
-	return experience_given
+	return stat_component.get_current_experience_given()
 
 
 func _physics_process(delta):
+	scale = Vector2(stat_component.get_current_scale(), stat_component.get_current_scale())
 	# flip the animated sprite body in the direction of travel
 	if move_direction.x > 0:
 		animated_sprite.set_flip_h(true)

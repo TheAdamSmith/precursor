@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://crsesgbkcbmc6"]
+
+[ext_resource type="Shader" path="res://shaders/character.gdshader" id="1_s85uj"]
+[ext_resource type="Texture2D" uid="uid://bm45nhj47fv3e" path="res://models/enemy_models/alien-v2/alien-v2-attack1.png" id="2_ooda3"]
+[ext_resource type="Texture2D" uid="uid://5oj2ree8vyj6" path="res://models/enemy_models/alien-v2/alien-v2-attack2.png" id="3_06fbd"]
+[ext_resource type="Texture2D" uid="uid://cbjlwdmkadu0n" path="res://models/enemy_models/alien-v2/alien-v2-move1.png" id="4_gpg37"]
+[ext_resource type="Texture2D" uid="uid://d1134k8fuhmt5" path="res://models/enemy_models/alien-v2/alien-v2-move2.png" id="5_d1cir"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_op8ev"]
+resource_local_to_scene = true
+shader = ExtResource("1_s85uj")
+shader_parameter/red_adder = 0.0
+shader_parameter/green_adder = 0.0
+shader_parameter/blue_adder = 0.0
+shader_parameter/flashing_red = 0.0
+shader_parameter/flashing_green = 0.0
+shader_parameter/flashing_blue = 0.0
+shader_parameter/flashing_max_intensity = 1.0
+shader_parameter/flashing = false
+shader_parameter/flashing_period_sec = 1.0
+shader_parameter/flashing_start_time_sec = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ulp8j"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("2_ooda3")
+}, {
+"duration": 0.5,
+"texture": ExtResource("3_06fbd")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("4_gpg37")
+}, {
+"duration": 4.0,
+"texture": ExtResource("5_d1cir")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="alien_v2" type="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_op8ev")
+sprite_frames = SubResource("SpriteFrames_ulp8j")
+animation = &"attack"

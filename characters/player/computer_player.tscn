@@ -106,8 +106,10 @@ player = NodePath("..")
 upgrade_component = NodePath("../UpgradeComponent")
 stat_component = NodePath("../StatComponent")
 
-[node name="UpgradeComponent" parent="." instance=ExtResource("8_g5ohr")]
+[node name="UpgradeComponent" parent="." node_paths=PackedStringArray("experience_component", "stat_component") instance=ExtResource("8_g5ohr")]
 position = Vector2(0, -57)
+experience_component = NodePath("../ExperienceComponent")
+stat_component = NodePath("../StatComponent")
 stat_scaler = ExtResource("6_jirwl")
 up_weapon = ExtResource("7_u6xnb")
 up_weapon_stat_scaler = ExtResource("8_wvlb4")
@@ -117,24 +119,10 @@ right_weapon = ExtResource("9_p61p5")
 right_weapon_stat_scaler = ExtResource("12_b8mbw")
 left_weapon = ExtResource("10_s4m4e")
 left_weapon_stat_scaler = ExtResource("14_gmbx7")
-experience_component = Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":ExtResource("9_io3wp"),"max_level":10,"initial_level_threshold":10,"threshold_multiplier":2,"exponent":3.57)
-
-stat_component = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("15_bodee"),"base_stats":{
-"acceleration_after_displacement": 100.0,
-"attacks_per_sec": 1.0,
-"damage": 10.0,
-"displaced_duration_sec": 0.15,
-"health": 100,
-"mass": 1.0,
-"speed": 200
-},"_base_stats":{})
-
 
 [node name="ExperienceComponent" type="Node2D" parent="."]
 script = ExtResource("9_io3wp")
 max_level = 10
-initial_level_threshold = 10
-threshold_multiplier = 2
 exponent = 3.57
 
 [node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("stat_component")]

@@ -1,0 +1,94 @@
+[gd_scene load_steps=20 format=3 uid="uid://dusuuhg2p0uh5"]
+
+[ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_jgs0o"]
+[ext_resource type="PackedScene" uid="uid://crsesgbkcbmc6" path="res://characters/enemies/enemy_types/enemy_models/alien_v2.tscn" id="2_42rtr"]
+[ext_resource type="Shader" path="res://shaders/character.gdshader" id="3_8ceqq"]
+[ext_resource type="Script" path="res://characters/components/stats/weapon_stat_component.gd" id="4_5df00"]
+[ext_resource type="Script" path="res://characters/components/health_component.gd" id="5_4etx5"]
+[ext_resource type="Script" path="res://characters/components/stats/character_stat_component.gd" id="5_ag1jm"]
+[ext_resource type="Script" path="res://characters/components/state_machine/state_machine.gd" id="6_omhti"]
+[ext_resource type="Script" path="res://characters/components/state_machine/follow_player_state.gd" id="7_7jqbn"]
+[ext_resource type="Script" path="res://characters/components/ranged_enemy_upgrade_component.gd" id="7_nmfpm"]
+[ext_resource type="Resource" uid="uid://dl3pvq0bbk0yi" path="res://characters/enemies/enemy_types/ranged_resources/ranged_gun_stat_scaler.tres" id="8_dqj48"]
+[ext_resource type="Script" path="res://characters/components/state_machine/attack_player_state.gd" id="8_vfkj7"]
+[ext_resource type="Resource" uid="uid://3kesr24uygfh" path="res://characters/enemies/enemy_types/ranged_resources/ranged_gun_tier_modifier.tres" id="9_e2l7y"]
+[ext_resource type="Script" path="res://characters/components/ranged_attack_component.gd" id="9_lfy23"]
+[ext_resource type="Script" path="res://weapons/basic_weapon/gun.gd" id="10_kid6l"]
+[ext_resource type="Resource" uid="uid://c64rkp8ygl735" path="res://characters/enemies/enemy_types/ranged_resources/ranged_stat_scaler.tres" id="10_x6v83"]
+[ext_resource type="PackedScene" uid="uid://dkvb0dnesm03j" path="res://weapons/bullets/enemy_bullet.tscn" id="11_34qc3"]
+[ext_resource type="Resource" uid="uid://dpje2ijfnjntk" path="res://characters/enemies/enemy_types/ranged_resources/ranged_tier_modifier.tres" id="11_md0br"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xigud"]
+resource_local_to_scene = true
+shader = ExtResource("3_8ceqq")
+shader_parameter/red_adder = 0.0
+shader_parameter/green_adder = 0.0
+shader_parameter/blue_adder = 0.0
+shader_parameter/flashing_red = 0.0
+shader_parameter/flashing_green = 0.0
+shader_parameter/flashing_blue = 0.0
+shader_parameter/flashing_max_intensity = 1.0
+shader_parameter/flashing = false
+shader_parameter/flashing_period_sec = 1.0
+shader_parameter/flashing_start_time_sec = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a5yob"]
+radius = 25.0
+
+[node name="RangedEnemy" type="CharacterBody2D" node_paths=PackedStringArray("upgrade_component", "stat_component")]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_jgs0o")
+upgrade_component = NodePath("RangedEnemyUpgradeComponent")
+stat_component = NodePath("CharacterStatComponent")
+
+[node name="AnimatedSprite2D" parent="." instance=ExtResource("2_42rtr")]
+material = SubResource("ShaderMaterial_xigud")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 3)
+shape = SubResource("CircleShape2D_a5yob")
+
+[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("stat_component")]
+script = ExtResource("5_4etx5")
+stat_component = NodePath("../CharacterStatComponent")
+
+[node name="CharacterStatComponent" type="Node" parent="."]
+script = ExtResource("5_ag1jm")
+
+[node name="RangedEnemyUpgradeComponent" type="Node2D" parent="." node_paths=PackedStringArray("gun_stat_component", "stat_component")]
+script = ExtResource("7_nmfpm")
+gun_stat_component = NodePath("../StateMachine/AttackPlayerState/RangedAttackComponent/Gun/WeaponStatComponent")
+gun_stat_scaler = ExtResource("8_dqj48")
+gun_tier_modifier = ExtResource("9_e2l7y")
+stat_component = NodePath("../CharacterStatComponent")
+stat_scaler = ExtResource("10_x6v83")
+enemy_tier_modifier = ExtResource("11_md0br")
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_omhti")
+initial_state = NodePath("FollowPlayerState")
+
+[node name="FollowPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("attack_state")]
+script = ExtResource("7_7jqbn")
+transition_to_attack_distance = 500.0
+attack_state = NodePath("../AttackPlayerState")
+slide_on_attack = true
+
+[node name="AttackPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("follow_state", "attack_component")]
+script = ExtResource("8_vfkj7")
+transition_to_follow_distance = 500.0
+follow_state = NodePath("../FollowPlayerState")
+attack_component = NodePath("RangedAttackComponent")
+
+[node name="RangedAttackComponent" type="Node2D" parent="StateMachine/AttackPlayerState" node_paths=PackedStringArray("gun", "stat_component")]
+script = ExtResource("9_lfy23")
+gun = NodePath("Gun")
+stat_component = NodePath("../../../CharacterStatComponent")
+
+[node name="Gun" type="Node2D" parent="StateMachine/AttackPlayerState/RangedAttackComponent"]
+script = ExtResource("10_kid6l")
+bullet = ExtResource("11_34qc3")
+
+[node name="WeaponStatComponent" type="Node" parent="StateMachine/AttackPlayerState/RangedAttackComponent/Gun"]
+script = ExtResource("4_5df00")

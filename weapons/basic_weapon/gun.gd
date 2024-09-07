@@ -1,10 +1,11 @@
 class_name Gun
 extends Node2D
 
-@onready var stat_component = $WeaponStatComponent
 @onready var vfx = $Vfx
 @onready var animation_player = $AnimationPlayer
 @onready var bullet_point = $BulletPoint
+@onready var stat_component = $WeaponStatComponent
+
 @export var bullet : PackedScene = preload("res://weapons/bullets/bullet.tscn")
 @export var sfx = load("res://assets/audio/sfx/single_pistol_gunshot.mp3")
 
