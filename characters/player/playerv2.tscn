@@ -258,17 +258,30 @@ offset_bottom = 22.0
 text = "2x"
 label_settings = SubResource("LabelSettings_xtrfy")
 
-[node name="AbilityIcon" type="Sprite2D" parent="Hud" node_paths=PackedStringArray("ability_component")]
-position = Vector2(283, 612)
-texture = ExtResource("24_qn7bx")
+[node name="AbilityIcon" type="Control" parent="Hud" node_paths=PackedStringArray("ability_component")]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -299.0
+offset_top = -59.0
+offset_right = -259.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource("25_0dmqk")
 ability_component = NodePath("../../DashComponent")
 
+[node name="IconSprite" type="Sprite2D" parent="Hud/AbilityIcon"]
+position = Vector2(16, 23)
+texture = ExtResource("24_qn7bx")
+
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Hud/AbilityIcon"]
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 48.0
-offset_bottom = 48.0
+offset_top = 7.0
+offset_right = 64.0
+offset_bottom = 71.0
 scale = Vector2(0.5, 0.5)
 fill_mode = 4
 texture_under = ExtResource("26_4te7w")

@@ -4,6 +4,16 @@
 
 [resource]
 script = ExtResource("1_l7fut")
+_example_dict = {
+"aoe_damage": 0.0,
+"aoe_scale": 0.0,
+"bullet_damage": 0.0,
+"bullet_speed": 0.0,
+"bullet_spread_deg": 0.0,
+"fire_rate": 0,
+"num_bullets_per_shot": 0.0,
+"piercing_num": 0
+}
 base_stats = {
 "aoe_damage": 40.0,
 "aoe_scale": 5.0,

@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://characters/components/state_machine/attack_player_state.gd" id="9_3bcm3"]
 [ext_resource type="Script" path="res://characters/components/ranged_attack_component.gd" id="10_b87fa"]
 [ext_resource type="Script" path="res://weapons/basic_weapon/gun.gd" id="11_kd6la"]
-[ext_resource type="Script" path="res://weapons/components/weapon_stat_component.gd" id="12_hcplr"]
+[ext_resource type="Script" path="res://characters/components/stats/weapon_stat_component.gd" id="12_hcplr"]
 [ext_resource type="PackedScene" uid="uid://dkvb0dnesm03j" path="res://weapons/bullets/enemy_bullet.tscn" id="12_iekr2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_op8ev"]
