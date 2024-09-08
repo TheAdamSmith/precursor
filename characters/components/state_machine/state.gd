@@ -25,4 +25,4 @@ func physics_process(delta):
 
 
 func _transition(next_state : State):
-	state_machine.transition.emit(self, next_state)
+	state_machine.transition(self, next_state)
