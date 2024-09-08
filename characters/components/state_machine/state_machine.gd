@@ -1,8 +1,6 @@
 class_name StateMachine
 extends Node2D
 
-#signal transition(curr : State, next : State)
-
 @export var initial_state : State
 
 var current_state : State
@@ -10,7 +8,6 @@ var _initial_entered = false
 
 func _ready():
 	current_state = initial_state
-	#transition.connect(_on_state_transition)
 
 
 func _process(delta):
@@ -29,7 +26,6 @@ func _physics_process(delta):
 
 func transition(curr : State, next : State):
 	if curr != current_state:
-		print("Warning: state %s is not the current state" % curr)
 		return
 	current_state.exit()
 	current_state = next
