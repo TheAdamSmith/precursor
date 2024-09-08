@@ -1,15 +1,27 @@
 [gd_resource type="Resource" script_class="WeaponStatScaler" load_steps=2 format=3 uid="uid://bpwuwshsw5dk7"]
 
-[ext_resource type="Script" path="res://characters/components/weapon_stat_scaler.gd" id="1_o72m3"]
+[ext_resource type="Script" path="res://characters/components/stats/weapon_stat_scaler.gd" id="1_o72m3"]
 
 [resource]
 script = ExtResource("1_o72m3")
+_example_dict = {
+"aoe_damage": 0.0,
+"aoe_scale": 0.0,
+"bullet_damage": 0.0,
+"bullet_speed": 0.0,
+"bullet_spread_deg": 0.0,
+"fire_rate": 0,
+"num_bullets_per_shot": 0.0,
+"piercing_num": 0
+}
 base_stats = {
 "aoe_damage": 0.0,
 "aoe_scale": 0.0,
 "bullet_damage": 5.0,
 "bullet_speed": 800.0,
+"bullet_spread_deg": 0.0,
 "fire_rate": 3,
+"num_bullets_per_shot": 1,
 "piercing_num": 0
 }
 per_level_stat_adders = {

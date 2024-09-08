@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="CharacterStatScaler" load_steps=2 format=3 uid="uid://b3fp82w5a6b16"]
+
+[ext_resource type="Script" path="res://characters/components/stats/character_stat_scaler.gd" id="1_65frn"]
+
+[resource]
+script = ExtResource("1_65frn")
+_example_dict = {
+"acceleration_after_displacement": 0.0,
+"attacks_per_sec": 0.0,
+"damage": 0.0,
+"displaced_duration_sec": 0.0,
+"experience_given": 0.0,
+"health": 0,
+"mass": 0.0,
+"scale": 0.0,
+"speed": 0
+}
+base_stats = {
+"acceleration_after_displacement": 100.0,
+"attacks_per_sec": 1.0,
+"damage": 1.0,
+"displaced_duration_sec": 0.15,
+"experience_given": 1.0,
+"health": 20,
+"mass": 1.0,
+"scale": 1.0,
+"speed": 100
+}
+per_level_stat_adders = {
+"attacks_per_sec": 0.1,
+"damage": 2.0,
+"experience_given": 1.0,
+"health": 30,
+"speed": 5
+}
+per_level_stat_multipliers = {}
+level_specific_adders = {}
+level_specific_multipliers = {}

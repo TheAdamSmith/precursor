@@ -5,6 +5,7 @@ extends DisplaceableCharacterBody2D
 @onready var audio_listener_2d : AudioListener2D = $AudioListener2D
 @onready var marker2D = $Marker2D
 @onready var sprite = $Marker2D/Cowboy
+@onready var upgrade_component = $UpgradeComponent
 
 @export var multiplayer_authority : int
 
@@ -26,6 +27,7 @@ func _ready():
 	shader = sprite.material
 	$HealthComponent.health_update.connect(_on_health_update)
 	$HealthComponent.invulnerable.connect(_on_invulnerability_update)
+	upgrade_component.initialize_stats()
 
 
 @rpc("any_peer", "call_local", "reliable")

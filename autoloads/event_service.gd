@@ -96,6 +96,8 @@ func _on_entity_damaged(damaging_entity, damaged_entity, base_damage):
 
 func _on_entity_death(damaging_entity, dying_entity):
 	var dying_character = _get_character_body_2d_parent(dying_entity)
+	if not dying_character:
+		print("Warning: dying character no longer exists")
 	if dying_character.has_method("give_experience"):
 		var damaging_character = _get_character_body_2d_parent(damaging_entity)
 		if damaging_character:
@@ -116,7 +118,7 @@ func _on_entity_death(damaging_entity, dying_entity):
 			if dying_character.arena_group == "arena%d" % main_arena_num:
 				game_over_label = "You Lose!"
 			PauseScreen.pause_state_changed(get_tree().paused, game_over_label)
-	dying_character.queue_free()
+	_free_node_except_bullets(dying_character)
 
 
 func _on_creep_send(sending_player):
@@ -126,7 +128,6 @@ func _on_creep_send(sending_player):
 		var exp_comp = sending_player.find_child("ExperienceComponent")
 		if exp_comp:
 			var amount = exp_comp.level
-			print("sending " + str(amount) + " creeps from " + sending_arena)
 			for i in range(0, amount):
 				spawner.spawn_enemy()
 
@@ -138,3 +139,17 @@ func _get_character_body_2d_parent(child):
 			return curr_node
 		curr_node = curr_node.get_parent()
 	return curr_node
+
+
+func _free_node_except_bullets(node : Node):
+	for child in get_all_children(node):
+		if child is Bullet:
+			child.reparent(get_tree().root, true)
+	node.queue_free()
+
+
+func get_all_children(node : Node):
+	var arr = [node]
+	for child in node.get_children():
+		arr.append_array(get_all_children(child))
+	return arr

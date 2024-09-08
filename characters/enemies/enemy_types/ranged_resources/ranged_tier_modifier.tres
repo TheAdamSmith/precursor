@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="EnemyTierModifier" load_steps=2 format=3 uid="uid://dpje2ijfnjntk"]
+
+[ext_resource type="Script" path="res://characters/components/stats/enemy_tier_modifier.gd" id="1_y2uqj"]
+
+[resource]
+script = ExtResource("1_y2uqj")
+stat_adders_by_tier = {}
+stat_multipliers_by_tier = {
+0: {
+"attacks_per_sec": 1.0,
+"experience_given": 1.0,
+"health": 1.0,
+"mass": 1.0,
+"scale": 1.0,
+"speed": 1.0
+},
+1: {
+"attacks_per_sec": 1.5,
+"experience_given": 5.0,
+"health": 5.0,
+"mass": 1.25,
+"scale": 1.25,
+"speed": 1.25
+},
+2: {
+"attacks_per_sec": 2,
+"experience_given": 10.0,
+"health": 10.0,
+"mass": 1.5,
+"scale": 1.5,
+"speed": 1.5
+}
+}
+shader_vals_by_tier = {
+0: {
+"blue_adder": 0.0,
+"green_adder": 0.0,
+"red_adder": 0.0
+},
+1: {
+"blue_adder": -0.25,
+"green_adder": -0.25,
+"red_adder": 0.25
+},
+2: {
+"blue_adder": -0.1,
+"green_adder": -0.5,
+"red_adder": -0.1
+}
+}

@@ -1,15 +1,27 @@
 [gd_resource type="Resource" script_class="WeaponStatScaler" load_steps=2 format=3 uid="uid://b60j6x63ap54q"]
 
-[ext_resource type="Script" path="res://characters/components/weapon_stat_scaler.gd" id="1_5lb3b"]
+[ext_resource type="Script" path="res://characters/components/stats/weapon_stat_scaler.gd" id="1_5lb3b"]
 
 [resource]
 script = ExtResource("1_5lb3b")
+_example_dict = {
+"aoe_damage": 0.0,
+"aoe_scale": 0.0,
+"bullet_damage": 0.0,
+"bullet_speed": 0.0,
+"bullet_spread_deg": 0.0,
+"fire_rate": 0,
+"num_bullets_per_shot": 0.0,
+"piercing_num": 0
+}
 base_stats = {
 "aoe_damage": 0.0,
 "aoe_scale": 0.0,
 "bullet_damage": 5.0,
 "bullet_speed": 500.0,
+"bullet_spread_deg": 30.0,
 "fire_rate": 0.5,
+"num_bullets_per_shot": 5,
 "piercing_num": 0
 }
 per_level_stat_adders = {
@@ -17,7 +29,9 @@ per_level_stat_adders = {
 "aoe_scale": 0.0,
 "bullet_damage": 5.0,
 "bullet_speed": 10.0,
+"bullet_spread_deg": 0.0,
 "fire_rate": 0.1,
+"num_bullets_per_shot": 1,
 "piercing_num": 0
 }
 per_level_stat_multipliers = {
@@ -28,23 +42,5 @@ per_level_stat_multipliers = {
 "fire_rate": 0.0,
 "piercing_num": 0
 }
-level_specific_adders = {
-1: {
-"aoe_damage": 0.0,
-"aoe_scale": 0.0,
-"bullet_damage": 0.0,
-"bullet_speed": 0.0,
-"fire_rate": 0.0,
-"piercing_num": 0
-}
-}
-level_specific_multipliers = {
-1: {
-"aoe_damage": 0.0,
-"aoe_scale": 0.0,
-"bullet_damage": 0.0,
-"bullet_speed": 0.0,
-"fire_rate": 0.0,
-"piercing_num": 0
-}
-}
+level_specific_adders = {}
+level_specific_multipliers = {}

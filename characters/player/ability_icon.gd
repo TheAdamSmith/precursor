@@ -1,5 +1,5 @@
 class_name AbilityIcon
-extends Sprite2D
+extends Control
 
 @onready var cooldown_progress = $TextureProgressBar
 

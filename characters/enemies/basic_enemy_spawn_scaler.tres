@@ -5,34 +5,14 @@
 [resource]
 script = ExtResource("1_y6uu2")
 sec_per_spawner_level_up = 30
-exp_per_level_exponent = 3.57
-enemy_base_stats = {
-"attacks_per_sec": 1.0,
-"damage": 1.0,
-"health": 20,
-"speed": 100
-}
-per_level_enemy_stat_addders = {
-"attacks_per_sec": 0.1,
-"damage": 2.0,
-"health": 30,
-"speed": 5
-}
-per_level_enemy_stat_multipliers = {
-"attacks_per_sec": 0,
-"damage": 0,
-"health": 0,
-"speed": 0
-}
 enemy_models_by_level = {
-1: ["alien_v1", "alien_v2"],
-5: ["alien_v1", "alien_v2"]
+1: ["melee_enemy", "ranged_enemy"],
 }
 enemy_tier_spawn_chance_by_level = {
 1: {
 0: 0.8,
-1: 0.2,
-2: 0.0
+1: 0.19,
+2: 0.01
 },
 5: {
 0: 0.5,
@@ -53,48 +33,5 @@ enemy_tier_spawn_chance_by_level = {
 0: 0.1,
 1: 0.4,
 2: 0.5
-}
-}
-stat_multipliers_by_tier = {
-0: {
-"attacks_per_sec": 0.0,
-"damage": 0.0,
-"exp": 1.0,
-"health": 0.0,
-"size": 1.0,
-"speed": 0.0
-},
-1: {
-"attacks_per_sec": 1.15,
-"damage": 1.5,
-"exp": 5.0,
-"health": 5.0,
-"size": 1.5,
-"speed": 1.15
-},
-2: {
-"attacks_per_sec": 1.3,
-"damage": 3.0,
-"exp": 10.0,
-"health": 10.0,
-"size": 2.0,
-"speed": 1.3
-}
-}
-shader_vals_by_tier = {
-0: {
-"blue_adder": 0.0,
-"green_adder": 0.0,
-"red_adder": 0.0
-},
-1: {
-"blue_adder": -0.25,
-"green_adder": -0.25,
-"red_adder": 0.25
-},
-2: {
-"blue_adder": 0.0,
-"green_adder": -0.3,
-"red_adder": -0.3
 }
 }

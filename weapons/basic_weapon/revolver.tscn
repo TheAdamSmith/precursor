@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://jgn80e46ku2v"]
+[gd_scene load_steps=15 format=3 uid="uid://jgn80e46ku2v"]
 
 [ext_resource type="Script" path="res://weapons/basic_weapon/gun.gd" id="1_nyi4i"]
 [ext_resource type="Texture2D" uid="uid://bxsrij7jnvog3" path="res://models/basic_weapon/revolver.png" id="1_y8xop"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ca73ela1e0s6f" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h5.png" id="7_8wgyo"]
 [ext_resource type="Texture2D" uid="uid://criicn1j4dc73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h6.png" id="8_a0wrh"]
 [ext_resource type="Texture2D" uid="uid://cf2umap2pka2w" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h7.png" id="9_jxsvf"]
+[ext_resource type="Script" path="res://characters/components/stats/weapon_stat_component.gd" id="10_5kfwl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xtuwr"]
 animations = [{
@@ -123,5 +124,8 @@ frame_progress = 0.718845
 libraries = {
 "": SubResource("AnimationLibrary_w8rn5")
 }
+
+[node name="WeaponStatComponent" type="Node" parent="."]
+script = ExtResource("10_5kfwl")
 
 [connection signal="animation_looped" from="Vfx" to="." method="_on_vfx_animation_looped"]
