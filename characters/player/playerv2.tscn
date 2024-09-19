@@ -34,7 +34,7 @@
 [ext_resource type="Script" path="res://characters/player/ability_icon.gd" id="25_0dmqk"]
 [ext_resource type="Texture2D" uid="uid://dthu284mckkiw" path="res://assets/misc_sprites/grey-circular-loading-icon.png" id="26_4te7w"]
 [ext_resource type="Texture2D" uid="uid://dew81mn74mysn" path="res://assets/misc_sprites/circular-loading-icon.png" id="27_1ri7c"]
-[ext_resource type="Script" path="res://characters/abilities/dash_stat_component.gd" id="28_8ptal"]
+[ext_resource type="Script" path="res://characters/components/stats/dash_stat_component.gd" id="28_8ptal"]
 [ext_resource type="Script" path="res://characters/components/ability_damage_component.gd" id="29_3gweb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrqpl"]

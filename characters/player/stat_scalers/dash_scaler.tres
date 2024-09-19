@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="DashStatScaler" load_steps=2 format=3 uid="uid://duy8rbinvtdl7"]
 
-[ext_resource type="Script" path="res://characters/abilities/dash_stat_scaler.gd" id="1_vqsga"]
+[ext_resource type="Script" path="res://characters/components/stats/dash_stat_scaler.gd" id="1_vfsq8"]
 
 [resource]
-script = ExtResource("1_vqsga")
+script = ExtResource("1_vfsq8")
 per_level_stat_adders = {
 "aoe_scale": 0.0,
 "cooldown_duration_sec": 0.0,

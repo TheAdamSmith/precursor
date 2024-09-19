@@ -69,11 +69,11 @@ enemy_tier_modifier = ExtResource("11_md0br")
 script = ExtResource("6_omhti")
 initial_state = NodePath("FollowPlayerState")
 
-[node name="FollowPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("attack_state")]
+[node name="FollowPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("7_7jqbn")
-transition_to_attack_distance = 400.0
-attack_state = NodePath("../AttackPlayerState")
-slide_on_attack = true
+transition_to_next_state_distance = 400.0
+next_state = NodePath("../AttackPlayerState")
+slide_on_transition = true
 
 [node name="AttackPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("follow_state", "attack_component")]
 script = ExtResource("8_vfkj7")

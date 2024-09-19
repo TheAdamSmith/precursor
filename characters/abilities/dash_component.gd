@@ -22,21 +22,23 @@ func _unhandled_input(event):
 	if cooldown_timer and cooldown_timer.time_left != 0.0:
 		return
 	if event.is_action_pressed("dash"):
-		player_stat_component.register_temp_multiplier(
-			"speed",
-			stat_component.get_current_speed_multiplier(),
-			stat_component.get_current_duration_sec(),
-		)
-		cooldown_timer = get_tree().create_timer(stat_component.get_current_cooldown_duration_sec())
-		dash_timer = get_tree().create_timer(stat_component.get_current_duration_sec())
-		ability_damage.set_active()
-		trail.start_adding_points()
-		if stat_component.get_current_invulnerability_duration_sec() != 0.0:
-			player_health_component.set_invulnerable(stat_component.get_current_invulnerability_duration_sec())
-		if stat_component.get_current_intangibility_duration_sec() != 0.0:
-			player.set_intangible(stat_component.get_current_intangibility_duration_sec())
-		#if icon:
-			#icon.set_timer(cooldown_timer)
+		dash()
+
+
+func dash():
+	player_stat_component.register_temp_multiplier(
+		"speed",
+		stat_component.get_current_speed_multiplier(),
+		stat_component.get_current_duration_sec(),
+	)
+	cooldown_timer = get_tree().create_timer(stat_component.get_current_cooldown_duration_sec())
+	dash_timer = get_tree().create_timer(stat_component.get_current_duration_sec())
+	ability_damage.set_active()
+	trail.start_adding_points()
+	if player and stat_component.get_current_invulnerability_duration_sec() != 0.0:
+		player_health_component.set_invulnerable(stat_component.get_current_invulnerability_duration_sec())
+	if player and stat_component.get_current_intangibility_duration_sec() != 0.0:
+		player.set_intangible(stat_component.get_current_intangibility_duration_sec())
 
 
 func _physics_process(delta):
