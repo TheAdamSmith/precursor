@@ -37,9 +37,7 @@
 [ext_resource type="Script" path="res://characters/components/stats/dash_stat_component.gd" id="28_8ptal"]
 [ext_resource type="Script" path="res://characters/abilities/ability_damage_component.gd" id="29_3gweb"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrqpl"]
-radius = 9.0
-height = 26.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_eb718"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l2u4k"]
 resource_local_to_scene = true
@@ -138,7 +136,7 @@ radius = 39.0
 
 [node name="playerv2" type="CharacterBody2D" node_paths=PackedStringArray("stat_component")]
 collision_layer = 2
-collision_mask = 15
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_6fimu")
 stat_component = NodePath("StatComponent")
@@ -149,7 +147,7 @@ z_index = 1
 position = Vector2(1.13687e-12, 5)
 rotation = 1.5708
 scale = Vector2(1.5, 1.5)
-shape = SubResource("CapsuleShape2D_mrqpl")
+shape = SubResource("CircleShape2D_eb718")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 

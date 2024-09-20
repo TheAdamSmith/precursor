@@ -7,6 +7,11 @@ extends EnemyState
 @export var slide_on_transition = false
 
 
+func enter():
+	super.enter()
+	enemy.animation_change.emit("move")
+
+
 func physics_process(delta):
 	if not player:
 		_find_player()

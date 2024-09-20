@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://deni32nc7sdc3"
-path="res://.godot/imported/charging-enemy-3.png-24e519f87fa1a1842b14d5f6cdfa3902.ctex"
+uid="uid://cwvhq1erdfi3g"
+path="res://.godot/imported/charging-enemy-idle-2.png-e2e9d5acad0df525ee3212a58636e3a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/misc_sprites/charging-enemy-3.png"
-dest_files=["res://.godot/imported/charging-enemy-3.png-24e519f87fa1a1842b14d5f6cdfa3902.ctex"]
+source_file="res://models/charging_enemy/charging-enemy-idle-2.png"
+dest_files=["res://.godot/imported/charging-enemy-idle-2.png-e2e9d5acad0df525ee3212a58636e3a0.ctex"]
 
 [params]
 

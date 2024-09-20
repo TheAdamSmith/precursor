@@ -15,6 +15,7 @@ func _ready():
 func enter():
 	super.enter()
 	dashed = false
+	enemy.animation_change.emit("charging")
 
 
 func physics_process(delta):

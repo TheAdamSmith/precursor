@@ -75,6 +75,7 @@ func _on_intangibility_timeout():
 		collision_mask += CollisionUtilities.ENEMY_MASK
 	if !(collision_mask & CollisionUtilities.DAMAGE_MASK):
 		collision_mask += CollisionUtilities.DAMAGE_MASK
+	$CollisionShape2D.disabled = false
 
 
 func _on_health_update(current_health, base_health, difference):
