@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyTierModifier" load_steps=2 format=3 uid="uid://b10s23lyeybv5"]
+
+[ext_resource type="Script" path="res://characters/components/stats/enemy_tier_modifier.gd" id="1_qgxgb"]
+
+[resource]
+script = ExtResource("1_qgxgb")
+stat_adders_by_tier = {}
+stat_multipliers_by_tier = {
+0: {
+"damage": 1.0
+},
+1: {
+"damage": 2.0
+},
+2: {
+"damage": 4.0
+}
+}
+shader_vals_by_tier = {}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dsamlvk8gvwup"]
+[gd_scene load_steps=26 format=3 uid="uid://dsamlvk8gvwup"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_43dde"]
 [ext_resource type="Shader" path="res://shaders/character.gdshader" id="2_lje7d"]
@@ -6,17 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://c4efai3ngprf1" path="res://assets/misc_sprites/charging-enemy-2.png" id="3_o0dxm"]
 [ext_resource type="Texture2D" uid="uid://deni32nc7sdc3" path="res://assets/misc_sprites/charging-enemy-3.png" id="4_k7wol"]
 [ext_resource type="Script" path="res://characters/components/stats/character_stat_component.gd" id="4_myx1g"]
-[ext_resource type="Script" path="res://characters/components/enemy_upgrade_component.gd" id="5_gly42"]
-[ext_resource type="Resource" uid="uid://b3fp82w5a6b16" path="res://characters/enemies/enemy_types/melee_resources/melee_stat_scaler.tres" id="6_5l4s8"]
-[ext_resource type="Resource" uid="uid://6cxbevpwmllp" path="res://characters/enemies/enemy_types/melee_resources/melee_tier_modifier.tres" id="7_b2isf"]
+[ext_resource type="Script" path="res://characters/components/upgrades/charging_enemy_upgrade_component.gd" id="7_30tgu"]
+[ext_resource type="Resource" uid="uid://dl5wqmwaa5bmr" path="res://characters/enemies/enemy_types/charging_resources/charging_dash_stat_scaler.tres" id="8_0vmo2"]
+[ext_resource type="Resource" uid="uid://cguq0xrb2sfbc" path="res://characters/enemies/enemy_types/charging_resources/charging_stat_scaler.tres" id="8_6f2j2"]
 [ext_resource type="Script" path="res://characters/components/state_machine/state_machine.gd" id="8_y3qmn"]
+[ext_resource type="Resource" uid="uid://b10s23lyeybv5" path="res://characters/enemies/enemy_types/charging_resources/charging_dash_tier_modifier.tres" id="9_0r5ka"]
 [ext_resource type="Script" path="res://characters/components/state_machine/follow_player_state.gd" id="9_dbwjv"]
+[ext_resource type="Resource" uid="uid://ndeto0am1kfn" path="res://characters/enemies/enemy_types/charging_resources/charging_tier_modifier.tres" id="9_vgmye"]
 [ext_resource type="Script" path="res://characters/components/state_machine/charge_attack_player_state.gd" id="11_dp35k"]
 [ext_resource type="Script" path="res://characters/abilities/dash_component.gd" id="13_q7yvu"]
 [ext_resource type="Script" path="res://characters/components/trail.gd" id="14_yqk4u"]
 [ext_resource type="Script" path="res://characters/components/stats/dash_stat_component.gd" id="15_70m7n"]
 [ext_resource type="Script" path="res://characters/components/state_machine/cooldown_state.gd" id="16_ankte"]
-[ext_resource type="Script" path="res://characters/components/ability_damage_component.gd" id="16_bll6n"]
+[ext_resource type="Script" path="res://characters/abilities/ability_damage_component.gd" id="16_bll6n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbi8g"]
 resource_local_to_scene = true
@@ -52,7 +54,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move",
-"speed": 5.0
+"speed": 4.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jyifc"]
@@ -60,21 +62,21 @@ radius = 31.0161
 
 [sub_resource type="Curve" id="Curve_4tq1i"]
 resource_local_to_scene = true
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0421053, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_ob07v"]
 colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6p1nf"]
-radius = 38.2099
+radius = 34.0
 
 [node name="ChargingEnemy" type="CharacterBody2D" node_paths=PackedStringArray("upgrade_component", "stat_component")]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_43dde")
-upgrade_component = NodePath("EnemyUpgradeComponent")
+upgrade_component = NodePath("ChargingEnemyUpgradeComponent")
 stat_component = NodePath("StatComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -82,6 +84,7 @@ z_index = 1
 material = SubResource("ShaderMaterial_gbi8g")
 sprite_frames = SubResource("SpriteFrames_6kv37")
 animation = &"move"
+frame_progress = 0.928177
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jyifc")
@@ -93,11 +96,14 @@ stat_component = NodePath("../StatComponent")
 [node name="StatComponent" type="Node" parent="."]
 script = ExtResource("4_myx1g")
 
-[node name="EnemyUpgradeComponent" type="Node2D" parent="." node_paths=PackedStringArray("stat_component")]
-script = ExtResource("5_gly42")
+[node name="ChargingEnemyUpgradeComponent" type="Node2D" parent="." node_paths=PackedStringArray("dash_stat_component", "stat_component")]
+script = ExtResource("7_30tgu")
+dash_stat_component = NodePath("../StateMachine/ChargeAttackPlayerState/DashComponent/DashStatComponent")
+dash_stat_scaler = ExtResource("8_0vmo2")
+dash_tier_modifier = ExtResource("9_0r5ka")
 stat_component = NodePath("../StatComponent")
-stat_scaler = ExtResource("6_5l4s8")
-enemy_tier_modifier = ExtResource("7_b2isf")
+stat_scaler = ExtResource("8_6f2j2")
+enemy_tier_modifier = ExtResource("9_vgmye")
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("8_y3qmn")
@@ -124,25 +130,15 @@ width_curve = SubResource("Curve_4tq1i")
 default_color = Color(1, 0, 0, 1)
 gradient = SubResource("Gradient_ob07v")
 script = ExtResource("14_yqk4u")
-max_length = 20
-position_source = NodePath("..")
+max_length = 35
+position_source = NodePath("../../../..")
 
 [node name="DashStatComponent" type="Node" parent="StateMachine/ChargeAttackPlayerState/DashComponent"]
 script = ExtResource("15_70m7n")
-base_stats = {
-"aoe_scale": 0.0,
-"cooldown_duration_sec": 5.0,
-"damage": 0.0,
-"duration_sec": 1.0,
-"intangibility_duration_sec": 0.0,
-"invulnerability_duration_sec": 0.0,
-"knockback_impulse_scalar": 0.0,
-"knockback_max_speed_mult": 0.0,
-"speed_multiplier": 5.0,
-"stun_duration_sec": 0.0
-}
 
 [node name="AbilityDamageComponent" type="Area2D" parent="StateMachine/ChargeAttackPlayerState/DashComponent" node_paths=PackedStringArray("ability_stat_component")]
+collision_layer = 16
+collision_mask = 2
 script = ExtResource("16_bll6n")
 ability_stat_component = NodePath("../DashStatComponent")
 

@@ -28,6 +28,8 @@ func physics_process(delta):
 		dash_component.dash()
 		dashed = true
 	if dash_component.dash_timer and dash_component.dash_timer.time_left == 0.0:
+		if next_state is CooldownState:
+			next_state.set_cooldown_time_sec(dash_component.stat_component.get_current_cooldown_duration_sec())
 		_transition(next_state)
 
 

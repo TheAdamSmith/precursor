@@ -36,6 +36,8 @@ func _ready():
 
 func initialize_stats():
 	stat_component.set_base_stats(stat_scaler.base_stats)
+	if dash_component:
+		dash_component.stat_component.set_base_stats(dash_scaler.base_stats)
 
 
 func _on_level_update(level):

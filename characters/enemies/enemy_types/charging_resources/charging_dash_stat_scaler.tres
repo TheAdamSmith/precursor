@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="DashStatScaler" load_steps=2 format=3 uid="uid://dl5wqmwaa5bmr"]
+
+[ext_resource type="Script" path="res://characters/components/stats/dash_stat_scaler.gd" id="1_j53ks"]
+
+[resource]
+script = ExtResource("1_j53ks")
+_example_dict = {
+"aoe_scale": 0.0,
+"cooldown_duration_sec": 0.0,
+"damage": 0.0,
+"duration_sec": 0.0,
+"intangibility_duration_sec": 0.0,
+"invulnerability_duration_sec": 0.0,
+"knockback_power": 0.0,
+"speed_multiplier": 0.0,
+"stun_duration_sec": 0.0
+}
+base_stats = {
+"aoe_scale": 1.0,
+"cooldown_duration_sec": 5.0,
+"damage": 10.0,
+"duration_sec": 1.0,
+"intangibility_duration_sec": 0.0,
+"invulnerability_duration_sec": 0.0,
+"knockback_power": 0.0,
+"speed_multiplier": 3.0,
+"stun_duration_sec": 0.0
+}
+per_level_stat_adders = {
+"damage": 5.0
+}
+per_level_stat_multipliers = {}
+level_specific_adders = {}
+level_specific_multipliers = {}

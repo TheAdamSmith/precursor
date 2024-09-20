@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bqi04w12vyyov" path="res://weapons/basic_weapon/assault_rifle.tscn" id="7_66yyg"]
 [ext_resource type="Resource" uid="uid://duy8rbinvtdl7" path="res://characters/player/stat_scalers/dash_scaler.tres" id="8_ctcds"]
 [ext_resource type="PackedScene" uid="uid://cvinwqhgbqbxv" path="res://weapons/basic_weapon/shotgun.tscn" id="8_fylpv"]
-[ext_resource type="PackedScene" uid="uid://b1vwu2a4upfbu" path="res://characters/components/upgrade_component.tscn" id="8_g5ohr"]
+[ext_resource type="PackedScene" uid="uid://b1vwu2a4upfbu" path="res://characters/player/upgrade_component.tscn" id="8_g5ohr"]
 [ext_resource type="Script" path="res://characters/components/creep_send_component.gd" id="8_kx8s1"]
 [ext_resource type="Resource" uid="uid://bpwuwshsw5dk7" path="res://characters/player/stat_scalers/assault_rifle_scaler.tres" id="8_nwtkf"]
 [ext_resource type="PackedScene" uid="uid://6nrsywyx2nfx" path="res://weapons/basic_weapon/sniper.tscn" id="9_07ubn"]
@@ -35,7 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://dthu284mckkiw" path="res://assets/misc_sprites/grey-circular-loading-icon.png" id="26_4te7w"]
 [ext_resource type="Texture2D" uid="uid://dew81mn74mysn" path="res://assets/misc_sprites/circular-loading-icon.png" id="27_1ri7c"]
 [ext_resource type="Script" path="res://characters/components/stats/dash_stat_component.gd" id="28_8ptal"]
-[ext_resource type="Script" path="res://characters/components/ability_damage_component.gd" id="29_3gweb"]
+[ext_resource type="Script" path="res://characters/abilities/ability_damage_component.gd" id="29_3gweb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mrqpl"]
 radius = 9.0
@@ -316,18 +316,6 @@ point_fade_time_sec = 0.05
 
 [node name="DashStatComponent" type="Node" parent="DashComponent"]
 script = ExtResource("28_8ptal")
-base_stats = {
-"aoe_scale": 0.0,
-"cooldown_duration_sec": 5.0,
-"damage": 0.0,
-"duration_sec": 0.15,
-"intangibility_duration_sec": 0.0,
-"invulnerability_duration_sec": 0.0,
-"knockback_impulse_scalar": 0.0,
-"knockback_max_speed_mult": 0.0,
-"speed_multiplier": 10.0,
-"stun_duration_sec": 0.0
-}
 
 [node name="AbilityDamageComponent" type="Area2D" parent="DashComponent" node_paths=PackedStringArray("ability_stat_component")]
 collision_layer = 16

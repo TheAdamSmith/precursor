@@ -6,7 +6,7 @@
 [ext_resource type="Animation" uid="uid://chkrcb7h1yobc" path="res://models/Cowboy_8bit/walkUp.res" id="6_6q8cu"]
 [ext_resource type="Resource" uid="uid://dcn4pfn8pdvl" path="res://characters/player/stat_scalers/player_stat_scaler.tres" id="6_jirwl"]
 [ext_resource type="PackedScene" uid="uid://bqi04w12vyyov" path="res://weapons/basic_weapon/assault_rifle.tscn" id="7_u6xnb"]
-[ext_resource type="PackedScene" uid="uid://b1vwu2a4upfbu" path="res://characters/components/upgrade_component.tscn" id="8_g5ohr"]
+[ext_resource type="PackedScene" uid="uid://b1vwu2a4upfbu" path="res://characters/player/upgrade_component.tscn" id="8_g5ohr"]
 [ext_resource type="PackedScene" uid="uid://cvinwqhgbqbxv" path="res://weapons/basic_weapon/shotgun.tscn" id="8_usxgj"]
 [ext_resource type="Resource" uid="uid://bpwuwshsw5dk7" path="res://characters/player/stat_scalers/assault_rifle_scaler.tres" id="8_wvlb4"]
 [ext_resource type="Script" path="res://characters/components/experience_component.gd" id="9_io3wp"]

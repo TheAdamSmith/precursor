@@ -2,9 +2,14 @@ class_name CooldownState
 extends EnemyState
 
 @export var next_state : EnemyState
+## Can be set by other states that transition to this one
 @export var cooldown_time_sec : float
 
 var cooldown_timer : SceneTreeTimer
+
+
+func set_cooldown_time_sec(val_sec):
+	cooldown_time_sec = val_sec
 
 
 func enter():
