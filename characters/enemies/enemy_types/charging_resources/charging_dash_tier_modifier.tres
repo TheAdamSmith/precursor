@@ -4,7 +4,14 @@
 
 [resource]
 script = ExtResource("1_qgxgb")
-stat_adders_by_tier = {}
+stat_adders_by_tier = {
+1: {
+"cooldown_duration_sec": -1.0
+},
+2: {
+"cooldown_duration_sec": -2.0
+}
+}
 stat_multipliers_by_tier = {
 0: {
 "damage": 1.0
