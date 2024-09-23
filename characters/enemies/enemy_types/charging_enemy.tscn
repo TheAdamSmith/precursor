@@ -125,7 +125,7 @@ enemy_tier_modifier = ExtResource("9_vgmye")
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("8_y3qmn")
-initial_state = NodePath("FollowPlayerState")
+initial_state = NodePath("CooldownState")
 
 [node name="FollowPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("9_dbwjv")
