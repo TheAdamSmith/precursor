@@ -62,19 +62,16 @@ func _on_invulnerability_update(invulnerable, duration_sec):
 
 
 func set_intangible(duration_sec):
-	if collision_mask & CollisionUtilities.ENEMY_MASK:
-		collision_mask -= CollisionUtilities.ENEMY_MASK
-	if collision_mask & CollisionUtilities.DAMAGE_MASK:
-		collision_mask -= CollisionUtilities.DAMAGE_MASK
+	collision_mask = CollisionUtilities.clear_flag(collision_mask, CollisionUtilities.ENEMY_FLAG)
+	collision_layer = CollisionUtilities.clear_flag(collision_layer, CollisionUtilities.PLAYER_FLAG)
 	intangible_timer = get_tree().create_timer(duration_sec)
 	intangible_timer.timeout.connect(_on_intangibility_timeout)
 
 
 func _on_intangibility_timeout():
-	if !(collision_mask & CollisionUtilities.ENEMY_MASK):
-		collision_mask += CollisionUtilities.ENEMY_MASK
-	if !(collision_mask & CollisionUtilities.DAMAGE_MASK):
-		collision_mask += CollisionUtilities.DAMAGE_MASK
+	collision_mask = CollisionUtilities.set_flag(collision_mask, CollisionUtilities.ENEMY_FLAG)
+	collision_layer = CollisionUtilities.set_flag(collision_layer, CollisionUtilities.PLAYER_FLAG)
+	$CollisionShape2D.disabled = false
 
 
 func _on_health_update(current_health, base_health, difference):

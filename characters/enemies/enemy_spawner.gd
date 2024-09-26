@@ -17,20 +17,20 @@ var _enemy_model_scenes = {}
 var num_enemies_spawned = 0
 var spawner_level = 1
 
-var _enemy_models
+var _enemy_type_spawn_chances
 var _enemy_spawn_chance
 
 
 func spawn_enemy():
 	if disabled:
 		return
-	if spawner_level in enemy_spawn_scaler.enemy_models_by_level.keys():
-		_enemy_models = enemy_spawn_scaler.enemy_models_by_level[spawner_level]
+	if spawner_level in enemy_spawn_scaler.enemy_type_spawn_chance_by_level.keys():
+		_enemy_type_spawn_chances = enemy_spawn_scaler.enemy_type_spawn_chance_by_level[spawner_level]
 	if spawner_level in enemy_spawn_scaler.enemy_tier_spawn_chance_by_level.keys():
 		_enemy_spawn_chance = enemy_spawn_scaler.enemy_tier_spawn_chance_by_level[spawner_level]
-	var enemy_tier = _get_random_enemy_tier()
+	var enemy_tier = _get_random_key_from_spawn_chance_dict(_enemy_spawn_chance)
 	var position = Vector2(randi_range(min_x,max_x),randi_range(min_y,max_y))
-	var enemy_model = _enemy_models.pick_random()
+	var enemy_model = _get_random_key_from_spawn_chance_dict(_enemy_type_spawn_chances)
 	# cache loaded scenes of enemies so they don't have to be reloaded every time
 	if enemy_model not in _enemy_model_scenes.keys():
 		_enemy_model_scenes[enemy_model] = load("res://characters/enemies/enemy_types/" + enemy_model + ".tscn")
@@ -47,17 +47,16 @@ func spawn_enemy():
 	num_enemies_spawned += 1
 
 
-func _get_random_enemy_tier():
+func _get_random_key_from_spawn_chance_dict(spawn_chance_dict : Dictionary):
 	var rand_spawn = randf_range(0.0, 1.0)
 	var chance_sum = 0.0
-	var ret_type
-	var ret_type_set = false
-	for enemy_tier in EnemySpawnScaler.EnemyTier.values():
-		chance_sum += _enemy_spawn_chance[enemy_tier]
-		if ret_type == null and rand_spawn <= chance_sum:
-			ret_type = enemy_tier
-	assert(is_equal_approx(chance_sum, 1.0), "ERROR: Sum of spawn chances must equal 1.0 but was %f" % chance_sum)
-	return ret_type
+	var ret
+	for key in spawn_chance_dict.keys():
+		chance_sum += spawn_chance_dict[key]
+		if ret == null and rand_spawn <= chance_sum:
+			ret = key
+	assert(is_equal_approx(chance_sum, 1.0), "ERROR: Sum of spawn chances must equal 1.0 but was %f for: %s" % [chance_sum, spawn_chance_dict])
+	return ret
 
 
 func _set_enemy_stats(enemy : Enemy):

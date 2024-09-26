@@ -1,0 +1,170 @@
+[gd_scene load_steps=30 format=3 uid="uid://dsamlvk8gvwup"]
+
+[ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_43dde"]
+[ext_resource type="Shader" path="res://shaders/character.gdshader" id="2_lje7d"]
+[ext_resource type="Script" path="res://characters/components/health_component.gd" id="3_4ddya"]
+[ext_resource type="Texture2D" uid="uid://c4efai3ngprf1" path="res://models/charging_enemy/charging-enemy-move-1.png" id="3_o0dxm"]
+[ext_resource type="Texture2D" uid="uid://drtf8icfoc6y5" path="res://models/charging_enemy/charging-enemy-charge-1.png" id="3_ohb7x"]
+[ext_resource type="Texture2D" uid="uid://c1i0j2nrfev8a" path="res://models/charging_enemy/charging-enemy-charge-2.png" id="4_e24mj"]
+[ext_resource type="Texture2D" uid="uid://deni32nc7sdc3" path="res://models/charging_enemy/charging-enemy-move-2.png" id="4_k7wol"]
+[ext_resource type="Script" path="res://characters/components/stats/character_stat_component.gd" id="4_myx1g"]
+[ext_resource type="Texture2D" uid="uid://jxnubhavvdkh" path="res://models/charging_enemy/charging-enemy-idle-1.png" id="5_r4kvi"]
+[ext_resource type="Texture2D" uid="uid://cwvhq1erdfi3g" path="res://models/charging_enemy/charging-enemy-idle-2.png" id="6_y0i4a"]
+[ext_resource type="Script" path="res://characters/components/upgrades/charging_enemy_upgrade_component.gd" id="7_30tgu"]
+[ext_resource type="Resource" uid="uid://dl5wqmwaa5bmr" path="res://characters/enemies/enemy_types/charging_resources/charging_dash_stat_scaler.tres" id="8_0vmo2"]
+[ext_resource type="Resource" uid="uid://cguq0xrb2sfbc" path="res://characters/enemies/enemy_types/charging_resources/charging_stat_scaler.tres" id="8_6f2j2"]
+[ext_resource type="Script" path="res://characters/components/state_machine/state_machine.gd" id="8_y3qmn"]
+[ext_resource type="Resource" uid="uid://b10s23lyeybv5" path="res://characters/enemies/enemy_types/charging_resources/charging_dash_tier_modifier.tres" id="9_0r5ka"]
+[ext_resource type="Script" path="res://characters/components/state_machine/follow_player_state.gd" id="9_dbwjv"]
+[ext_resource type="Resource" uid="uid://ndeto0am1kfn" path="res://characters/enemies/enemy_types/charging_resources/charging_tier_modifier.tres" id="9_vgmye"]
+[ext_resource type="Script" path="res://characters/components/state_machine/charge_attack_player_state.gd" id="11_dp35k"]
+[ext_resource type="Script" path="res://characters/abilities/dash_component.gd" id="13_q7yvu"]
+[ext_resource type="Script" path="res://characters/components/trail.gd" id="14_yqk4u"]
+[ext_resource type="Script" path="res://characters/components/stats/dash_stat_component.gd" id="15_70m7n"]
+[ext_resource type="Script" path="res://characters/components/state_machine/cooldown_state.gd" id="16_ankte"]
+[ext_resource type="Script" path="res://characters/abilities/ability_damage_component.gd" id="16_bll6n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gbi8g"]
+resource_local_to_scene = true
+shader = ExtResource("2_lje7d")
+shader_parameter/red_adder = 0.0
+shader_parameter/green_adder = 0.0
+shader_parameter/blue_adder = 0.0
+shader_parameter/flashing_red = 0.0
+shader_parameter/flashing_green = 0.0
+shader_parameter/flashing_blue = 0.0
+shader_parameter/flashing_max_intensity = 1.0
+shader_parameter/flashing = false
+shader_parameter/flashing_period_sec = 1.0
+shader_parameter/flashing_start_time_sec = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6kv37"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ohb7x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e24mj")
+}],
+"loop": true,
+"name": &"charging",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_r4kvi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_y0i4a")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_o0dxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_k7wol")
+}],
+"loop": true,
+"name": &"move",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jyifc"]
+radius = 30.0167
+
+[sub_resource type="Curve" id="Curve_4tq1i"]
+resource_local_to_scene = true
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0421053, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_ob07v"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6p1nf"]
+radius = 32.0
+
+[node name="ChargingEnemy" type="CharacterBody2D" node_paths=PackedStringArray("upgrade_component", "stat_component")]
+collision_layer = 4
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_43dde")
+upgrade_component = NodePath("ChargingEnemyUpgradeComponent")
+stat_component = NodePath("StatComponent")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_gbi8g")
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_6kv37")
+animation = &"move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jyifc")
+
+[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("stat_component")]
+script = ExtResource("3_4ddya")
+stat_component = NodePath("../StatComponent")
+
+[node name="StatComponent" type="Node" parent="."]
+script = ExtResource("4_myx1g")
+
+[node name="ChargingEnemyUpgradeComponent" type="Node2D" parent="." node_paths=PackedStringArray("dash_stat_component", "stat_component")]
+script = ExtResource("7_30tgu")
+dash_stat_component = NodePath("../StateMachine/ChargeAttackPlayerState/DashComponent/DashStatComponent")
+dash_stat_scaler = ExtResource("8_0vmo2")
+dash_tier_modifier = ExtResource("9_0r5ka")
+stat_component = NodePath("../StatComponent")
+stat_scaler = ExtResource("8_6f2j2")
+enemy_tier_modifier = ExtResource("9_vgmye")
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("8_y3qmn")
+initial_state = NodePath("CooldownState")
+
+[node name="FollowPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("9_dbwjv")
+transition_to_next_state_distance = 300.0
+next_state = NodePath("../ChargeAttackPlayerState")
+
+[node name="ChargeAttackPlayerState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("next_state", "dash_component")]
+script = ExtResource("11_dp35k")
+next_state = NodePath("../CooldownState")
+dash_component = NodePath("DashComponent")
+
+[node name="DashComponent" type="Node2D" parent="StateMachine/ChargeAttackPlayerState" node_paths=PackedStringArray("player_stat_component", "player_health_component")]
+script = ExtResource("13_q7yvu")
+player_stat_component = NodePath("../../../StatComponent")
+player_health_component = NodePath("../../../HealthComponent")
+
+[node name="Trail" type="Line2D" parent="StateMachine/ChargeAttackPlayerState/DashComponent" node_paths=PackedStringArray("position_source")]
+width = 20.0
+width_curve = SubResource("Curve_4tq1i")
+default_color = Color(1, 0, 0, 1)
+gradient = SubResource("Gradient_ob07v")
+script = ExtResource("14_yqk4u")
+max_length = 35
+position_source = NodePath("../../../..")
+
+[node name="DashStatComponent" type="Node" parent="StateMachine/ChargeAttackPlayerState/DashComponent"]
+script = ExtResource("15_70m7n")
+
+[node name="AbilityDamageComponent" type="Area2D" parent="StateMachine/ChargeAttackPlayerState/DashComponent" node_paths=PackedStringArray("ability_stat_component")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("16_bll6n")
+ability_stat_component = NodePath("../DashStatComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/ChargeAttackPlayerState/DashComponent/AbilityDamageComponent"]
+shape = SubResource("CircleShape2D_6p1nf")
+debug_color = Color(0.988235, 0, 0.313726, 0.419608)
+
+[node name="CooldownState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("16_ankte")
+next_state = NodePath("../FollowPlayerState")
+cooldown_time_sec = 2.0

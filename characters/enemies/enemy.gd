@@ -2,6 +2,7 @@ extends DisplaceableCharacterBody2D
 class_name Enemy
 
 signal attack_started
+signal animation_change(animation : String)
 
 @onready var animated_sprite = $AnimatedSprite2D
 @export var upgrade_component : EnemyUpgradeComponent
@@ -24,6 +25,11 @@ func _ready():
 	upgrade_component.set_enemy_shader_params()
 	$HealthComponent.health_update.connect(_on_health_update)
 	attack_started.connect(_on_attack_started)
+	animation_change.connect(_on_animation_change)
+
+
+func _on_animation_change(animation : String):
+	animated_sprite.play(animation)
 
 
 func _on_attack_started():
@@ -72,10 +78,10 @@ func _physics_process(delta):
 	scale = Vector2(stat_component.get_current_scale(), stat_component.get_current_scale())
 	max_speed = stat_component.get_current_speed()
 	accelerate_and_collide(delta)
-	if animated_sprite.animation == "attack" and animated_sprite.is_playing():
-		return
 	if move_direction.x > 0:
 		animated_sprite.set_flip_h(true)
-	else:
+	elif move_direction.x < 0:
 		animated_sprite.set_flip_h(false)
+	if animated_sprite.animation != "move" and animated_sprite.is_playing():
+		return
 	animated_sprite.play("move")

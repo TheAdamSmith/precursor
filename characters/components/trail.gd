@@ -5,18 +5,21 @@ extends Line2D
 @export var position_source : Node2D
 @export var point_fade_time_sec : float
 
+var _base_width
 var point_queue : Array
 var _add_points = false
 var _elapsed_time_since_last_fade = 0.0
 
 
 func _ready():
+	_base_width = width
 	top_level = true
 	if not position_source:
 		position_source = get_parent()
 
 
 func start_adding_points():
+	width = _base_width * position_source.scale.x
 	_add_points = true
 
 

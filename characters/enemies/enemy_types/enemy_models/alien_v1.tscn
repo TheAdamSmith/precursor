@@ -49,4 +49,3 @@ animations = [{
 material = SubResource("ShaderMaterial_8jq2b")
 sprite_frames = SubResource("SpriteFrames_4h5hd")
 animation = &"attack"
-frame_progress = 0.465028
