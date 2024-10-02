@@ -77,7 +77,7 @@ script = ExtResource("1_e5wjo")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_62exx")
 animation = &"spawning"
-frame_progress = 0.262301
+frame_progress = 0.254269
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
