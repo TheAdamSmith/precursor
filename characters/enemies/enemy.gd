@@ -70,6 +70,24 @@ func _on_flashing_timeout():
 	shader.set_shader_parameter("flashing", false)
 
 
+func on_death():
+	remove_from_group("enemy")
+	TreeUtilities.reparent_bullets(self, get_tree().root)
+	if $AnimationPlayer:
+		for child in get_children():
+			if child is CollisionShape2D or child is StateMachine:
+				child.queue_free()
+		set_physics_process(false)
+		$AnimationPlayer.play("death")
+		$AnimationPlayer.animation_finished.connect(_on_death_animation_finished)
+	else:
+		queue_free()
+
+
+func _on_death_animation_finished():
+	queue_free()
+
+
 func give_experience():
 	return stat_component.get_current_experience_given()
 
