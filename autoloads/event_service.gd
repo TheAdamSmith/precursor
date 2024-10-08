@@ -86,7 +86,7 @@ func _change_pause_state():
 
 
 func _on_entity_damaged(damaging_entity, damaged_entity, base_damage):
-	var damaged_character = _get_character_body_2d_parent(damaged_entity)
+	var damaged_character = TreeUtilities.get_character_body_2d_parent(damaged_entity)
 	if damaged_character:
 		var health_comps = damaged_character.find_children("", "HealthComponent")
 		if health_comps:
@@ -95,11 +95,11 @@ func _on_entity_damaged(damaging_entity, damaged_entity, base_damage):
 
 
 func _on_entity_death(damaging_entity, dying_entity):
-	var dying_character = _get_character_body_2d_parent(dying_entity)
+	var dying_character = TreeUtilities.get_character_body_2d_parent(dying_entity)
 	if not dying_character:
 		print("Warning: dying character no longer exists")
 	if dying_character.has_method("give_experience"):
-		var damaging_character = _get_character_body_2d_parent(damaging_entity)
+		var damaging_character = TreeUtilities.get_character_body_2d_parent(damaging_entity)
 		if damaging_character:
 			var exp_comp = damaging_character.get_node("ExperienceComponent")
 			var creep_send_comp = damaging_character.find_child("CreepSendComponent")
@@ -118,7 +118,11 @@ func _on_entity_death(damaging_entity, dying_entity):
 			if dying_character.arena_group == "arena%d" % main_arena_num:
 				game_over_label = "You Lose!"
 			PauseScreen.pause_state_changed(get_tree().paused, game_over_label)
-	_free_node_except_bullets(dying_character)
+	if dying_character.has_method("on_death"):
+		dying_character.on_death()
+	else:
+		TreeUtilities.reparent_bullets(dying_character, get_tree().root)
+		dying_character.queue_free()
 
 
 func _on_creep_send(sending_player):
@@ -130,26 +134,3 @@ func _on_creep_send(sending_player):
 			var amount = exp_comp.level
 			for i in range(0, amount):
 				spawner.spawn_enemy()
-
-
-func _get_character_body_2d_parent(child):
-	var curr_node = child
-	while curr_node:
-		if curr_node is CharacterBody2D:
-			return curr_node
-		curr_node = curr_node.get_parent()
-	return curr_node
-
-
-func _free_node_except_bullets(node : Node):
-	for child in get_all_children(node):
-		if child is Bullet:
-			child.reparent(get_tree().root, true)
-	node.queue_free()
-
-
-func get_all_children(node : Node):
-	var arr = [node]
-	for child in node.get_children():
-		arr.append_array(get_all_children(child))
-	return arr

@@ -32,10 +32,10 @@ static func create_arenas_root_node(num_arenas, num_players_per_side, main_arena
 			var spawner = EnemySpawner.new()
 			spawner.enemy_spawn_scaler = ResourceLoader.load("res://characters/enemies/basic_enemy_spawn_scaler.tres")
 			# Following assumes 1 tile boundary
-			spawner.min_x = i * ARENA_WIDTH + TILE_SIZE
-			spawner.max_x = (i + 1) * ARENA_WIDTH - TILE_SIZE
-			spawner.min_y = TILE_SIZE
-			spawner.max_y = ARENA_HEIGHT - TILE_SIZE
+			spawner.min_x = i * ARENA_WIDTH + (5 * TILE_SIZE)
+			spawner.max_x = (i + 1) * ARENA_WIDTH - (5 * TILE_SIZE)
+			spawner.min_y = 5 * TILE_SIZE
+			spawner.max_y = ARENA_HEIGHT - (5 * TILE_SIZE)
 			spawner.spawn_time = 1 / (enemies_per_second_per_player * num_players_per_side)
 			spawner.name = "Arena" + str(i) + "Spawner"
 			spawner.arena_group = arena_group

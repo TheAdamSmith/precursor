@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dusuuhg2p0uh5"]
+[gd_scene load_steps=23 format=3 uid="uid://dusuuhg2p0uh5"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_jgs0o"]
 [ext_resource type="PackedScene" uid="uid://crsesgbkcbmc6" path="res://characters/enemies/enemy_types/enemy_models/alien_v2.tscn" id="2_42rtr"]
@@ -34,6 +34,114 @@ shader_parameter/flashing_start_time_sec = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a5yob"]
 radius = 25.0
+
+[sub_resource type="Animation" id="Animation_laqso"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/red_adder")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/green_adder")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:material:shader_parameter/blue_adder")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_n1gtp"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.353553),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 4.59479),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:material:shader_parameter/red_adder")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 3),
+"update": 0,
+"values": [1.0, -1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:material:shader_parameter/green_adder")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 3),
+"update": 0,
+"values": [1.0, -1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:material:shader_parameter/blue_adder")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 3),
+"update": 0,
+"values": [1.0, -1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m8uc8"]
+_data = {
+"RESET": SubResource("Animation_laqso"),
+"death": SubResource("Animation_n1gtp")
+}
 
 [node name="RangedEnemy" type="CharacterBody2D" node_paths=PackedStringArray("upgrade_component", "stat_component")]
 collision_layer = 4
@@ -92,3 +200,8 @@ bullet = ExtResource("11_34qc3")
 
 [node name="WeaponStatComponent" type="Node" parent="StateMachine/AttackPlayerState/RangedAttackComponent/Gun"]
 script = ExtResource("4_5df00")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m8uc8")
+}
