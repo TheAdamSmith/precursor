@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://drtf8icfoc6y5" path="res://models/charging_enemy/charging-enemy-charge-1.png" id="3_ohb7x"]
 [ext_resource type="Texture2D" uid="uid://c1i0j2nrfev8a" path="res://models/charging_enemy/charging-enemy-charge-2.png" id="4_e24mj"]
 [ext_resource type="Texture2D" uid="uid://deni32nc7sdc3" path="res://models/charging_enemy/charging-enemy-move-2.png" id="4_k7wol"]
-[ext_resource type="Script" path="res://characters/components/stats/character_stat_component.gd" id="4_myx1g"]
+[ext_resource type="Script" path="res://stats/character_stat_component.gd" id="4_myx1g"]
 [ext_resource type="Texture2D" uid="uid://jxnubhavvdkh" path="res://models/charging_enemy/charging-enemy-idle-1.png" id="5_r4kvi"]
 [ext_resource type="Texture2D" uid="uid://cwvhq1erdfi3g" path="res://models/charging_enemy/charging-enemy-idle-2.png" id="6_y0i4a"]
 [ext_resource type="Script" path="res://characters/components/upgrades/charging_enemy_upgrade_component.gd" id="7_30tgu"]
@@ -20,7 +20,7 @@
 [ext_resource type="Script" path="res://characters/components/state_machine/charge_attack_player_state.gd" id="11_dp35k"]
 [ext_resource type="Script" path="res://characters/abilities/dash_component.gd" id="13_q7yvu"]
 [ext_resource type="Script" path="res://characters/components/trail.gd" id="14_yqk4u"]
-[ext_resource type="Script" path="res://characters/components/stats/dash_stat_component.gd" id="15_70m7n"]
+[ext_resource type="Script" path="res://stats/dash_stat_component.gd" id="15_70m7n"]
 [ext_resource type="Script" path="res://characters/components/state_machine/cooldown_state.gd" id="16_ankte"]
 [ext_resource type="Script" path="res://characters/abilities/ability_damage_component.gd" id="16_bll6n"]
 

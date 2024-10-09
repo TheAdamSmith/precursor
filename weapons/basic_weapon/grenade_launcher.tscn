@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ca73ela1e0s6f" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h5.png" id="7_y6wse"]
 [ext_resource type="Texture2D" uid="uid://criicn1j4dc73" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h6.png" id="8_o5802"]
 [ext_resource type="Texture2D" uid="uid://cf2umap2pka2w" path="res://models/explosions/Explosions Pack 3 files/Sprites/explosion-h/explosion-h7.png" id="9_tt6fr"]
-[ext_resource type="Script" path="res://characters/components/stats/weapon_stat_component.gd" id="11_kqn4a"]
+[ext_resource type="Script" path="res://stats/weapon_stat_component.gd" id="11_kqn4a"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xtuwr"]
 animations = [{

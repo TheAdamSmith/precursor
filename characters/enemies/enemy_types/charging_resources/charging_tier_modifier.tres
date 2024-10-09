@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyTierModifier" load_steps=2 format=3 uid="uid://ndeto0am1kfn"]
 
-[ext_resource type="Script" path="res://characters/components/stats/enemy_tier_modifier.gd" id="1_hdup1"]
+[ext_resource type="Script" path="res://stats/enemy_tier_modifier.gd" id="1_hdup1"]
 
 [resource]
 script = ExtResource("1_hdup1")

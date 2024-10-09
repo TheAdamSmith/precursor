@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="DashStatScaler" load_steps=2 format=3 uid="uid://dl5wqmwaa5bmr"]
 
-[ext_resource type="Script" path="res://characters/components/stats/dash_stat_scaler.gd" id="1_j53ks"]
+[ext_resource type="Script" path="res://stats/dash_stat_scaler.gd" id="1_j53ks"]
 
 [resource]
 script = ExtResource("1_j53ks")

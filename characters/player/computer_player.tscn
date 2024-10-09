@@ -19,7 +19,7 @@
 [ext_resource type="Resource" uid="uid://dqx1fw4rocdgi" path="res://characters/player/stat_scalers/sniper_scaler.tres" id="12_b8mbw"]
 [ext_resource type="Script" path="res://characters/components/computer_player_input_component.gd" id="12_csdww"]
 [ext_resource type="Resource" uid="uid://tqhxjx66nxc8" path="res://characters/player/stat_scalers/grenade_launcher_scaler.tres" id="14_gmbx7"]
-[ext_resource type="Script" path="res://characters/components/stats/character_stat_component.gd" id="15_bodee"]
+[ext_resource type="Script" path="res://stats/character_stat_component.gd" id="15_bodee"]
 [ext_resource type="Script" path="res://characters/components/creep_send_component.gd" id="18_wxmb3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_84u7u"]

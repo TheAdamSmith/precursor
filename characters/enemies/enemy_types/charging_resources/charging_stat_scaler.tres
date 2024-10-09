@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterStatScaler" load_steps=2 format=3 uid="uid://cguq0xrb2sfbc"]
 
-[ext_resource type="Script" path="res://characters/components/stats/character_stat_scaler.gd" id="1_oovae"]
+[ext_resource type="Script" path="res://stats/character_stat_scaler.gd" id="1_oovae"]
 
 [resource]
 script = ExtResource("1_oovae")

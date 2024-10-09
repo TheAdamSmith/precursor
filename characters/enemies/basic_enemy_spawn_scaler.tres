@@ -6,11 +6,11 @@
 script = ExtResource("1_y6uu2")
 sec_per_spawner_level_up = 30
 enemy_type_spawn_chance_by_level = {
-1:{
-"melee_enemy": 0.35,
-"ranged_enemy": 0.55,
+1: {
 "charging_enemy": 0.1,
-},
+"melee_enemy": 0.35,
+"ranged_enemy": 0.55
+}
 }
 enemy_tier_spawn_chance_by_level = {
 1: {

@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://fljrfn00436l"]
+[gd_scene load_steps=4 format=3 uid="uid://fljrfn00436l"]
 
 [ext_resource type="Script" path="res://items/healing_item.gd" id="1_k71la"]
+[ext_resource type="Texture2D" uid="uid://dw1jp7v2d5qj3" path="res://icon.svg" id="2_ns2td"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_av7ie"]
+radius = 27.4591
 
 [node name="HealingItem" type="Node2D"]
 script = ExtResource("1_k71la")
+healing_value = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_ns2td")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_av7ie")

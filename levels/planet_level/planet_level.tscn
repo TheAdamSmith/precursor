@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt7xh03ye22rr"]
+[gd_scene load_steps=9 format=3 uid="uid://dt7xh03ye22rr"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy_spawner.gd" id="1_on5qm"]
 [ext_resource type="PackedScene" uid="uid://bry1y52kbn44d" path="res://characters/player/playerv2.tscn" id="2_kqhvk"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://c7icek0pyocbw" path="res://levels/arenas/planet_arena.tscn" id="4_2lvn6"]
 [ext_resource type="AudioStream" uid="uid://o03ehjegtst0" path="res://assets/audio/bgm/level_2.wav" id="5_0nnl3"]
 [ext_resource type="PackedScene" uid="uid://l3fqkrc78nis" path="res://audio/bgm_selector.tscn" id="5_x6t60"]
+[ext_resource type="Resource" uid="uid://bcu68cf7q5r5p" path="res://characters/enemies/basic_enemy_spawn_scaler.tres" id="7_4vm5x"]
+[ext_resource type="PackedScene" uid="uid://fljrfn00436l" path="res://items/healing_item.tscn" id="7_o4rog"]
 
 [node name="Level" type="Node2D"]
 
@@ -28,3 +30,28 @@ min_x = 32
 max_x = 2016
 min_y = 32
 max_y = 2016
+enemy_spawn_scaler = ExtResource("7_4vm5x")
+
+[node name="HealingItem" parent="." instance=ExtResource("7_o4rog")]
+position = Vector2(929, 382)
+
+[node name="HealingItem2" parent="." instance=ExtResource("7_o4rog")]
+position = Vector2(590, 355)
+
+[node name="HealingItem3" parent="." instance=ExtResource("7_o4rog")]
+position = Vector2(350, 779)
+
+[node name="HealingItem4" parent="." instance=ExtResource("7_o4rog")]
+position = Vector2(545, 1581)
+
+[node name="HealingItem5" parent="." instance=ExtResource("7_o4rog")]
+position = Vector2(1280, 1377)
+
+[node name="HealingItem6" parent="." instance=ExtResource("7_o4rog")]
+position = Vector2(1693, 1711)
+
+[node name="HealingItem7" parent="." instance=ExtResource("7_o4rog")]
+position = Vector2(1716, 710)
+
+[node name="HealingItem8" parent="." instance=ExtResource("7_o4rog")]
+position = Vector2(941, 992)

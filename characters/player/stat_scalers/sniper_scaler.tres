@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponStatScaler" load_steps=2 format=3 uid="uid://dqx1fw4rocdgi"]
 
-[ext_resource type="Script" path="res://characters/components/stats/weapon_stat_scaler.gd" id="1_86ttf"]
+[ext_resource type="Script" path="res://stats/weapon_stat_scaler.gd" id="1_86ttf"]
 
 [resource]
 script = ExtResource("1_86ttf")
