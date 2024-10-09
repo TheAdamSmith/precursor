@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://fljrfn00436l"]
+
+[ext_resource type="Script" path="res://items/healing_item.gd" id="1_k71la"]
+
+[node name="HealingItem" type="Node2D"]
+script = ExtResource("1_k71la")
