@@ -49,6 +49,10 @@ func _get_current_full_health():
 
 
 func set_invulnerable(duration_sec):
+	if _invulnerable:
+		if _invulnability_timer.time_left < duration_sec:
+			_invulnability_timer.time_left = duration_sec
+		return
 	_invulnerable = true
 	_invulnability_timer = get_tree().create_timer(duration_sec, false, true)
 	_invulnability_timer.timeout.connect(_on_invulnerability_timeout)

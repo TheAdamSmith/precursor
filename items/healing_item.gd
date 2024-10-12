@@ -2,10 +2,6 @@ class_name HealingItem
 extends Item
 
 @export var healing_value : float
-
-
-func pickup(picking_up_entity):
-	pass
  
 
 func use(using_entity : Node2D):

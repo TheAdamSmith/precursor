@@ -13,6 +13,7 @@ var arena_group : String
 var shader : ShaderMaterial
 var flashing_timer : SceneTreeTimer
 var intangible_timer : SceneTreeTimer
+var _invulnerable = false
 
 
 func _ready():
@@ -27,6 +28,7 @@ func _ready():
 	shader = sprite.material
 	$HealthComponent.health_update.connect(_on_health_update)
 	$HealthComponent.invulnerable.connect(_on_invulnerability_update)
+	stat_component.stat_updated.connect(_on_stat_update)
 	upgrade_component.initialize_stats()
 
 
@@ -48,10 +50,22 @@ func update_animation():
 		animations.play("walk")
 
 
+func _on_stat_update(stat_name):
+	if stat_name == "scale":
+		animations.play("scale_update", )
+		pass
+
+
 func _on_invulnerability_update(invulnerable, duration_sec):
 	if not invulnerable or duration_sec == 0.0:
 		shader.set_shader_parameter("flashing", false)
+		_invulnerable = false
 		return
+	_set_invulnerable_shader()
+	_invulnerable = true
+
+
+func _set_invulnerable_shader():
 	shader.set_shader_parameter("flashing", true)
 	shader.set_shader_parameter("flashing_start_time", float(Time.get_ticks_msec() * 1e-3))
 	shader.set_shader_parameter("flashing_period_sec", 0.2)
@@ -97,10 +111,14 @@ func _flash_shader(health_diff):
 
 
 func _on_flashing_timeout():
-	shader.set_shader_parameter("flashing", false)
+	if not _invulnerable:
+		shader.set_shader_parameter("flashing", false)
+	else:
+		_set_invulnerable_shader()
 
 
 func _physics_process(delta):
+	scale = Vector2(stat_component.get_current_scale(), stat_component.get_current_scale())
 	velocity = move_direction * stat_component.get_current_speed()
 	move_and_collide(velocity * delta, true)
 	for i in get_slide_collision_count():

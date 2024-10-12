@@ -11,6 +11,7 @@ _example_dict = {
 "displaced_duration_sec": 0.0,
 "health": 0,
 "mass": 0.0,
+"scale": 0.0,
 "speed": 0
 }
 base_stats = {
@@ -20,6 +21,7 @@ base_stats = {
 "displaced_duration_sec": 0.0,
 "health": 100,
 "mass": 1.0,
+"scale": 1.0,
 "speed": 200.0
 }
 per_level_stat_adders = {
