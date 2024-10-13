@@ -81,7 +81,7 @@ func on_death():
 		set_physics_process(false)
 		$AnimationPlayer.play("death")
 		await $AnimationPlayer.animation_finished
-	TreeUtilities.reparent_bullets(self, get_tree().root)
+	TreeUtilities.reparent_bullets(self, get_tree().current_scene)
 	queue_free()
 
 
