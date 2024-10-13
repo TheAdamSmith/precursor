@@ -39,12 +39,17 @@ func spawn_enemy():
 	enemy.global_position = position
 	enemy.add_to_group("enemy")
 	enemy.upgrade_component.tier = enemy_tier
-	add_child(enemy)
-	if not arena_group:
-		arena_group = ArenaUtilities.get_arena_name_by_position(enemy.global_position)
-	enemy.add_to_group(arena_group)
-	_set_enemy_stats(enemy)
+	#add_child(enemy)
+
+	#enemy.add_to_group(arena_group)
+	#_set_enemy_stats(enemy)
 	num_enemies_spawned += 1
+	var delayed_spawn = load("res://characters/enemies/delayed_enemy_spawn.tscn").instantiate()
+	delayed_spawn.spawn_delay_seconds = 1.5
+	delayed_spawn.enemy_to_spawn = enemy
+	delayed_spawn.global_position = enemy.global_position
+	delayed_spawn.enemy_level = spawner_level
+	add_child(delayed_spawn)
 
 
 func _get_random_key_from_spawn_chance_dict(spawn_chance_dict : Dictionary):
@@ -59,9 +64,9 @@ func _get_random_key_from_spawn_chance_dict(spawn_chance_dict : Dictionary):
 	return ret
 
 
-func _set_enemy_stats(enemy : Enemy):
+static func _set_enemy_stats(enemy : Enemy, enemy_level : int):
 	enemy.upgrade_component.initialize_stats()
-	enemy.upgrade_component.level_up(spawner_level)
+	enemy.upgrade_component.level_up(enemy_level)
 	enemy.upgrade_component.set_tier_modifiers()                    
 
 
@@ -69,6 +74,8 @@ func _physics_process(delta):
 	if disabled:
 		return
 	if not spawn_timer or spawn_timer.time_left == 0.0:
+		if not arena_group:
+			arena_group = ArenaUtilities.get_arena_name_by_position(Vector2((min_x + max_x) / 2.0, (min_y + max_y) / 2.0))
 		if arena_group and ArenaUtilities.get_count_in_arena_by_group(get_tree(), "player", arena_group) == 0:
 			disabled = true
 			return
