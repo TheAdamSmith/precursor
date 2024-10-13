@@ -8,6 +8,8 @@ extends Node2D
 
 @export var bullet : PackedScene = preload("res://weapons/bullets/bullet.tscn")
 @export var sfx = load("res://assets/audio/sfx/single_pistol_gunshot.mp3")
+@export var set_bullet_shader_params = false
+@export var bullet_shader_params : Dictionary = {}
 
 var can_fire = true
 var initial_rotation
@@ -66,6 +68,11 @@ func _create_bullet():
 	# Basic method, can be overridden by subclass
 	var bullet_node = bullet.instantiate()
 	bullet_node.piercing_num = stat_component.get_current_piercing_num()
+	if set_bullet_shader_params:
+		var shader = bullet_node.get_node("SmallBullet").material
+		shader.set_shader_parameter("start_time_sec", float(Time.get_ticks_msec() * 1e-3))
+		for shader_key in bullet_shader_params.keys():
+			shader.set_shader_parameter(shader_key, bullet_shader_params[shader_key])
 	return bullet_node
 
 

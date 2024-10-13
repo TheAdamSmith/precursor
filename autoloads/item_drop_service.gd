@@ -13,4 +13,4 @@ func _on_item_drop_event(item_level, item_tier, item_position, drop_chance):
 	var items = ["res://items/buff_item.tscn", "res://items/healing_item.tscn"]
 	var item = load(items.pick_random()).instantiate()
 	item.global_position = item_position
-	add_child(item)
+	get_tree().current_scene.add_child(item)

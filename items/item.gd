@@ -15,10 +15,13 @@ func _ready():
 		lifetime_timer.timeout.connect(_on_lifetime_timeout)
 	if pickup_on_contact:
 		$Area2D.body_entered.connect(_on_pickup)
+	if $AnimationPlayer:
+		$AnimationPlayer.play("idle")
 
 
 func _on_pickup(body):
-	pickup(body)
+	if not pickup(body):
+		return
 	if use_on_pickup:
 		use(body)
 	if free_on_pickup:
@@ -29,9 +32,9 @@ func _on_lifetime_timeout():
 	queue_free()
 
 
-func pickup(picking_up_entity):
-	pass
+func pickup(picking_up_entity) -> bool:
+	return true
 
 
-func use(using_entity):
+func use(using_entity) -> void:
 	pass

@@ -14,7 +14,12 @@
 radius = 8.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qk2fn"]
+resource_local_to_scene = true
 shader = ExtResource("2_q3fde")
+shader_parameter/start_time_sec = 0.0
+shader_parameter/red_adder = 0.0
+shader_parameter/green_adder = 0.0
+shader_parameter/blue_adder = 0.0
 shader_parameter/brighter_color = Color(1, 0.8, 0, 1)
 shader_parameter/brighter_period_sec = 1.2
 shader_parameter/brighter_intensity = 0.3

@@ -1,19 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://fljrfn00436l"]
+[gd_scene load_steps=6 format=3 uid="uid://fljrfn00436l"]
 
 [ext_resource type="Script" path="res://items/healing_item.gd" id="1_k71la"]
-[ext_resource type="Texture2D" uid="uid://dw1jp7v2d5qj3" path="res://icon.svg" id="2_ns2td"]
+[ext_resource type="Texture2D" uid="uid://b2p52tq4xx7g" path="res://assets/misc_sprites/health-pack.png" id="2_yl613"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_av7ie"]
-radius = 27.4591
+radius = 27.0
+
+[sub_resource type="Animation" id="Animation_vxv75"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.25, 1.25), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pi7ai"]
+_data = {
+"idle": SubResource("Animation_vxv75")
+}
 
 [node name="HealingItem" type="Node2D"]
 script = ExtResource("1_k71la")
-healing_value = 100.0
+healing_value = 10.0
 lifetime_on_ground_sec = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_ns2td")
+texture = ExtResource("2_yl613")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 32
@@ -21,3 +41,8 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_av7ie")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pi7ai")
+}

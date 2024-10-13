@@ -1,18 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnjg1d0iwb31p"]
+[gd_scene load_steps=6 format=3 uid="uid://dnjg1d0iwb31p"]
 
 [ext_resource type="Script" path="res://items/buff_item.gd" id="1_o2hwl"]
-[ext_resource type="Texture2D" uid="uid://dw1jp7v2d5qj3" path="res://icon.svg" id="2_cydi6"]
+[ext_resource type="Texture2D" uid="uid://5dmgjk4ck4pc" path="res://assets/misc_sprites/pill.png" id="2_hl71w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_av7ie"]
 radius = 27.4591
+
+[sub_resource type="Animation" id="Animation_nk10j"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.25, 1.25), Vector2(1, 1), Vector2(1.25, 1.25), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5708, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wx2q4"]
+_data = {
+"idle": SubResource("Animation_nk10j")
+}
 
 [node name="BuffItem" type="Node2D"]
 script = ExtResource("1_o2hwl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = -3.14159
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_cydi6")
+texture = ExtResource("2_hl71w")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 32
@@ -20,3 +52,8 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_av7ie")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wx2q4")
+}

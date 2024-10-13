@@ -24,4 +24,20 @@ stat_multipliers_by_tier = {
 "bullet_speed": 1.2
 }
 }
-shader_vals_by_tier = {}
+shader_vals_by_tier = {
+0: {
+"blue_adder": 0.0,
+"green_adder": 0.0,
+"red_adder": 0.0
+},
+1: {
+"blue_adder": -0.5,
+"green_adder": -0.5,
+"red_adder": 0.5
+},
+2: {
+"blue_adder": 0.5,
+"green_adder": -0.9,
+"red_adder": -0.5
+}
+}

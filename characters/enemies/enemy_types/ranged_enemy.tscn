@@ -33,7 +33,7 @@ shader_parameter/flashing_period_sec = 1.0
 shader_parameter/flashing_start_time_sec = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a5yob"]
-radius = 25.0
+radius = 31.0161
 
 [node name="RangedEnemy" type="CharacterBody2D" node_paths=PackedStringArray("upgrade_component", "stat_component")]
 collision_layer = 4
@@ -56,11 +56,12 @@ stat_component = NodePath("../CharacterStatComponent")
 [node name="CharacterStatComponent" type="Node" parent="."]
 script = ExtResource("5_ag1jm")
 
-[node name="RangedEnemyUpgradeComponent" type="Node2D" parent="." node_paths=PackedStringArray("gun_stat_component", "stat_component")]
+[node name="RangedEnemyUpgradeComponent" type="Node2D" parent="." node_paths=PackedStringArray("gun_stat_component", "gun", "stat_component")]
 script = ExtResource("7_nmfpm")
 gun_stat_component = NodePath("../StateMachine/AttackPlayerState/RangedAttackComponent/Gun/WeaponStatComponent")
 gun_stat_scaler = ExtResource("8_dqj48")
 gun_tier_modifier = ExtResource("9_e2l7y")
+gun = NodePath("../StateMachine/AttackPlayerState/RangedAttackComponent/Gun")
 stat_component = NodePath("../CharacterStatComponent")
 stat_scaler = ExtResource("10_x6v83")
 enemy_tier_modifier = ExtResource("11_md0br")
@@ -89,6 +90,7 @@ stat_component = NodePath("../../../CharacterStatComponent")
 [node name="Gun" type="Node2D" parent="StateMachine/AttackPlayerState/RangedAttackComponent"]
 script = ExtResource("10_kid6l")
 bullet = ExtResource("11_34qc3")
+set_bullet_shader_params = true
 
 [node name="WeaponStatComponent" type="Node" parent="StateMachine/AttackPlayerState/RangedAttackComponent/Gun"]
 script = ExtResource("4_5df00")
