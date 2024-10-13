@@ -19,7 +19,7 @@ func _physics_process(delta):
 	_attack()
 	if enemy:
 		enemy.attack_started.emit()
-	attack_cooldown_timer = get_tree().create_timer(1.0 / stat_component.get_current_attacks_per_sec())
+	attack_cooldown_timer = get_tree().create_timer(1.0 / stat_component.get_current_attacks_per_sec(), false, true)
 	can_attack = false
 
 

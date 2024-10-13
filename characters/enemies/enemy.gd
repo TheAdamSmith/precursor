@@ -51,7 +51,7 @@ func _on_health_update(current_health, base_health, difference):
 func _flash_shader(health_diff):
 	if not shader or health_diff == 0.0 or $HealthComponent.is_full_health():
 		return
-	flashing_timer = get_tree().create_timer(0.5)
+	flashing_timer = get_tree().create_timer(0.5, false, true)
 	flashing_timer.timeout.connect(_on_flashing_timeout)
 	shader.set_shader_parameter("flashing", true)
 	shader.set_shader_parameter("flashing_start_time", float(Time.get_ticks_msec() * 1e-3))

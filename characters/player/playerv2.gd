@@ -78,7 +78,7 @@ func _set_invulnerable_shader():
 func set_intangible(duration_sec):
 	collision_mask = CollisionUtilities.clear_flag(collision_mask, CollisionUtilities.ENEMY_FLAG)
 	collision_layer = CollisionUtilities.clear_flag(collision_layer, CollisionUtilities.PLAYER_FLAG)
-	intangible_timer = get_tree().create_timer(duration_sec)
+	intangible_timer = get_tree().create_timer(duration_sec, false, true)
 	intangible_timer.timeout.connect(_on_intangibility_timeout)
 
 

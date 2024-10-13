@@ -63,7 +63,7 @@ func _physics_process(delta):
 		_select_upgrade()
 	if timer and timer.time_left != 0:
 		return
-	timer = get_tree().create_timer(randf_range(.1,.2))
+	timer = get_tree().create_timer(randf_range(.1,.2), false, true)
 	var move_direction = _determine_weighted_movement_direction()
 	if not move_direction:
 		return

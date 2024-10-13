@@ -31,8 +31,8 @@ func dash():
 		stat_component.get_current_speed_multiplier(),
 		stat_component.get_current_duration_sec(),
 	)
-	cooldown_timer = get_tree().create_timer(stat_component.get_current_cooldown_duration_sec())
-	dash_timer = get_tree().create_timer(stat_component.get_current_duration_sec())
+	cooldown_timer = get_tree().create_timer(stat_component.get_current_cooldown_duration_sec(), false, true)
+	dash_timer = get_tree().create_timer(stat_component.get_current_duration_sec(), false, true)
 	ability_damage.set_active()
 	trail.start_adding_points()
 	if player and stat_component.get_current_invulnerability_duration_sec() != 0.0:

@@ -14,7 +14,7 @@ func set_cooldown_time_sec(val_sec):
 
 func enter():
 	super.enter()
-	cooldown_timer = get_tree().create_timer(cooldown_time_sec)
+	cooldown_timer = get_tree().create_timer(cooldown_time_sec, false, true)
 	enemy.animation_change.emit("idle")
 
 

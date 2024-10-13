@@ -73,10 +73,10 @@ func _physics_process(delta):
 			disabled = true
 			return
 		spawn_enemy()
-		spawn_timer = get_tree().create_timer(spawn_time)
+		spawn_timer = get_tree().create_timer(spawn_time, false, true)
 	if not level_up_timer:
-		level_up_timer = get_tree().create_timer(enemy_spawn_scaler.sec_per_spawner_level_up)
+		level_up_timer = get_tree().create_timer(enemy_spawn_scaler.sec_per_spawner_level_up, false, true)
 		return
 	if level_up_timer.time_left == 0.0:
 		spawner_level += 1
-		level_up_timer = get_tree().create_timer(enemy_spawn_scaler.sec_per_spawner_level_up)
+		level_up_timer = get_tree().create_timer(enemy_spawn_scaler.sec_per_spawner_level_up, false, true)

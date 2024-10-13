@@ -35,7 +35,7 @@ func apply_impulse(impulse_vec : Vector2, max_speed_multiplier=base_displaced_ma
 		tmp_max_speed_mult = max_speed_multiplier
 	velocity += impulse_vec / stat_component.get_current_mass()
 	if not displaced_timer or displaced_timer.time_left == 0.0:
-		displaced_timer = get_tree().create_timer(stat_component.get_current_displaced_duration_sec())
+		displaced_timer = get_tree().create_timer(stat_component.get_current_displaced_duration_sec(), false, true)
 	displaced = true
 
 

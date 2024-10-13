@@ -11,7 +11,7 @@ var lifetime_timer : SceneTreeTimer
 
 func _ready():
 	if lifetime_on_ground_sec > 0.0 and lifetime_on_ground_sec != INF:
-		lifetime_timer = get_tree().create_timer(lifetime_on_ground_sec)
+		lifetime_timer = get_tree().create_timer(lifetime_on_ground_sec, false, true)
 		lifetime_timer.timeout.connect(_on_lifetime_timeout)
 	if pickup_on_contact:
 		$Area2D.body_entered.connect(_on_pickup)

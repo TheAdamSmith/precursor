@@ -34,7 +34,7 @@ func _on_body_entered(body):
 	velocity.y = 0
 	$Vfx.show()
 	$Vfx.play()
-	await get_tree().create_timer(0.05).timeout 
+	await get_tree().create_timer(0.05, false, true).timeout 
 	$SmallBullet.hide()
 
 
