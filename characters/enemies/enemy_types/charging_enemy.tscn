@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://dsamlvk8gvwup"]
 
 [ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_43dde"]
-[ext_resource type="Shader" path="res://shaders/character.gdshader" id="2_lje7d"]
+[ext_resource type="Shader" path="res://shaders/basic.gdshader" id="2_lje7d"]
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="3_4ddya"]
 [ext_resource type="Texture2D" uid="uid://c4efai3ngprf1" path="res://models/charging_enemy/charging-enemy-move-1.png" id="3_o0dxm"]
 [ext_resource type="Texture2D" uid="uid://drtf8icfoc6y5" path="res://models/charging_enemy/charging-enemy-charge-1.png" id="3_ohb7x"]

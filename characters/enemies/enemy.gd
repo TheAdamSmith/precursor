@@ -73,15 +73,13 @@ func _on_flashing_timeout():
 func on_death():
 	remove_from_group("enemy")
 	if $AnimationPlayer:
-		#for child in get_children():
-			#if child is CollisionShape2D or child is StateMachine:
-				#child.queue_free()
 		collision_layer = 0
 		collision_mask = 0
 		set_physics_process(false)
 		$AnimationPlayer.play("death")
 		await $AnimationPlayer.animation_finished
 	TreeUtilities.reparent_bullets(self, get_tree().current_scene)
+	ItemDropService.random_item_drop_event.emit(0, upgrade_component.tier, global_position, 0.25)
 	queue_free()
 
 

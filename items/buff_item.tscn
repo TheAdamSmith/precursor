@@ -1,7 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnjg1d0iwb31p"]
+[gd_scene load_steps=10 format=3 uid="uid://dnjg1d0iwb31p"]
 
 [ext_resource type="Script" path="res://items/buff_item.gd" id="1_o2hwl"]
 [ext_resource type="Texture2D" uid="uid://5dmgjk4ck4pc" path="res://assets/misc_sprites/pill.png" id="2_hl71w"]
+[ext_resource type="Shader" path="res://shaders/basic.gdshader" id="2_yempw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vcdru"]
+resource_local_to_scene = true
+shader = ExtResource("2_yempw")
+shader_parameter/red_adder = 0.0
+shader_parameter/green_adder = 0.0
+shader_parameter/blue_adder = 0.0
+shader_parameter/alpha_adder = 0.0
+shader_parameter/flashing_red = 1.0
+shader_parameter/flashing_green = 1.0
+shader_parameter/flashing_blue = 1.0
+shader_parameter/flashing_aplha = 0.0
+shader_parameter/flashing_max_intensity = 0.5
+shader_parameter/flashing = true
+shader_parameter/flashing_period_sec = 5.0
+shader_parameter/flashing_start_time_sec = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_av7ie"]
 radius = 27.4591
@@ -35,15 +52,100 @@ tracks/1/keys = {
 "values": [0.0, 1.5708, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_uepir"]
+resource_name = "despawning"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.25, 1.25), Vector2(1, 1), Vector2(1.25, 1.25), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5708, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:material:shader_parameter/flashing_period_sec")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.6]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:material:shader_parameter/flashing_aplha")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5]
+}
+
+[sub_resource type="Animation" id="Animation_3fjxg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flashing_aplha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/flashing_period_sec")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wx2q4"]
 _data = {
+"RESET": SubResource("Animation_3fjxg"),
+"despawning": SubResource("Animation_uepir"),
 "idle": SubResource("Animation_nk10j")
 }
 
 [node name="BuffItem" type="Node2D"]
 script = ExtResource("1_o2hwl")
+buff_duration_sec = 10.0
+lifetime_on_ground_sec = 30.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vcdru")
 texture = ExtResource("2_hl71w")
 
 [node name="Area2D" type="Area2D" parent="."]

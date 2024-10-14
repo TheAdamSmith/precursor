@@ -103,7 +103,6 @@ func _on_entity_death(damaging_entity, dying_entity):
 		if damaging_character:
 			var exp_comp = damaging_character.get_node("ExperienceComponent")
 			var creep_send_comp = damaging_character.find_child("CreepSendComponent")
-			ItemDropService.item_drop_event.emit(0,0,dying_character.global_position,0.25)
 			if exp_comp:
 				exp_comp.add_exp(dying_character.give_experience())
 			if creep_send_comp:

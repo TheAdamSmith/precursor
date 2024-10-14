@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://crsesgbkcbmc6"]
 
-[ext_resource type="Shader" path="res://shaders/character.gdshader" id="1_s85uj"]
+[ext_resource type="Shader" path="res://shaders/basic.gdshader" id="1_s85uj"]
 [ext_resource type="Texture2D" uid="uid://bm45nhj47fv3e" path="res://models/enemy_models/alien-v2/alien-v2-attack1.png" id="2_ooda3"]
 [ext_resource type="Texture2D" uid="uid://5oj2ree8vyj6" path="res://models/enemy_models/alien-v2/alien-v2-attack2.png" id="3_06fbd"]
 [ext_resource type="Texture2D" uid="uid://cbjlwdmkadu0n" path="res://models/enemy_models/alien-v2/alien-v2-move1.png" id="4_gpg37"]

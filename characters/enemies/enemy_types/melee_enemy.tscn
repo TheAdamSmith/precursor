@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://characters/enemies/enemy.gd" id="1_ckm7t"]
 [ext_resource type="Script" path="res://characters/components/health_component.gd" id="2_ed0qn"]
 [ext_resource type="PackedScene" uid="uid://3epyqiu4ccl1" path="res://characters/enemies/enemy_types/enemy_models/alien_v1.tscn" id="2_ekhej"]
-[ext_resource type="Shader" path="res://shaders/character.gdshader" id="3_6lig2"]
+[ext_resource type="Shader" path="res://shaders/basic.gdshader" id="3_6lig2"]
 [ext_resource type="Script" path="res://stats/character_stat_component.gd" id="3_jh23c"]
 [ext_resource type="Script" path="res://characters/components/upgrades/enemy_upgrade_component.gd" id="4_7aebi"]
 [ext_resource type="Script" path="res://characters/components/state_machine/state_machine.gd" id="4_xny7j"]
@@ -19,9 +19,11 @@ shader = ExtResource("3_6lig2")
 shader_parameter/red_adder = 0.0
 shader_parameter/green_adder = 0.0
 shader_parameter/blue_adder = 0.0
+shader_parameter/alpha_adder = 0.0
 shader_parameter/flashing_red = 0.0
 shader_parameter/flashing_green = 0.0
 shader_parameter/flashing_blue = 0.0
+shader_parameter/flashing_aplha = 0.0
 shader_parameter/flashing_max_intensity = 1.0
 shader_parameter/flashing = false
 shader_parameter/flashing_period_sec = 1.0
