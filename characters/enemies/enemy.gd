@@ -79,7 +79,7 @@ func on_death():
 		$AnimationPlayer.play("death")
 		await $AnimationPlayer.animation_finished
 	TreeUtilities.reparent_bullets(self, get_tree().current_scene)
-	ItemDropService.random_item_drop_event.emit(0, upgrade_component.tier, global_position, 0.25)
+	ItemDropService.random_item_drop_event.emit(0, upgrade_component.tier, global_position, stat_component.get_current_item_drop_chance())
 	queue_free()
 
 

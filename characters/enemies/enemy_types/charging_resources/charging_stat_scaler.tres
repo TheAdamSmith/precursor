@@ -13,7 +13,8 @@ _example_dict = {
 "health": 0,
 "mass": 0.0,
 "scale": 0.0,
-"speed": 0
+"speed": 0,
+"item_drop_chance": 0.0,
 }
 base_stats = {
 "acceleration_after_displacement": 100.0,
@@ -24,7 +25,8 @@ base_stats = {
 "health": 40,
 "mass": 1.0,
 "scale": 1.5,
-"speed": 80
+"speed": 80,
+"item_drop_chance": 1.0,
 }
 per_level_stat_adders = {
 "attacks_per_sec": 0.1,

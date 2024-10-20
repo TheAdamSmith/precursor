@@ -14,6 +14,7 @@ extends StatComponent
 	"acceleration_after_displacement": 0.0,
 	"experience_given": 0.0,
 	"scale": 0.0,
+	"item_drop_chance": 0.0,
 } 
 
 
@@ -56,3 +57,7 @@ func get_current_experience_given():
 
 func get_current_scale():
 	return _get_modified_stat("scale")
+
+
+func get_current_item_drop_chance():
+	return _get_modified_stat("item_drop_chance")

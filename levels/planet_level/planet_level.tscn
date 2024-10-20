@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://o03ehjegtst0" path="res://assets/audio/bgm/level_2.wav" id="5_0nnl3"]
 [ext_resource type="PackedScene" uid="uid://l3fqkrc78nis" path="res://audio/bgm_selector.tscn" id="5_x6t60"]
 [ext_resource type="Resource" uid="uid://bcu68cf7q5r5p" path="res://characters/enemies/basic_enemy_spawn_scaler.tres" id="7_4vm5x"]
-[ext_resource type="PackedScene" uid="uid://fljrfn00436l" path="res://items/healing_item.tscn" id="7_o4rog"]
+[ext_resource type="PackedScene" uid="uid://fljrfn00436l" path="res://items/common/healing_item.tscn" id="7_o4rog"]
 
 [node name="Level" type="Node2D"]
 
