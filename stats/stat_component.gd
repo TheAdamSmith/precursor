@@ -114,6 +114,16 @@ func register_temp_multiplier(stat_name, multiplier, duration_sec, emit=true):
 		stat_updated.emit(stat_name)
 
 
+func register_all_temp_adders(stat_dict, duration_sec, num_times=1, emit=true):
+	for stat_name in stat_dict.keys():
+		register_temp_adder(stat_name, stat_dict[stat_name] * num_times, duration_sec, emit)
+
+
+func register_all_temp_multipliers(stat_dict, duration_sec, num_times=1, emit=true):
+	for stat_name in stat_dict.keys():
+		register_temp_multiplier(stat_name, stat_dict[stat_name] * num_times, duration_sec, emit)
+
+
 func _clear_timed_out_stats():
 	for stat_name in _temp_multipliers.keys():
 		var remove_indexs = []

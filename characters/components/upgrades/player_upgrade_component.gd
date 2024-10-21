@@ -120,3 +120,18 @@ func _spawn_weapon(upgrade_scene, upgrade_base_stats, upgrade_vec, upgrade_rotat
 	get_parent().add_child(upgrade_node)
 	upgrade_node.stat_component.set_base_stats(upgrade_base_stats)
 	return upgrade_node
+
+
+func apply_player_buff(adders_dict, multipliers_dict, buff_duration):
+	_apply_buff(stat_component, adders_dict, multipliers_dict, buff_duration)
+
+
+func apply_weapon_buff(adders_dict, multipliers_dict, buff_duration):
+	if up_weapon_node:
+		_apply_buff(up_weapon_node.stat_component, adders_dict, multipliers_dict, buff_duration)
+	if down_weapon_node:
+		_apply_buff(down_weapon_node.stat_component, adders_dict, multipliers_dict, buff_duration)
+	if right_weapon_node:
+		_apply_buff(right_weapon_node.stat_component, adders_dict, multipliers_dict, buff_duration)
+	if left_weapon_node:
+		_apply_buff(left_weapon_node.stat_component, adders_dict, multipliers_dict, buff_duration)

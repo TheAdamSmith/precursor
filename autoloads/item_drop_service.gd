@@ -7,7 +7,6 @@ var items = []
 
 func _ready():
 	items = DirUtilities.get_files_by_extension("res://items/", ".tscn", true)
-	print(items)
 	random_item_drop_event.connect(_on_random_item_drop_event)
 
 
